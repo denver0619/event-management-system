@@ -1,4 +1,4 @@
-using event_management_system.Models;
+using event_management_system.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

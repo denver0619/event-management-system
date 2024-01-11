@@ -7,4 +7,12 @@
     <RootNamespace>event_management_system</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Domain\Entities\" />
+    <Folder Include="Domain\Repositories\" />
+    <Folder Include="Infrastructures\" />
+    <Folder Include="Configurations\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>
