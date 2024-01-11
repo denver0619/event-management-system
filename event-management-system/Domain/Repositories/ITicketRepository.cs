@@ -8,5 +8,6 @@ namespace event_management_system.Domain.Repositories
         public void RemoveTicket(ITicket ticket);
         public void UpdateTicket(ITicket ticket);
         public List<ITicket> GetAllTickets();
+        public ITicket GetByID(string id);
     }
 }

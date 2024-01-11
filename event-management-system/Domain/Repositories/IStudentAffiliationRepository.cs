@@ -8,5 +8,6 @@ namespace event_management_system.Domain.Repositories
         public void RemoveStudentAffiliation(IStudentAffiliation studentAffiliation);
         public void UpdateStudentAffiliation(IStudentAffiliation studentAffiliation);
         public List<IStudentAffiliation> GetAllStudentAffiliations();
+        public IStudentAffiliation GetByID(string id);
     }
 }

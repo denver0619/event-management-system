@@ -7,5 +7,6 @@ namespace event_management_system.Domain.Repositories
         public void AddEventAttendee(IEventAttendee eventAttendee);
         public void RemoveEventAttendee(IEventAttendee eventAttendee);
         public List<IEventAttendee> GetAllAttendees();
+        public IEventAttendee GetByID(string id);
     }
 }

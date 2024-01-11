@@ -8,5 +8,6 @@ namespace event_management_system.Domain.Repositories
         public void RemoveOrganization(IOrganization organization);
         public void UpdateOrganization(IOrganization organization);
         public List<IOrganization> GetAllOrganizations();
+        public IOrganization GetByID(string id);
     }
 }

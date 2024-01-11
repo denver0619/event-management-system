@@ -8,5 +8,6 @@ namespace event_management_system.Domain.Repositories
         public void UpdateEventContentType (IEventContentType eventContentType);
         public void DeleteEventContentType (IEventContentType eventContentType);
         public List<IEventContentType> GetAllEventContentTypes ();
+        public IEventContentType GetByID(string id);
     }
 }

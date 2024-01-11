@@ -8,5 +8,6 @@ namespace event_management_system.Domain.Repositories
         public void UpdateStudent(IStudent student);
         public void RemoveStudent(IStudent student);
         public List<IStudent> GetAllStudents();
+        public IStudent GetByID(string id);
     }
 }
