@@ -10,9 +10,11 @@
   <ItemGroup>
     <Folder Include="Domain\Entities\" />
     <Folder Include="Domain\Repositories\" />
-    <Folder Include="Infrastructures\" />
-    <Folder Include="Configurations\" />
     <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.2.0" />
   </ItemGroup>
 
 </Project>
