@@ -11,6 +11,7 @@
     <Folder Include="Domain\Entities\" />
     <Folder Include="Domain\Repositories\" />
     <Folder Include="Services\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <ItemGroup>

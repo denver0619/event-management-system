@@ -18,7 +18,34 @@ namespace event_management_system.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Events()
+        {
+            return View();
+        }
+
+        public IActionResult EventsUpcoming() {
+
+            return PartialView("EventsUpcoming");
+        }
+
+        public IActionResult EventsOngoing()
+        {
+
+            return PartialView("EventsOngoing");
+        }
+
+        public IActionResult EventsPrevious()
+        {
+
+            return PartialView("EventsOngoing");
+        }
+
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
         {
             return View();
         }
