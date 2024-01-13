@@ -37,7 +37,7 @@ namespace event_management_system.Controllers
         public IActionResult EventsPrevious()
         {
 
-            return PartialView("EventsOngoing");
+            return PartialView("EventsPrevious");
         }
 
         public IActionResult About()

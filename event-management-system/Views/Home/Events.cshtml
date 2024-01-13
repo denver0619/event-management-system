@@ -29,22 +29,47 @@
     </div>
 </div>
 
-<div class="content-navigation standard-container">
-    <button>
-        <h1 class="medium-text current-content" id="upcoming-btn">UPCOMING EVENTS</h1>
+<div class="content-navigation standard-container" id="content-navigation">
+    <div id="current-content"></div>
+    <button onclick="loadContent('Upcoming')">.
+        <h1 class="medium-text" id="upcoming-btn">UPCOMING EVENTS</h1>
     </button>
-    <button>
+    <button onclick ="loadContent('Ongoing')">
         <h1 class="medium-text" id="ongoing-btn">ONGOING EVENTS</h1>
     </button>
-    <button>
+    <button onclick="loadContent('Previous')">
         <h1 class="medium-text" id="previous-btn">PREVIOUS EVENTS</h1>
     </button>
 </div>
 
-<div class="sub-content-container">
-    @await Html.PartialAsync("_UpcomingEventsPartial")
+<div class="subcontent-container" id="subcontent-container">
+    @await Html.PartialAsync("EventsUpcoming")
 </div>
 
 @section Scripts {
-    <script src="~/js/events.js"></script>
+    @* <script src="~/js/events.js"></script> *@
+    <script>
+        function loadContent(type) {
+
+            // Remove current-content class from all buttons
+            //document.querySelectorAll('.content-navigation button h1').forEach(function (element) {
+            //    element.classList.remove('current-content');
+            //});
+
+            // Add current-content class to the clicked button
+            //document.getElementById(`${type.toLowerCase()}-btn`).classList.add('current-content');
+
+            // Slide to the clicked button
+            document.getElementById('current-content').style.transform = `translateX(${type.toLowerCase() === 'upcoming' ? 0 : type.toLowerCase() === 'ongoing' ? 100 : 200}%)`;
+
+
+            fetch(`/Home/Events${type}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('subcontent-container').innerHTML = data;
+                    document.getElementById('subcontent-container').scrollIntoView();
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
 }
