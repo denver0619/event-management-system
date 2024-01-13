@@ -26,6 +26,12 @@
                 Welcome to the Events Tab, your go-to destination for a holistic view of the university's colorful event scene! Whether you're gearing up for upcoming activities, immersing yourself in ongoing happenings, or reminiscing about past memorable events, this section has got you covered. Organizers, dive into the details, from event names to dates and locations, all neatly organized for your convenience. Ready to make waves of your own? The "Create Event" button awaits, empowering you to kickstart your event planning journey. Experience the ease of navigation and a centralized hub designed to elevate your event management game. Welcome to the heart of the action, where every detail is at your fingertips!
             </p>
         </div>
+        <div class="create-event-container">
+            <h2 class="create-event-text medium-text text-glow-white">MAKE YOUR OWN EVENT</h2>
+            <a class="create-event-btn pill-box">
+                Create Event
+            </a>
+        </div>
     </div>
 </div>
 
@@ -67,7 +73,7 @@
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('subcontent-container').innerHTML = data;
-                    document.getElementById('subcontent-container').scrollIntoView();
+                    // document.getElementById('subcontent-container').scrollIntoView();
                 })
                 .catch(error => console.error('Error:', error));
         }
