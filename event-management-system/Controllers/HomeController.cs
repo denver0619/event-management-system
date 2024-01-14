@@ -18,28 +18,6 @@ namespace event_management_system.Controllers
             return View();
         }
 
-        public IActionResult Events()
-        {
-            return View();
-        }
-
-        public IActionResult EventsUpcoming() {
-
-            return PartialView("EventsUpcoming");
-        }
-
-        public IActionResult EventsOngoing()
-        {
-
-            return PartialView("EventsOngoing");
-        }
-
-        public IActionResult EventsPrevious()
-        {
-
-            return PartialView("EventsPrevious");
-        }
-
         public IActionResult About()
         {
             return View();

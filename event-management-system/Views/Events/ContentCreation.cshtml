@@ -1,0 +1,46 @@
+﻿@{
+}
+
+<div class="introduction-container event-introduction" id="event-information-introduction">
+    <div class="introduction-content standard-container">
+        <div class="introduction-text-container">
+            <h1 class="introduction-text-title large-text"><span>EVENTS CONTENT CREATION</span></h1>
+            <p class="introduction-text-p">
+                Welcome to the Events Tab, your go-to destination for a holistic view of the university's colorful event scene! Whether you're gearing up for upcoming activities, immersing yourself in ongoing happenings, or reminiscing about past memorable events, this section has got you covered. Organizers, dive into the details, from event names to dates and locations, all neatly organized for your convenience. Ready to make waves of your own? The "Create Event" button awaits, empowering you to kickstart your event planning journey. Experience the ease of navigation and a centralized hub designed to elevate your event management game. Welcome to the heart of the action, where every detail is at your fingertips!
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="content-navigation standard-container" id="event-information-navigation">
+    <div class="current-content" id="current-event-information-navigation"></div>
+    <button onclick="loadContent('Content')">
+        <h1 class="medium-text" id="event-content-btn">EVENT CONTENT</h1>
+    </button>
+    <button onclick="loadContent('Log')">
+        <h1 class="medium-text" id="event-log-btn">EVENT LOG</h1>
+    </button>
+</div>
+
+<div class="subcontent-container" id="subcontent-container">
+    @await Html.PartialAsync("EventContent")
+</div>
+
+@section Scripts {
+    @* <script src="~/js/events.js"></script> *@
+    <script>
+        function loadContent(type) {
+            // Slide to the clicked button
+            document.getElementById('current-event-information-navigation').style.transform = `translateX(${type.toLowerCase() === 'content' ? 0 : type.toLowerCase() === 'log' ? 100 : 0}%)`;
+
+
+            fetch(`/Events/Event${type}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('subcontent-container').innerHTML = data;
+                    // document.getElementById('subcontent-container').scrollIntoView();
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+}

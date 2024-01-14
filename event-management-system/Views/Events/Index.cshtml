@@ -3,22 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@functions {
-    public string IsContentActive(string controller, string action)
-    {
-        string isActive = "";
-
-        if (Context.Request.RouteValues["controller"]!.ToString() == controller &&
-            Context.Request.RouteValues["action"]!.ToString() == action)
-        {
-            isActive = "current-sub-content";
-        }
-
-        return isActive;
-    }
-}
-
-<div class="introduction-container event-introduction ">
+<div class="introduction-container event-introduction" id="event-list-introduction">
     <div class="introduction-content standard-container">
         <div class="introduction-text-container">
             <h1 class="introduction-text-title large-text"><span>ORGANIZATION EVENTS</span></h1>
@@ -28,16 +13,16 @@
         </div>
         <div class="create-event-container">
             <h2 class="create-event-text medium-text text-glow-white">MAKE YOUR OWN EVENT</h2>
-            <a class="create-event-btn pill-box">
+            <a class="create-event-btn pill-box small-text" asp-area="" asp-controller="Events" asp-action="ContentCreation">
                 Create Event
             </a>
         </div>
     </div>
 </div>
 
-<div class="content-navigation standard-container" id="content-navigation">
-    <div id="current-content"></div>
-    <button onclick="loadContent('Upcoming')">.
+<div class="content-navigation standard-container" id="event-list-navigation">
+    <div class="current-content" id="current-event-list-navigation"></div>
+    <button onclick="loadContent('Upcoming')">
         <h1 class="medium-text" id="upcoming-btn">UPCOMING EVENTS</h1>
     </button>
     <button onclick ="loadContent('Ongoing')">
@@ -56,20 +41,11 @@
     @* <script src="~/js/events.js"></script> *@
     <script>
         function loadContent(type) {
-
-            // Remove current-content class from all buttons
-            //document.querySelectorAll('.content-navigation button h1').forEach(function (element) {
-            //    element.classList.remove('current-content');
-            //});
-
-            // Add current-content class to the clicked button
-            //document.getElementById(`${type.toLowerCase()}-btn`).classList.add('current-content');
-
             // Slide to the clicked button
-            document.getElementById('current-content').style.transform = `translateX(${type.toLowerCase() === 'upcoming' ? 0 : type.toLowerCase() === 'ongoing' ? 100 : 200}%)`;
+            document.getElementById('current-event-list-navigation').style.transform = `translateX(${type.toLowerCase() === 'upcoming' ? 0 : type.toLowerCase() === 'ongoing' ? 100 : 200}%)`;
 
 
-            fetch(`/Home/Events${type}`)
+            fetch(`/Events/Events${type}`)
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('subcontent-container').innerHTML = data;

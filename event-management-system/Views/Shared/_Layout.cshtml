@@ -38,8 +38,8 @@
                         </a>
                     </li>
                     <li>
-                        <a class="nav-btn" asp-area="" asp-controller="Home" asp-action="Events">
-                            <p class="text-glow-white @IsPageActive("Home", "Events")">Events</p>
+                        <a class="nav-btn" asp-area="" asp-controller="Events" asp-action="Index">
+                            <p class="text-glow-white @IsPageActive("Events", "Index")">Events</p>
                         </a>
                     </li>
                     <li>
@@ -75,7 +75,7 @@
         
     </footer>
     
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    @* <script src="~/js/site.js" asp-append-version="true"></script> *@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
