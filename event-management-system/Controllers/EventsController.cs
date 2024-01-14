@@ -2,6 +2,7 @@
 
 namespace event_management_system.Controllers
 {
+
     public class EventsController : Controller
     {
         public IActionResult Index()

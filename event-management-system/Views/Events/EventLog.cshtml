@@ -1,4 +1,82 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-    <h1>EventLog</h1>
+<div class="event-log-container standard-container">
+
+    <div class="event-log-text">
+        <h1 class="text-glow-white">EVENT ATTENDEES</h1>
+    </div>
+
+    <div class="table-wrapper">
+        <div class="table-container">
+
+            <!-- Search and Filter  -->
+            <form class="search-and-filter-container">
+
+                <!-- Search -->
+                <fieldset class="search-container">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <g clip-path="url(#clip0_11_108)">
+                            <path d="M6 11.5C9.03757 11.5 11.5 9.03757 11.5 6C11.5 2.96243 9.03757 0.5 6 0.5C2.96243 0.5 0.5 2.96243 0.5 6C0.5 9.03757 2.96243 11.5 6 11.5Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M13.5 13.5L10 10" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_11_108">
+                                <rect width="14" height="14" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+
+                    <input type="text" name="" id="search-input" placeholder="Search anything here..">
+
+                </fieldset>
+
+                <!-- Filter -->
+                <fieldset class="filter-container">
+                    <button class="filter-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <g clip-path="url(#clip0_10_103)">
+                                <path d="M13.5 0.5H0.5L5.5 7.5V13.5L8.5 11.5V7.5L13.5 0.5Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_10_103">
+                                    <rect width="14" height="14" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        <p>Filter</p>
+                    </button>
+                </fieldset>
+
+            </form>
+
+            <!-- TABLE -->
+            <table id="event-attendees-table">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Name</th>
+                        <th>Year Level</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                        <th>Confirm</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>123456</td>
+                        <td>John Doe</td>
+                        <td>Junior</td>
+                        <td>john.doe@example.com</td>
+                        <td>(123) 456-7890</td>
+                        <td>
+                            <input type="checkbox" name="" id="">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

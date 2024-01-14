@@ -40,6 +40,10 @@ ul {
     list-style-type: none;
 }
 
+fieldset {
+     border: none;
+}
+
 button {
     border: none;
     background: none;
@@ -137,6 +141,20 @@ header {
     left: 0;
     z-index: -1;
     background: url("/images/background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.landing-bg {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: url("/images/background-test.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 /* Introductino */
@@ -387,7 +405,7 @@ header {
             width: 49.5%;
         }
 
-/* UPCOMING EVENT */
+/* EVENT */
 .event-container {
     margin: 100px auto;
 }
@@ -413,16 +431,116 @@ header {
 
 
 
+/* EVENT LOG */
+.event-log-container {
+    margin: 100px auto;
+}
+
+    .event-log-text {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+
+    /* Search and Filter */
+    .search-and-filter-container {
+        display: flex;
+        justify-content: flex-end;
+        gap: 20px;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background-color: #fff;
+        padding: 20px 0;
+    }
+
+        .search-and-filter-container .search-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #D3D3D3;
+            border-radius: 5px;
+            height: 30px;
+            width: 250px;
+            padding: 0 10px;
+        }
+
+        .search-and-filter-container input[type='text'] {
+            border: none;
+            outline: none;
+        }
+
+        .search-and-filter-container .filter-container {
+        }
+
+            .search-and-filter-container .filter-container .filter-btn {
+                display: flex;
+                align-items: center;
+                background-color: #fff;
+                gap: 10px;
+                border: 1px solid #D3D3D3;
+                border-radius: 5px;
+                height: 30px;
+                padding: 0 10px;
+                outline: none;
+                cursor: pointer;
+            }
 
 
 
+    /* TABLE */
+    .table-wrapper {
+        overflow: hidden;
+        border-radius: 20px;
+        border: 1px solid #D3D3D3;
+        background: #fff;
+        color: #000;
+    }
+
+        .table-wrapper .table-container {
+            position: relative;
+            height: 75vh;
+            width: 100%;
+            padding: 0 40px;
+            overflow: auto;
+        }
+
+    .table-container::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .table-container::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .table-container::-webkit-scrollbar-thumb {
+        background: #888;
+    }
 
 
+    #event-attendees-table tr {
+        height: 60px;
+    }
 
+    .table-container table {
+        position: relative;
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        table-layout: fixed;
+        /* Makes cells equal in width */
+    }
 
+        .table-container table thead {
+            position: sticky;
+            top: 70px;
+            z-index: 1;
+            background-color: #fff;
+        }
 
-
-
+        .table-container table tr {
+            border-bottom: 0.5px solid #D3D3D3;
+        }
 
 
 

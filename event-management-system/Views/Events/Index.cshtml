@@ -3,6 +3,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="nav-bg">
+</div>
+
 <div class="introduction-container event-introduction" id="event-list-introduction">
     <div class="introduction-content standard-container">
         <div class="introduction-text-container">
@@ -34,7 +37,7 @@
 </div>
 
 <div class="subcontent-container" id="subcontent-container">
-    @await Html.PartialAsync("EventsUpcoming")
+    @await Html.PartialAsync("EventsUpcoming");
 </div>
 
 @section Scripts {
