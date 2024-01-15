@@ -28,9 +28,9 @@
     <button onclick="loadContent('Upcoming')">
         <h1 class="medium-text" id="upcoming-btn">UPCOMING EVENTS</h1>
     </button>
-    <button onclick ="loadContent('Ongoing')">
+    @* <button onclick ="loadContent('Ongoing')">
         <h1 class="medium-text" id="ongoing-btn">ONGOING EVENTS</h1>
-    </button>
+    </button> *@
     <button onclick="loadContent('Previous')">
         <h1 class="medium-text" id="previous-btn">PREVIOUS EVENTS</h1>
     </button>
@@ -45,7 +45,8 @@
     <script>
         function loadContent(type) {
             // Slide to the clicked button
-            document.getElementById('current-event-list-navigation').style.transform = `translateX(${type.toLowerCase() === 'upcoming' ? 0 : type.toLowerCase() === 'ongoing' ? 100 : 200}%)`;
+            // document.getElementById('current-event-list-navigation').style.transform = `translateX(${type.toLowerCase() === 'upcoming' ? 0 : type.toLowerCase() === 'ongoing' ? 100 : 200}%)`;
+            document.getElementById('current-event-list-navigation').style.transform = `translateX(${type.toLowerCase() === 'upcoming' ? 0 : type.toLowerCase() === 'previous' ? 100 : 0}%)`;
 
 
             fetch(`/Events/Events${type}`)
