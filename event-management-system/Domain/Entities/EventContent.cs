@@ -5,25 +5,25 @@
         public EventContent () { }
         public EventContent (string eventContentID,
             string eventID,
-            string eventTypeID,
+            string eventContentTypeID,
             string content)
         {
             EventContentID = eventContentID;
             EventID = eventID;
-            EventTypeID = eventTypeID;
+            EventContentTypeID = eventContentTypeID;
             Content = content;
         }
         public EventContent (IEventContent eventContent)
         {
             EventContentID = eventContent.EventContentID;
             EventID = eventContent.EventID;
-            EventTypeID = eventContent.EventTypeID;
+            EventContentTypeID = eventContent.EventContentTypeID;
             Content = eventContent.Content;
         }
 
         public string? EventContentID { get; set; }
         public string? EventID { get; set; }
-        public string? EventTypeID { get; set; }
+        public string? EventContentTypeID { get; set; }
         public string? Content { get; set; }
     }
 }

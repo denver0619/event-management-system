@@ -80,7 +80,6 @@ namespace event_management_system.Infrastructures
             return dataTable;
         }
 
-        /*public void UpdateRecord(string tableName, string values, string constraints)*/
         public void UpdateRecord(string tableName, Entity entity)
         {
             _connection.Open();
@@ -91,6 +90,18 @@ namespace event_management_system.Infrastructures
             string constraints = this.GetIDConstraint(tableName, entity);
             string terminator = ";";
             string query = queryType + tableName + setValues + values + whereClause + constraints + terminator;
+
+            MySqlCommand command = new MySqlCommand(query, _connection);
+            command.ExecuteNonQuery();
+            _connection.Close();
+        }
+
+        public void DeleteRecord(string tableName, string constraints)
+        {
+            _connection.Open();
+            string queryType = "DELETE FROM ";
+            string whereClaues = " WHERE ";
+            string query = queryType + tableName + whereClaues + constraints;
 
             MySqlCommand command = new MySqlCommand(query, _connection);
             command.ExecuteNonQuery();
