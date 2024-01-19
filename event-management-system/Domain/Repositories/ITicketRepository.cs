@@ -9,7 +9,7 @@ namespace event_management_system.Domain.Repositories
         public void UpdateTicket(ITicket ticket);
         public List<ITicket> GetAllTickets();
         public ITicket GetByID(string id);
-        public List<ITicket> GetBYEventID(string eventID);
+        public List<ITicket> GetByEventID(string eventID);
         public List<ITicket> GetByStudentID(string studentID);
     }
 }
