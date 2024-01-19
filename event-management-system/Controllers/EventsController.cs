@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Diagnostics;
+using System.Diagnostics;
 
 namespace event_management_system.Controllers
 {
@@ -14,32 +16,46 @@ namespace event_management_system.Controllers
         {
             return View();
         }
-        public IActionResult EventContent()
-        {
-            return PartialView("EventContent");
 
-        }
-        public IActionResult EventLog()
+        
+        public IActionResult EventMain()
         {
-            return PartialView("EventLog");
+            string EventID = HttpContext.Request.Query["id"]!;
+            ViewData["EventID"] = EventID;
 
+            return View();
         }
+
+
 
         public IActionResult EventsUpcoming() {
 
-            return PartialView("EventsUpcoming");
-        }
-
-        public IActionResult EventsOngoing()
-        {
-
-            return PartialView("EventsOngoing");
+            return PartialView("EventCategory/EventsUpcoming");
         }
 
         public IActionResult EventsPrevious()
         {
 
-            return PartialView("EventsPrevious");
+            return PartialView("EventCategory/EventsPrevious");
+        }
+
+
+
+        public IActionResult EventDetails()
+        {
+            return PartialView("EventManagement/EventDetails");
+
+        }
+        public IActionResult EventAttendanceLog()
+        {
+
+            return PartialView("EventManagement/EventAttendanceLog");
+        }
+        
+        public IActionResult EventAttendees()
+        {
+
+            return PartialView("EventManagement/EventAttendees");
         }
     }
 }

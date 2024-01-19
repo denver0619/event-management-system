@@ -25,37 +25,18 @@
 
 <div class="content-navigation standard-container" id="event-list-navigation">
     <div class="current-content" id="current-event-list-navigation"></div>
-    <button onclick="loadContent('Upcoming')">
+    <button data-type="Upcoming">
         <h1 class="medium-text" id="upcoming-btn">UPCOMING EVENTS</h1>
     </button>
-    @* <button onclick ="loadContent('Ongoing')">
-        <h1 class="medium-text" id="ongoing-btn">ONGOING EVENTS</h1>
-    </button> *@
-    <button onclick="loadContent('Previous')">
+    <button data-type="Previous">
         <h1 class="medium-text" id="previous-btn">PREVIOUS EVENTS</h1>
     </button>
 </div>
 
 <div class="subcontent-container" id="subcontent-container">
-    @await Html.PartialAsync("EventsUpcoming");
+    @await Html.PartialAsync("EventCategory/EventsUpcoming");
 </div>
 
 @section Scripts {
-    @* <script src="~/js/events.js"></script> *@
-    <script>
-        function loadContent(type) {
-            // Slide to the clicked button
-            // document.getElementById('current-event-list-navigation').style.transform = `translateX(${type.toLowerCase() === 'upcoming' ? 0 : type.toLowerCase() === 'ongoing' ? 100 : 200}%)`;
-            document.getElementById('current-event-list-navigation').style.transform = `translateX(${type.toLowerCase() === 'upcoming' ? 0 : type.toLowerCase() === 'previous' ? 100 : 0}%)`;
-
-
-            fetch(`/Events/Events${type}`)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('subcontent-container').innerHTML = data;
-                    // document.getElementById('subcontent-container').scrollIntoView();
-                })
-                .catch(error => console.error('Error:', error));
-        }
-    </script>
+    <script src="~/js/events.js"></script>
 }
