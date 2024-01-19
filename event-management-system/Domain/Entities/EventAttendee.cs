@@ -2,6 +2,7 @@
 {
     public class EventAttendee : IEventAttendee
     {
+
         public EventAttendee() { }
         public EventAttendee(string eventAttendeeID,
             string eventID,

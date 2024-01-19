@@ -22,7 +22,7 @@
             Venue = venue;
         }
 
-        Event(IEvent eventEntity)
+        public Event(IEvent eventEntity)
         {
             EventID = eventEntity.EventID;
             EventNatureID = eventEntity.EventNatureID;
