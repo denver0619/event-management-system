@@ -41,21 +41,24 @@ namespace event_management_system.Controllers
 
 
 
-        public IActionResult EventDetails()
+        public IActionResult EventDetails(string EventID)
         {
+            Debug.WriteLine(EventID);
             return PartialView("EventManagement/EventDetails");
 
         }
-        public IActionResult EventAttendanceLog()
+        public IActionResult EventAttendees(string EventID)
         {
+            Debug.WriteLine(EventID);
+            return PartialView("EventManagement/EventAttendees");
+        }
 
+        public IActionResult EventAttendanceLog(string EventID)
+        {
+            Debug.WriteLine(EventID);
             return PartialView("EventManagement/EventAttendanceLog");
         }
         
-        public IActionResult EventAttendees()
-        {
 
-            return PartialView("EventManagement/EventAttendees");
-        }
     }
 }

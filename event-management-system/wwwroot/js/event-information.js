@@ -3,8 +3,10 @@
 })
 
 function initialLoadContent() {
+    var eventId = document.getElementById('subcontent-container').getAttribute('event-id');
+
     // LOAD EVENT ATTENDEES 
-    fetch(`/Events/EventAttendees`)
+    fetch(`/Events/EventAttendees?eventId=${eventId}`)
         .then(response => response.text())
         .then(data => {
             document.getElementById('subcontent-container').innerHTML = data;
@@ -46,7 +48,9 @@ function loadContent(type) {
 }
 
 function loadSubContent(type) {
-    fetch(`/Events/Event${type}`)
+    var eventId = document.getElementById('subcontent-container').getAttribute('event-id');
+
+    fetch(`/Events/Event${type}?eventId=${eventId}`)
         .then(response => response.text())
         .then(data => {
             document.getElementById('subcontent-container').innerHTML = data;
@@ -59,11 +63,16 @@ function loadSubContent(type) {
 
 
 function loadEventDetailScript() {
+    setupFileUpload();
 
-    const fileInput = document.getElementById('file-input');
-    const previewContainer = document.getElementById('preview-container');
+    function setupFileUpload() {
+        const fileInput = document.getElementById('file-input');
+        const previewContainer = document.getElementById('preview-container');
 
-    fileInput.addEventListener('change', handleFileSelect);
+        fileInput.addEventListener('change', handleFileSelect);
+    }
+
+    
 
     function handleFileSelect(event) {
         const files = event.target.files;
