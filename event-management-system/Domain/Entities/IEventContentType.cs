@@ -2,7 +2,7 @@
 {
     public interface IEventContentType
     {
-        public string EventContentTypeID {  get; set; }
-        public string ContentTypeName { get; set; }
+        public string? EventContentTypeID {  get; set; }
+        public string? ContentTypeName { get; set; }
     }
 }
