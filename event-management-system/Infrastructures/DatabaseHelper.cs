@@ -16,7 +16,6 @@ namespace event_management_system.Infrastructures
             _connection = _connectionManager.Connection;
         }
 
-        /*public void InsertRecord(string tableName, string fields, List<string> values)*/
         public void InsertRecord(string tableName, Entity entity)
         {
             _connection.Open();
