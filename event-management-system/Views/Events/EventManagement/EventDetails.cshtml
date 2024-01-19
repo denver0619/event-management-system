@@ -1,0 +1,117 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<div class="event-content-container standard-container">
+
+    <div class="event-content-header">
+        <h1 class="form-title text-glow-white">CREATE YOUR EVENT!</h1>
+    </div>
+
+
+    <form action="" id="upload-image-form">
+
+        <fieldset class="add-image">
+            <p>Image</p>
+            <div id="upload-container">
+                <div id="preview-container"></div>
+                <div class="upload-button-container">
+                    <label for="file-input" class="upload-button">
+                        Choose Image/s
+                    </label>
+                    <input type="file" id="file-input" class="file-input" accept="image/*" multiple>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="event-details">
+
+            <div class="form-row">
+                <div>
+                    <label for="eventTitle">Event Title</label>
+                    <input type="text" name="eventTitle" id="eventTitle">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="startDateTime">Start Date/Time</label>
+                    <input type="datetime-local" name="startDateTime" id="startDateTime">
+                </div>
+
+                <div>
+                    <label for="endDateTime">End Date/Time</label>
+                    <input type="datetime-local" name="endDateTime" id="endDateTime">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="venue">Venue</label>
+                    <input type="text" name="venue" id="venue">
+                </div>
+
+                <div>
+                    <label for="participantNumber">Number of Participants</label>
+                    <input type="number" name="participantNumber" id="participantNumber">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="">Nature of Event</label>
+                    <br>
+                    <!-- <input type="text" name="venue" id="venue"> -->
+                    <select name="" id="">
+                        <option value="" disabled selected hidden>Event Nature</option>
+                        <option value="">Curricular</option>
+                        <option value="">Co-curricular</option>
+                        <option value="">Non-curricular</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="typeOfEvent">Type of Event</label>
+                    <input type="text" name="typeOfEvent" id="typeOfEvent">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="contactPerson">Contact Person</label>
+                    <input type="text" name="contactPerson" id="contactPerson">
+                </div>
+
+                <div>
+                    <label for="contactNumber">Contact Number</label>
+                    <input type="text" name="contactNumber" id="contactNumber">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="feedbackLink">Feedback Link</label>
+                    <input type="text" name="feedbackLink" id="feedbackLink">
+                </div>
+
+                <div>
+                    <label for="paymentLink">Payment Link</label>
+                    <input type="text" name="paymentLink" id="paymentLink">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="description">Description</label>
+                    <textarea type="text" name="description" id="description" rows="10"></textarea>
+                </div>
+            </div>
+
+        </fieldset>
+
+    </form>
+
+
+</div>
+
+
+<script src="~js/event-details.js"></script>
