@@ -1,6 +1,6 @@
 ﻿namespace event_management_system.Domain.Entities
 {
-    public class Ticket
+    public class Ticket : ITicket
     {
         public Ticket() { }
         public Ticket(string ticketID,
