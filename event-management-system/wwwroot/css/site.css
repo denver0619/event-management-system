@@ -727,6 +727,239 @@ header {
 
 
 
+
+
+
+/* About */
+.about-introduction .introduction-text-container {
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about {
+    margin: 60px auto;
+}
+
+    /* Centralized */
+    .centralized-container {
+        height: 90vh;
+    }
+
+        .centralized-container .head-title-container {
+            height: 85px;
+            flex-shrink: 0;
+        }
+
+            .centralized-container .head-title-container .head-title {
+                color: #F22F2F;
+                text-align: center;
+                text-shadow: 0px 0px 1.912px #F22F2F, 0px 0px 13.383px #F22F2F;
+                font-family: Poppins;
+                font-size: 40px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                text-transform: uppercase;
+            }
+
+        .centralized-container .centralized-content {
+            display: flex;
+            margin-top: 100px;
+        }
+
+            .centralized-container .centralized-content .image-container {
+                flex-basis: 40%;
+                width: 100%;
+                height: 100%;
+                overflow: visible;
+                position: relative;
+                display: flex;
+                align-items: center;
+            }
+
+                .centralized-container .centralized-content .image-container img {
+                    width: 175%;
+                    margin-top: -150px;
+                    margin-left: -150px;
+                    z-index: -1;
+                }
+
+            .centralized-container .centralized-content .text-list-container {
+                flex-basis: 60%;
+                display: flex;
+                flex-direction: column;
+                gap: 40px;
+                text-align: justify;
+            }
+
+                .centralized-container .centralized-content .text-list-container .text-title-container {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 15px;
+                }
+
+                .centralized-container .centralized-content .text-title-container svg {
+                    filter: drop-shadow(0px 0px 5.04px #FFF) drop-shadow(0px 0px 35.28px #FFF) drop-shadow(0px 0px 60.48px #FFF) drop-shadow(0px 0px 105.84px #FFF);
+                }
+
+                .centralized-container .centralized-content .text-title-container .text-title {
+                    color: #FFF;
+                    text-shadow: 0px 0px 1.229px #FFF, 0px 0px 8.604px #FFF;
+                    font-family: Poppins;
+                    font-size: 24px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;
+                    margin-top: 5px;
+                    margin-left: 10px;
+                }
+
+            .centralized-container .centralized-content .text-list-container .text-desc {
+                text-align: justify;
+                color: #FFF;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 300;
+                line-height: normal;
+            }
+
+    /* HIGHLIGHT */
+
+    .highlight-container {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        overflow: visible;
+        flex-direction: column;
+    }
+
+        .highlight-container .rows-container {
+            display: flex;
+            margin: 100px;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            flex-direction: column;
+        }
+
+            .highlight-container .rows-container .text-title-container {
+                display: flex;
+                align-items: center;
+                margin-bottom: 15px;
+                justify-content: center;
+            }
+
+        .highlight-container .row-two-container,
+        .highlight-container .row-one-container {
+            display: flex;
+            flex-direction: row;
+            gap: 90px;
+            margin-bottom: 150px;
+        }
+
+        .highlight-container .rows-container img {
+            flex-shrink: 0;
+            margin-top: -150px;
+            margin-bottom: -90px;
+            margin-left: 50px;
+        }
+
+/* FAQ */
+
+.faq-introduction .introduction-text-container {
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.faq-container {
+    margin: 60px auto;
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+}
+
+    .faq-container .column {
+        /*width: 40%;
+        float: left;
+        margin-left: 5%;
+        margin-top: 5%;*/
+    }
+
+       /* .faq-container .column:last-child {
+            width: 40%;
+            float: right;
+            margin-right: 10%;
+            margin-top: 6%;
+        }*/
+
+        .faq-container .column h3 {
+            color: #FFF;
+            text-align: center;
+            text-shadow: 0px 0px 7.409px #FFF;
+            font-family: Poppins;
+            font-size: 30px;
+            font-style: bold;
+            font-weight: bolder;
+        }
+
+    .faq-container .faq {
+        list-style: none;
+        padding: 0;
+        text-align: justify;
+    }
+
+        .faq-container .faq div {
+            margin-bottom: 12px;
+            text-align: justify;
+            height: 125px;
+/*            margin-left: 10%;
+            padding-left: 10%;*/
+        }
+
+        .faq-container .faq span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 36px;
+            height: 36px;
+            line-height: 200%;
+            margin-right: 72px;
+            border-radius: 50%;
+            background: #EB7622;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            position: absolute;
+            left: -48px;
+        }
+
+        .faq-container .faq h4 {
+            color: #ffffff;
+            text-align: justify;
+            margin-top: 48px;
+            position: relative;
+        }
+
+        .faq-container .faq p {
+            color: white;
+            text-align: justify;
+        }
+
+
+
+
+
+
+
+
+
+
+
 /* Utility */
 .event-card {
     display: flex;
