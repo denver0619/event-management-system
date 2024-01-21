@@ -5,7 +5,7 @@ using System.Diagnostics;
 namespace event_management_system.Controllers
 {
 
-    public class EventsController : Controller
+    public class OrganizationEventsController : Controller
     {
         public IActionResult Index()
         {
