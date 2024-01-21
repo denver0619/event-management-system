@@ -17,6 +17,14 @@ namespace event_management_system.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult SendEventData() {
+            /* Add Field */
+
+
+            return Ok();
+        }
+
         
         public IActionResult EventMain()
         {

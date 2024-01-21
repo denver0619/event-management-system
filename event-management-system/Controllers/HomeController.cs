@@ -13,9 +13,31 @@ namespace event_management_system.Controllers
             _logger = logger;
         }
 
+        public IActionResult Login()
+        {
+
+
+            
+            return View();
+        }
+
+        public IActionResult ValidateOrganizationLogin()
+        {
+            // Replace with your logic to get the account ID
+            int accountId = 123; 
+
+            TempData["AccountId"] = accountId;
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult SendOrganizationAccount() 
+        {
+            return RedirectToAction();
         }
 
         public IActionResult About()

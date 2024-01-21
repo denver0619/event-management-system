@@ -614,20 +614,26 @@ header {
         border: none;
     }
 
-    .event-details .form-row div input,
-    .event-details .form-row div select {
+    .event-details .form-row div input{
         height: 30px;
         padding: 5px 10px;
         border-radius: 5px;
         border: none;
     }
 
-.event-content-container {
-    margin: 100px auto;
-    background: var(--bg-gradient-red-orange);
-    padding: 40px 40px 80px;
-    border-radius: 40px;
-}
+    .event-details .form-row div select {
+        height: 30px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 1px solid white;
+    }
+
+        .event-content-container {
+            margin: 100px auto;
+            background: var(--bg-gradient-red-orange);
+            padding: 40px 40px 80px;
+            border-radius: 40px;
+        }
 
     .event-content-container .event-content-header {
         text-align: center;
@@ -638,6 +644,12 @@ header {
             font-weight: 700;
         }
 
+    .event-content-container #upload-event-form {
+        margin-bottom: 40px;
+    }
+
+
+
     /* Add Image */
     .add-image {
         margin-bottom: 10px;
@@ -645,6 +657,7 @@ header {
 
         .add-image p{
             text-align: center;
+            margin-bottom: 10px;
         }
 
         .add-image #upload-container {
@@ -803,7 +816,7 @@ header {
                     filter: drop-shadow(0px 0px 5.04px #FFF) drop-shadow(0px 0px 35.28px #FFF) drop-shadow(0px 0px 60.48px #FFF) drop-shadow(0px 0px 105.84px #FFF);
                 }
 
-                .centralized-container .centralized-content .text-title-container .text-title {
+                .about .text-title {
                     color: #FFF;
                     text-shadow: 0px 0px 1.229px #FFF, 0px 0px 8.604px #FFF;
                     font-family: Poppins;
@@ -820,7 +833,7 @@ header {
                 color: #FFF;
                 font-size: 16px;
                 font-style: normal;
-                font-weight: 300;
+                font-weight: 400;
                 line-height: normal;
             }
 
@@ -902,7 +915,6 @@ header {
             text-shadow: 0px 0px 7.409px #FFF;
             font-family: Poppins;
             font-size: 30px;
-            font-style: bold;
             font-weight: bolder;
         }
 
@@ -961,6 +973,25 @@ header {
 
 
 /* Utility */
+.shake {
+    animation: shake 0.3s;
+}
+
+@keyframes shake {
+    25% {
+        transform: translateX(4px);
+    }
+
+    50% {
+        transform: translateX(-4px);
+    }
+
+    75% {
+        transform: translateX(4px);
+    }
+}
+
+
 .event-card {
     display: flex;
     height: 100%;
@@ -1048,6 +1079,32 @@ header {
 
 .pill-box {
     border-radius: 50px;
+}
+
+
+.pill-btn {
+    border: 3px solid #fff;
+    width: 215px;
+    padding: 10px 20px;
+    text-align: center;
+    box-shadow: 0px 0px 7.409px #FFF;
+    color: #FFF;
+    font-size: 24px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+    .pill-btn:hover {
+        color: #FF4000;
+        background-color: #FFF;
+    }
+
+.btn-group {
+    display: flex;
+    gap: 20px;
+    margin: 0 auto;
+    justify-content: center;
 }
 
 

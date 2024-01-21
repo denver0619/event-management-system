@@ -16,28 +16,124 @@
 </div>
 
 <div class="content-navigation standard-container" id="create-event-information">
-    @* <div class="current-content" id="current-event-information-navigation"></div> *@
-    @* <button onclick="loadContent('Content')">
-        <h1 class="medium-text" id="event-content-btn">EVENT CONTENT</h1>
-    </button> *@
     <div class="current-content create-event-background">
         <h1 class="medium-text" id="event-content-btn">EVENT CONTENT</h1>
     </div>
-   
-
-    @* <button onclick="loadContent('Log')">
-        <h1 class="medium-text" id="event-log-btn">EVENT LOG</h1>
-    </button> *@
 </div>
 
-<div class="subcontent-container" id="subcontent-container">
-    <div class="event-content-container standard-container">
-        <div class="event-content-header">
-            <h1>Create your Event!</h1>
-        </div>
+<div class="event-content-container standard-container">
 
-        <form>
-        </form>
-
+    <div class="event-content-header">
+        <h1 class="form-title text-glow-white">CREATE YOUR EVENT!</h1>
     </div>
+
+
+    <form action="" id="upload-event-form">
+
+        <fieldset class="add-image">
+            <p>Image</p>
+            <div id="upload-container">
+                <div id="preview-container"></div>
+                <div class="upload-button-container">
+                    <label for="file-input" class="upload-button">
+                        Choose Image/s
+                    </label>
+                    <input type="file" id="file-input" class="file-input" accept="image/*" multiple>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="event-details">
+
+            <div class="form-row">
+                <div>
+                    <label for="eventTitle">Event Title</label>
+                    <input type="text" name="eventTitle" id="eventTitle">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="startDateTime">Start Date/Time</label>
+                    <input type="datetime-local" name="startDateTime" id="startDateTime">
+                </div>
+
+                <div>
+                    <label for="endDateTime">End Date/Time</label>
+                    <input type="datetime-local" name="endDateTime" id="endDateTime">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="venue">Venue</label>
+                    <input type="text" name="venue" id="venue">
+                </div>
+
+                <div>
+                    <label for="participantNumber">Number of Participants</label>
+                    <input type="number" name="participantNumber" id="participantNumber">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="eventNature">Nature of Event</label>
+                    <br>
+                    <!-- <input type="text" name="venue" id="venue"> -->
+                    <select name="eventNature" id="eventNature">
+                        <option value="" disabled selected hidden>Event Nature</option>
+                        <option value="Curricular">Curricular</option>
+                        <option value="Co-curricular">Co-curricular</option>
+                        <option value="Non-curricular">Non-curricular</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="typeOfEvent">Type of Event</label>
+                    <input type="text" name="typeOfEvent" id="typeOfEvent">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="contactPerson">Contact Person</label>
+                    <input type="text" name="contactPerson" id="contactPerson">
+                </div>
+
+                <div>
+                    <label for="contactNumber">Contact Number</label>
+                    <input type="text" name="contactNumber" id="contactNumber">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="feedbackLink">Feedback Link</label>
+                    <input type="text" name="feedbackLink" id="feedbackLink">
+                </div>
+
+                <div>
+                    <label for="paymentLink">Payment Link</label>
+                    <input type="text" name="paymentLink" id="paymentLink">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="description">Description</label>
+                    <textarea type="text" name="description" id="description" rows="10"></textarea>
+                </div>
+            </div>
+
+        </fieldset>
+
+    </form>
+    <div class="btn-group">
+        <button class="pill-btn pill-box" id="preview-event">Preview Event</button>
+        <button class="pill-btn pill-box" id="submit-event">Submit Event</button>
+    </div>
+    
 </div>
+
+<script src="~/js/event-creation.js"></script>

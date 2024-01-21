@@ -63,18 +63,18 @@ function loadSubContent(type) {
 
 
 function loadEventDetailScript() {
+    const previewContainer = document.getElementById('preview-container');
     setupFileUpload();
 
     function setupFileUpload() {
         const fileInput = document.getElementById('file-input');
-        const previewContainer = document.getElementById('preview-container');
+        /*const previewContainer = document.getElementById('preview-container');*/
 
         fileInput.addEventListener('change', handleFileSelect);
     }
 
-    
+    /*function handleFileSelect(event) {
 
-    function handleFileSelect(event) {
         const files = event.target.files;
 
         for (const file of files) {
@@ -87,6 +87,36 @@ function loadEventDetailScript() {
 
             reader.readAsDataURL(file);
         }
+    }*/
+
+    function handleFileSelect(event) {
+        const files = event.target.files;
+
+        // Ensure only one file is selected
+        if (files.length !== 1) {
+            alert('Please select only one image.');
+            return;
+        }
+
+        const file = files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            // Clear existing preview cards
+            clearPreviewContainer();
+
+            const previewCard = createPreviewCard(e.target.result);
+            previewContainer.appendChild(previewCard);
+        };
+
+        reader.readAsDataURL(file);
+
+        console.log(file)
+    }
+
+    function clearPreviewContainer() {
+        const existingPreviews = document.querySelectorAll('.preview-card');
+        existingPreviews.forEach(preview => previewContainer.removeChild(preview));
     }
 
     function createPreviewCard(imageSrc) {
