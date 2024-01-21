@@ -14,7 +14,6 @@
     <Folder Include="Views\VisitorEvents\" />
     <Folder Include="Views\UserEvents\" />
     <Folder Include="Views\UserHome\" />
-    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <ItemGroup>

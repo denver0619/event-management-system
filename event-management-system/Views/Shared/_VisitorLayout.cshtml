@@ -3,8 +3,7 @@
     {
         string isActive = "";
 
-        if (Context.Request.RouteValues["controller"]!.ToString() == controller &&
-            Context.Request.RouteValues["action"]!.ToString() == action)
+        if (Context.Request.RouteValues["controller"]!.ToString() == controller && Context.Request.RouteValues["action"]!.ToString() == action)
         {
             isActive = "current";
         }
@@ -33,22 +32,22 @@
             <div class="nav-list-container">
                 <ul class="nav-list">
                     <li>
-                        <a class="nav-btn" asp-area="" asp-controller="UserHome" asp-action="Index">
+                        <a class="nav-btn" asp-area="" asp-controller="OrganizationHome" asp-action="Index">
                             <p class="text-glow-white @IsPageActive("VisitorHome", "Index")">Home</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-btn" asp-area="" asp-controller="UserEvents" asp-action="Index">
-                            <p class="text-glow-white @IsPageActive("VisitorHome", "Index")">Events</p>
+                        <a class="nav-btn" asp-area="" asp-controller="OrganizationEvents" asp-action="Index">
+                            <p class="text-glow-white @IsPageActive("VisitorEvents", "Index")">Events</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-btn" asp-area="" asp-controller="UserHome" asp-action="About">
+                        <a class="nav-btn" asp-area="" asp-controller="OrganizationHome" asp-action="About">
                             <p class="text-glow-white @IsPageActive("VisitorHome", "About")">About</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-btn" asp-area="" asp-controller="UserHome" asp-action="Contact">
+                        <a class="nav-btn" asp-area="" asp-controller="OrganizationHome" asp-action="Contact">
                             <p class="text-glow-white @IsPageActive("VisitorHome", "Contact")">Contact</p>
                         </a>
                     </li>
@@ -60,9 +59,6 @@
                 </div>
             </div>
         </nav>
-
-        @* <div class="nav-bg">
-        </div> *@
     </header>
 
     <div class="container">
@@ -74,7 +70,6 @@
     <footer class="border-top footer text-muted">
     </footer>
 
-    @* <script src="~/js/site.js" asp-append-version="true"></script> *@
-    @await RenderSectionAsync("Scripts", required: false)
+   
 </body>
 </html>
