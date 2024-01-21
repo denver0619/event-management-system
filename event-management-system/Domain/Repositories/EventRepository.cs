@@ -53,7 +53,16 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DatePosted"].ToString()!),
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
-                    row["Venue"].ToString()!
+                    row["Venue"].ToString()!,
+                    row["Image"].ToString()!,
+                    row["Title"].ToString()!,
+                    Int32.Parse(row["NumberOfParticipants"].ToString()!),
+                    row["TypeOfVenue"].ToString()!,
+                    row["ContactPerson"].ToString()!,
+                    row["ContactNumber"].ToString()!,
+                    row["FeedbackLink"].ToString()!,
+                    row["PaymentLink"].ToString()!,
+                    row["Description"].ToString()!
                     );
                 eventsEntity.Add(eventEntity);
             }
@@ -66,14 +75,23 @@ namespace event_management_system.Domain.Repositories
             DataTable dataTable = databaseHelper.SelectRecord(this.tableName, constraints);
             DataRow row = dataTable.Rows[0];
             return new Event(
-                 row["EventID"].ToString()!,
+                    row["EventID"].ToString()!,
                     row["EventNatureID"].ToString()!,
                     row["EventStatusID,"].ToString()!,
                     row["OrganizationID"].ToString()!,
                     DateTime.Parse(row["DatePosted"].ToString()!),
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
-                    row["Venue"].ToString()!
+                    row["Venue"].ToString()!,
+                    row["Image"].ToString()!,
+                    row["Title"].ToString()!,
+                    Int32.Parse(row["NumberOfParticipants"].ToString()!),
+                    row["TypeOfVenue"].ToString()!,
+                    row["ContactPerson"].ToString()!,
+                    row["ContactNumber"].ToString()!,
+                    row["FeedbackLink"].ToString()!,
+                    row["PaymentLink"].ToString()!,
+                    row["Description"].ToString()!
                     );
         }
 
@@ -92,7 +110,16 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DatePosted"].ToString()!),
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
-                    row["Venue"].ToString()!
+                    row["Venue"].ToString()!,
+                    row["Image"].ToString()!,
+                    row["Title"].ToString()!,
+                    Int32.Parse(row["NumberOfParticipants"].ToString()!),
+                    row["TypeOfVenue"].ToString()!,
+                    row["ContactPerson"].ToString()!,
+                    row["ContactNumber"].ToString()!,
+                    row["FeedbackLink"].ToString()!,
+                    row["PaymentLink"].ToString()!,
+                    row["Description"].ToString()!
                     );
                 eventsEntity.Add(eventEntity);
             }
@@ -114,7 +141,16 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DatePosted"].ToString()!),
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
-                    row["Venue"].ToString()!
+                    row["Venue"].ToString()!,
+                    row["Image"].ToString()!,
+                    row["Title"].ToString()!,
+                    Int32.Parse(row["NumberOfParticipants"].ToString()!),
+                    row["TypeOfVenue"].ToString()!,
+                    row["ContactPerson"].ToString()!,
+                    row["ContactNumber"].ToString()!,
+                    row["FeedbackLink"].ToString()!,
+                    row["PaymentLink"].ToString()!,
+                    row["Description"].ToString()!
                     );
                 eventsEntity.Add(eventEntity);
             }
@@ -136,7 +172,16 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DatePosted"].ToString()!),
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
-                    row["Venue"].ToString()!
+                    row["Venue"].ToString()!,
+                    row["Image"].ToString()!,
+                    row["Title"].ToString()!,
+                    Int32.Parse(row["NumberOfParticipants"].ToString()!),
+                    row["TypeOfVenue"].ToString()!,
+                    row["ContactPerson"].ToString()!,
+                    row["ContactNumber"].ToString()!,
+                    row["FeedbackLink"].ToString()!,
+                    row["PaymentLink"].ToString()!,
+                    row["Description"].ToString()!
                     );
                 eventsEntity.Add(eventEntity);
             }
