@@ -2,6 +2,7 @@
 using event_management_system.Infrastructures;
 using Microsoft.Extensions.Logging;
 using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace event_management_system.Domain.Repositories
 {
@@ -188,10 +189,132 @@ namespace event_management_system.Domain.Repositories
             return eventsEntity;
         }
 
-      
+        public List<IEvent> GetUpcommingEvents ()
+        {
+            DateTime date = DateTime.Now;
+            string constraints = "DateStart > " + "\'" + date.ToString("yyyy-MM-dd hh:mm:ss ") + date.ToString("tt").ToUpper() + "\'";
+            DataTable dataTable = databaseHelper.SelectAllRecordWith(tableName, constraints);
+            List<IEvent> eventsEntity = new List<IEvent>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Event eventEntity = new Event(
+                    row["EventID"].ToString()!,
+                    row["EventNatureID"].ToString()!,
+                    row["EventStatusID,"].ToString()!,
+                    row["OrganizationID"].ToString()!,
+                    DateTime.Parse(row["DatePosted"].ToString()!),
+                    DateTime.Parse(row["DateStart"].ToString()!),
+                    DateTime.Parse(row["DateEnd"].ToString()!),
+                    row["Venue"].ToString()!,
+                    row["Image"].ToString()!,
+                    row["Title"].ToString()!,
+                    Int32.Parse(row["NumberOfParticipants"].ToString()!),
+                    row["TypeOfVenue"].ToString()!,
+                    row["ContactPerson"].ToString()!,
+                    row["ContactNumber"].ToString()!,
+                    row["FeedbackLink"].ToString()!,
+                    row["PaymentLink"].ToString()!,
+                    row["Description"].ToString()!
+                    );
+                eventsEntity.Add(eventEntity);
+            }
+            return eventsEntity;
+        }
+
+        public List<IEvent> GetUpcommingEventsByOrganizationID(string organizationID)
+        {
+            DateTime date = DateTime.Now;
+            string constraints = "DateStart > " + "\'" + date.ToString("yyyy-MM-dd hh:mm:ss ") + date.ToString("tt").ToUpper() + "\'" + " AND " + "OrganizationID = " + organizationID;
+            DataTable dataTable = databaseHelper.SelectAllRecordWith(tableName, constraints);
+            List<IEvent> eventsEntity = new List<IEvent>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Event eventEntity = new Event(
+                    row["EventID"].ToString()!,
+                    row["EventNatureID"].ToString()!,
+                    row["EventStatusID,"].ToString()!,
+                    row["OrganizationID"].ToString()!,
+                    DateTime.Parse(row["DatePosted"].ToString()!),
+                    DateTime.Parse(row["DateStart"].ToString()!),
+                    DateTime.Parse(row["DateEnd"].ToString()!),
+                    row["Venue"].ToString()!,
+                    row["Image"].ToString()!,
+                    row["Title"].ToString()!,
+                    Int32.Parse(row["NumberOfParticipants"].ToString()!),
+                    row["TypeOfVenue"].ToString()!,
+                    row["ContactPerson"].ToString()!,
+                    row["ContactNumber"].ToString()!,
+                    row["FeedbackLink"].ToString()!,
+                    row["PaymentLink"].ToString()!,
+                    row["Description"].ToString()!
+                    );
+                eventsEntity.Add(eventEntity);
+            }
+            return eventsEntity;
+        }
+
+        public List<IEvent> GetPreviousEvents()
+        {
+            DateTime date = DateTime.Now;
+            string constraints = "DateStart < " + "\'" + date.ToString("yyyy-MM-dd hh:mm:ss ") + date.ToString("tt").ToUpper() + "\'";
+            DataTable dataTable = databaseHelper.SelectAllRecordWith(tableName, constraints);
+            List<IEvent> eventsEntity = new List<IEvent>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Event eventEntity = new Event(
+                    row["EventID"].ToString()!,
+                    row["EventNatureID"].ToString()!,
+                    row["EventStatusID,"].ToString()!,
+                    row["OrganizationID"].ToString()!,
+                    DateTime.Parse(row["DatePosted"].ToString()!),
+                    DateTime.Parse(row["DateStart"].ToString()!),
+                    DateTime.Parse(row["DateEnd"].ToString()!),
+                    row["Venue"].ToString()!,
+                    row["Image"].ToString()!,
+                    row["Title"].ToString()!,
+                    Int32.Parse(row["NumberOfParticipants"].ToString()!),
+                    row["TypeOfVenue"].ToString()!,
+                    row["ContactPerson"].ToString()!,
+                    row["ContactNumber"].ToString()!,
+                    row["FeedbackLink"].ToString()!,
+                    row["PaymentLink"].ToString()!,
+                    row["Description"].ToString()!
+                    );
+                eventsEntity.Add(eventEntity);
+            }
+            return eventsEntity;
+        }
+
+        public List<IEvent> GetPreviousEventsByOrganizationID(string organizationID)
+        {
+            DateTime date = DateTime.Now;
+            string constraints = "DateStart < " + "\'" + date.ToString("yyyy-MM-dd hh:mm:ss ") + date.ToString("tt").ToUpper() + "\'" + " AND " + "OrganizationID = " + organizationID;
+            DataTable dataTable = databaseHelper.SelectAllRecordWith(tableName, constraints);
+            List<IEvent> eventsEntity = new List<IEvent>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Event eventEntity = new Event(
+                    row["EventID"].ToString()!,
+                    row["EventNatureID"].ToString()!,
+                    row["EventStatusID,"].ToString()!,
+                    row["OrganizationID"].ToString()!,
+                    DateTime.Parse(row["DatePosted"].ToString()!),
+                    DateTime.Parse(row["DateStart"].ToString()!),
+                    DateTime.Parse(row["DateEnd"].ToString()!),
+                    row["Venue"].ToString()!,
+                    row["Image"].ToString()!,
+                    row["Title"].ToString()!,
+                    Int32.Parse(row["NumberOfParticipants"].ToString()!),
+                    row["TypeOfVenue"].ToString()!,
+                    row["ContactPerson"].ToString()!,
+                    row["ContactNumber"].ToString()!,
+                    row["FeedbackLink"].ToString()!,
+                    row["PaymentLink"].ToString()!,
+                    row["Description"].ToString()!
+                    );
+                eventsEntity.Add(eventEntity);
+            }
+            return eventsEntity;
+        }
     }
-
-
-
-
 }
