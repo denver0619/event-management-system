@@ -13,25 +13,24 @@ namespace event_management_system.Controllers
             _logger = logger;
         }
 
-        public IActionResult Login()
-        {
+        
 
-
-            
-            return View();
-        }
-
-        public IActionResult ValidateOrganizationLogin()
+        /*public IActionResult ValidateOrganizationLogin()
         {
             // Replace with your logic to get the account ID
             int accountId = 123; 
 
             TempData["AccountId"] = accountId;
             return RedirectToAction("Index");
-        }
+        }*/
 
         public IActionResult Index()
         {
+            // get user list for org then extract userId then find it in list
+            // string userId = HttpContext.Request.Query["userId"];
+            // pass it into view bag then adjust js in view
+            // ViewBag.UserName = user.UserName;
+
             return View();
         }
 

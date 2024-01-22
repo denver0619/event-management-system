@@ -21,7 +21,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;600;700&display=swap" rel="stylesheet">
     <title>@ViewData["Title"] - TicketFlare</title>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/visitor-site.css" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -32,31 +32,31 @@
             <div class="nav-list-container">
                 <ul class="nav-list">
                     <li>
-                        <a class="nav-btn" asp-area="" asp-controller="OrganizationHome" asp-action="Index">
+                        <a class="nav-btn" asp-area="" asp-controller="VisitorHome" asp-action="Index">
                             <p class="text-glow-white @IsPageActive("VisitorHome", "Index")">Home</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-btn" asp-area="" asp-controller="OrganizationEvents" asp-action="Index">
+                        <a class="nav-btn" asp-area="" asp-controller="VisitorEvents" asp-action="Index">
                             <p class="text-glow-white @IsPageActive("VisitorEvents", "Index")">Events</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-btn" asp-area="" asp-controller="OrganizationHome" asp-action="About">
+                        <a class="nav-btn" asp-area="" asp-controller="VisitorHome" asp-action="About">
                             <p class="text-glow-white @IsPageActive("VisitorHome", "About")">About</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-btn" asp-area="" asp-controller="OrganizationHome" asp-action="Contact">
+                        <a class="nav-btn" asp-area="" asp-controller="VisitorHome" asp-action="Contact">
                             <p class="text-glow-white @IsPageActive("VisitorHome", "Contact")">Contact</p>
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="nav-user-container">
-                <div class="nav-user pill-box">
+                <a class="nav-user pill-box" asp-area="" asp-controller="VisitorHome" asp-action="Login">
                     <p>Sign in</p>
-                </div>
+                </a>
             </div>
         </nav>
     </header>
@@ -70,6 +70,6 @@
     <footer class="border-top footer text-muted">
     </footer>
 
-   
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

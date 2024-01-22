@@ -8,5 +8,23 @@ namespace event_management_system.Controllers
         {
             return View();
         }
+
+        public IActionResult EventsUpcoming()
+        {
+
+            return PartialView("EventCategory/EventsUpcoming");
+        }
+
+        public IActionResult EventsPrevious()
+        {
+
+            return PartialView("EventCategory/EventsPrevious");
+        }
+
+        public IActionResult EventInfo()
+        {
+            //get card info from url then find from list then return model
+            return View();
+        }
     }
 }

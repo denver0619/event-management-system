@@ -19,7 +19,7 @@ function setupLogin() {
 }
 
 function sendLoginData(data) {
-    fetch('VisitorHome/ValidateLogin', {
+    fetch('/VisitorHome/ValidateLogin', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
