@@ -21,13 +21,13 @@ namespace event_management_system.Controllers
         public IActionResult ValidateLogin([FromBody] UserCredential userCredential) 
         {
 
-            Debug.WriteLine(JsonSerializer.Serialize(userCredential));
+            // Debug.WriteLine(JsonSerializer.Serialize(userCredential));
             // get list of user then validate iif user or org
             string email = userCredential.Email!;
             string password = userCredential.Password!;
             string userId = "3";
 
-            Debug.WriteLine(email);
+            // Debug.WriteLine(email);
 
             if (email == "org")
             {

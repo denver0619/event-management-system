@@ -1,4 +1,5 @@
-﻿:root {
+﻿
+:root {
     --text-gradient-red-orange: linear-gradient(90deg, #EB7622 7.85%, rgba(236, 55, 55, 0.80) 100%);
     --bg-gradient-red-orange: linear-gradient(180deg, #EB7622 0%, rgba(236, 55, 55, 0.80) 100%);
     --black-bg: #080606;

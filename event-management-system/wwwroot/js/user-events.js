@@ -1,11 +1,10 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
-
     initialLoadContent();
     setupSubcontentButtons();
 })
 
 function initialLoadContent() {
-    fetch(`/VisitorEvents/EventsUpcoming`)
+    fetch(`/UserEvents/EventsUpcoming`)
         .then(response => response.text())
         .then(data => {
             document.getElementById('subcontent-container').innerHTML = data;
@@ -50,7 +49,7 @@ function loadContent(type) {
 
 
 function loadCategorySubContent(type) {
-    fetch(`/VisitorEvents/Events${type}`)
+    fetch(`/UserEvents/Events${type}`)
         .then(response => response.text())
         .then(data => {
             document.getElementById('subcontent-container').innerHTML = data;
@@ -72,7 +71,7 @@ function setupCardRedirect() {
 }
 
 function redirectToEventMain(EventID) {
-    var url = '/VisitorEvents/EventInfo?id=' + encodeURIComponent(EventID);
+    var url = '/UserEvents/EventInfo?id=' + encodeURIComponent(EventID);
 
     // Redirect to the new URL
     window.location.href = url;

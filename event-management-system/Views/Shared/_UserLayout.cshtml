@@ -43,8 +43,8 @@
                         </a>
                     </li>
                     <li>
-                        <a class="nav-btn" asp-area="" asp-controller="UserEvents" asp-action="Index">
-                            <p class="text-glow-white @IsPageActive("UserEvents", "MyEvents")">Events</p>
+                        <a class="nav-btn" asp-area="" asp-controller="UserEvents" asp-action="MyEvents">
+                            <p class="text-glow-white @IsPageActive("UserEvents", "MyEvents")">My Events</p>
                         </a>
                     </li>
                     <li>
@@ -61,7 +61,7 @@
             </div>
             <div class="nav-user-container">
                 <div class="nav-user pill-box">
-                    <p>Sign in</p>
+                    <p>UserName</p>
                 </div>
             </div>
         </nav>
@@ -79,7 +79,7 @@
     <footer class="border-top footer text-muted">
     </footer>
 
-    @* <script src="~/js/site.js" asp-append-version="true"></script> *@
+    <script src="~/js/visitor.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

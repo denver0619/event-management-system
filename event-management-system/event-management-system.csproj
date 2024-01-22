@@ -11,8 +11,6 @@
     <Folder Include="Domain\Entities\" />
     <Folder Include="Domain\Repositories\" />
     <Folder Include="Services\" />
-    <Folder Include="Views\UserEvents\" />
-    <Folder Include="Views\UserHome\" />
   </ItemGroup>
 
   <ItemGroup>
