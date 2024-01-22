@@ -11,7 +11,7 @@ namespace event_management_system.Infrastructures
 
         public DatabaseHelper()
         {
-            Configuration.MySQL.ConnectionString = "server=26.223.107.167;port=3306;user=root;database=amiscosadatabase;password=;Convert Zero Datetime=True;"; //Temporary
+            Configuration.MySQL.ConnectionString = "server=26.46.224.164;port=3306;user=root;database=eventmanagementdb;password=;Convert Zero Datetime=True;"; //Temporary
             _connectionManager = new DatabaseConnectionManager(Configuration.MySQL.ConnectionString);
             _connection = _connectionManager.Connection;
         }
