@@ -83,7 +83,7 @@ namespace event_management_system.Domain.Repositories
         {
             string constraints = "Email = " + email + " AND " + "Hash = " + secret; 
             DataTable dataTable = databaseHelper.SelectRecord(this.tableName, constraints);
-            if(dataTable.Rows[0] == null)
+            if(!(dataTable.Rows.Count > 0))
             {
                 return new Student();
             }

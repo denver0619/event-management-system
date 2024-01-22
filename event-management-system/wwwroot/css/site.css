@@ -74,6 +74,12 @@ textarea:focus {
     margin: 0 auto;
 }
 
+.small-container {
+    width: 80%;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
 
 /* NAV BAR */
 header {
@@ -615,14 +621,14 @@ header {
     }
 
     .event-details .form-row div input{
-        height: 30px;
+        height: 40px;
         padding: 5px 10px;
         border-radius: 5px;
         border: none;
     }
 
     .event-details .form-row div select {
-        height: 30px;
+        height: 40px;
         padding: 5px 10px;
         border-radius: 5px;
         border: 1px solid white;
@@ -645,7 +651,9 @@ header {
         }
 
     .event-content-container #upload-event-form {
-        margin-bottom: 40px;
+        display: block;
+        margin: 40px auto;
+        max-width: 800px;
     }
 
 
