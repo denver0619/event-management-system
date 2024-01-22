@@ -869,6 +869,26 @@ header {
     border-radius: 50px;
 }
 
+#register-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border: 3px solid #FF4000;
+    width: 200px;
+    margin: 40px auto;
+    transition: all 0.3s ease-in-out;
+    color: #FF4000;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+    #register-btn:hover {
+        background-color: #FF4000; /* Slightly darker shade for hover effect */
+        color: #ffffff; /* Change text color on hover */
+    
+    }
+
 
 .pill-btn {
     border: 3px solid #fff;

@@ -29,11 +29,13 @@ function sendLoginData(data) {
         .then(response => response.json())
         .then(data => {
             if (data.redirectTo) {
+
                 window.location.href = data.redirectTo;
             } else {
                 // Handle other responses
                 console.log("Login successful");
             }
+
         })
         .catch(error => {
             // Handle network or other errors

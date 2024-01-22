@@ -7,6 +7,7 @@ namespace event_management_system.Controllers
     {
         public IActionResult Index()
         {
+            // Load Event Model then pas to controller to see list of events
             string userId = HttpContext.Request.Query["userId"]!;
             TempData["UserId"] = userId;
             return View();

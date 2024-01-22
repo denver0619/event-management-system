@@ -9,6 +9,8 @@ namespace event_management_system.Controllers
     {
         public IActionResult Index()
         {
+            string userID = HttpContext.Request.Query["userId"]!;
+            Debug.WriteLine(userID);
             return View();
         }
 
@@ -19,7 +21,7 @@ namespace event_management_system.Controllers
 
         [HttpPost]
         public IActionResult SendEventData() {
-            /* Add Field */
+            
 
 
             return Ok();
@@ -28,22 +30,29 @@ namespace event_management_system.Controllers
         
         public IActionResult EventMain()
         {
-            string EventID = HttpContext.Request.Query["id"]!;
-            ViewData["EventID"] = EventID;
+            
+            
 
             return View();
         }
 
 
 
-        public IActionResult EventsUpcoming() {
+        public IActionResult EventsUpcoming() 
+        {
+            string userID = HttpContext.Request.Query["userId"]!;
+            Debug.WriteLine(userID);
 
+            // get list of upcoming based on orgID then return as model
             return PartialView("EventCategory/EventsUpcoming");
+            // return PartialView("EventCategory/EventsUpcoming", modelHere);
         }
 
         public IActionResult EventsPrevious()
         {
-
+            string userID = HttpContext.Request.Query["userId"]!;
+            Debug.WriteLine(userID);
+            // get list of previous based on orgID then return as model
             return PartialView("EventCategory/EventsPrevious");
         }
 
