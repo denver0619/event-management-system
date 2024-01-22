@@ -72,5 +72,20 @@ namespace event_management_system.Domain.Repositories
                     row["Email"].ToString()!
                 );
         }
+
+        public IOrganization GetByCredential(string email, string secret)
+        {
+            string constraints = "Email = " + email + " AND " + "Hash = " + secret;
+            DataTable dataTable = databaseHelper.SelectRecord(this.tableName, constraints);
+            DataRow row = dataTable.Rows[0];
+            return new Organization(
+                    row["OrganizationID"].ToString()!,
+                    row["OrganizationName"].ToString()!,
+                    row["AccreditationStatus"].ToString()!,
+                    row["OrganizationDescription"].ToString()!,
+                    row["Hash"].ToString()!,
+                    row["Email"].ToString()!
+                );
+        }
     }
 }
