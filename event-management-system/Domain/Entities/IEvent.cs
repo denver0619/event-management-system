@@ -12,8 +12,8 @@
         public string? Venue { get; set; }
         public string? Image { get; set; }
         public string? Title { get; set; }
-        public int NumberOfParticipants { get; set; }   
-        public string? TypeOfEvent { get; set; }
+        public int ParticipantNumber { get; set; }   
+        public string? EventType { get; set; }
         public string? ContactPerson { get; set; }
         public string? ContactNumber { get; set; }
         public string? FeedbackLink { get; set; }
