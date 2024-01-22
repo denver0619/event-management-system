@@ -3,8 +3,7 @@
     {
         string isActive = "";
 
-        if (Context.Request.RouteValues["controller"]!.ToString() == controller &&
-            Context.Request.RouteValues["action"]!.ToString() == action)
+        if (Context.Request.RouteValues["controller"]!.ToString() == controller && Context.Request.RouteValues["action"]!.ToString() == action)
         {
             isActive = "current";
         }
@@ -22,7 +21,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;600;700&display=swap" rel="stylesheet">
     <title>@ViewData["Title"] - TicketFlare</title>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/visitor-site.css" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -33,36 +32,33 @@
             <div class="nav-list-container">
                 <ul class="nav-list">
                     <li>
-                        <a class="nav-btn" asp-area="" asp-controller="Home" asp-action="Index">
-                            <p class="text-glow-white @IsPageActive("Home", "Index")">Home</p>
+                        <a class="nav-btn" asp-area="" asp-controller="VisitorHome" asp-action="Index">
+                            <p class="text-glow-white @IsPageActive("VisitorHome", "Index")">Home</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-btn" asp-area="" asp-controller="Events" asp-action="Index">
-                            <p class="text-glow-white @IsPageActive("Events", "Index")">Events</p>
+                        <a class="nav-btn" asp-area="" asp-controller="VisitorEvents" asp-action="Index">
+                            <p class="text-glow-white @IsPageActive("VisitorEvents", "Index")">Events</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-btn" asp-area="" asp-controller="Home" asp-action="About">
-                            <p class="text-glow-white @IsPageActive("Home", "About")">About</p>
+                        <a class="nav-btn" asp-area="" asp-controller="VisitorHome" asp-action="About">
+                            <p class="text-glow-white @IsPageActive("VisitorHome", "About")">About</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-btn" asp-area="" asp-controller="Home" asp-action="Contact">
-                            <p class="text-glow-white @IsPageActive("Home", "Contact")">Contact</p>
+                        <a class="nav-btn" asp-area="" asp-controller="VisitorHome" asp-action="Contact">
+                            <p class="text-glow-white @IsPageActive("VisitorHome", "Contact")">Contact</p>
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="nav-user-container">
-                <div class="nav-user pill-box">
+                <a class="nav-user pill-box" asp-area="" asp-controller="VisitorHome" asp-action="Login">
                     <p>Sign in</p>
-                </div>
+                </a>
             </div>
         </nav>
-
-        @* <div class="nav-bg">
-        </div> *@
     </header>
 
     <div class="container">
@@ -72,10 +68,8 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        
     </footer>
-    
-    @* <script src="~/js/site.js" asp-append-version="true"></script> *@
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

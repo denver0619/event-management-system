@@ -4,7 +4,7 @@
 })
 
 function initialLoadContent() {
-    fetch(`/OrganizationEvents/EventsUpcoming`)
+    fetch(`/UserEvents/EventsUpcoming`)
         .then(response => response.text())
         .then(data => {
             document.getElementById('subcontent-container').innerHTML = data;
@@ -49,7 +49,7 @@ function loadContent(type) {
 
 
 function loadCategorySubContent(type) {
-    fetch(`/OrganizationEvents/Events${type}`)
+    fetch(`/UserEvents/Events${type}`)
         .then(response => response.text())
         .then(data => {
             document.getElementById('subcontent-container').innerHTML = data;
@@ -57,7 +57,6 @@ function loadCategorySubContent(type) {
         })
         .catch(error => console.error('Error:', error));
 }
-
 
 function setupCardRedirect() {
     var eventCards = document.querySelectorAll('.event-card');
@@ -78,7 +77,7 @@ function redirectToEventMain(eventID, queryString) {
     // Remove the leading "?" from the queryString if it exists
     queryString = queryString.startsWith('?') ? queryString.substring(1) : queryString;
 
-    var url = '/OrganizationEvents/EventMain?id=' + encodeURIComponent(eventID);
+    var url = '/UserEvents/EventInfo?id=' + encodeURIComponent(eventID);
 
     // Append the queryString if it's not empty
     if (queryString) {

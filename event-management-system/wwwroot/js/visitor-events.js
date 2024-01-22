@@ -1,10 +1,11 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
+
     initialLoadContent();
     setupSubcontentButtons();
 })
 
 function initialLoadContent() {
-    fetch(`/OrganizationEvents/EventsUpcoming`)
+    fetch(`/VisitorEvents/EventsUpcoming`)
         .then(response => response.text())
         .then(data => {
             document.getElementById('subcontent-container').innerHTML = data;
@@ -49,7 +50,7 @@ function loadContent(type) {
 
 
 function loadCategorySubContent(type) {
-    fetch(`/OrganizationEvents/Events${type}`)
+    fetch(`/VisitorEvents/Events${type}`)
         .then(response => response.text())
         .then(data => {
             document.getElementById('subcontent-container').innerHTML = data;
@@ -64,26 +65,14 @@ function setupCardRedirect() {
 
     eventCards.forEach(function (card) {
         card.addEventListener('click', function () {
-            var eventID = card.getAttribute('event-id');
-
-            // Get query data
-            var queryString = window.location.search;
-
-            redirectToEventMain(eventID, queryString);
+            var eventID = card.getAttribute('event-id'); // Assuming you have a data attribute for event ID
+            redirectToEventMain(eventID);
         });
     });
 }
 
-function redirectToEventMain(eventID, queryString) {
-    // Remove the leading "?" from the queryString if it exists
-    queryString = queryString.startsWith('?') ? queryString.substring(1) : queryString;
-
-    var url = '/OrganizationEvents/EventMain?id=' + encodeURIComponent(eventID);
-
-    // Append the queryString if it's not empty
-    if (queryString) {
-        url += '&' + queryString;
-    }
+function redirectToEventMain(EventID) {
+    var url = '/VisitorEvents/EventInfo?id=' + encodeURIComponent(EventID);
 
     // Redirect to the new URL
     window.location.href = url;

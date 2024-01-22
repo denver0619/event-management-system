@@ -1,0 +1,81 @@
+﻿@functions {
+    public string IsPageActive(string controller, string action)
+    {
+        string isActive = "";
+
+        if (Context.Request.RouteValues["controller"]!.ToString() == controller &&
+            Context.Request.RouteValues["action"]!.ToString() == action)
+        {
+            isActive = "current";
+        }
+
+        return isActive;
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;600;700&display=swap" rel="stylesheet">
+    <title>@ViewData["Title"] - TicketFlare</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-logo-container">
+                <h1 class="logo-name">TicketFlare</h1>
+            </div>
+            <div class="nav-list-container">
+                <ul class="nav-list">
+                    <li>
+                        <a class="nav-btn" asp-area="" asp-controller="OrganizationHome" asp-action="Index">
+                            <p class="text-glow-white @IsPageActive("OrganizationHome", "Index")">Home</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-btn" asp-area="" asp-controller="OrganizationEvents" asp-action="Index">
+                            <p class="text-glow-white @IsPageActive("OrganizationEvents", "Index")">Events</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-btn" asp-area="" asp-controller="OrganizationHome" asp-action="About">
+                            <p class="text-glow-white @IsPageActive("OrganizationHome", "About")">About</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-btn" asp-area="" asp-controller="OrganizationHome" asp-action="Contact">
+                            <p class="text-glow-white @IsPageActive("OrganizationHome", "Contact")">Contact</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-user-container">
+                <div class="nav-user pill-box">
+                    <p>OrgName</p>
+                </div>
+            </div>
+        </nav>
+
+        @* <div class="nav-bg">
+        </div> *@
+    </header>
+
+    <div class="container">
+        <main role="main" id="main-container">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        
+    </footer>
+    
+    <script src="~/js/organization.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

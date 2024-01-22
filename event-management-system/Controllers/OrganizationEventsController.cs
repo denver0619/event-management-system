@@ -5,7 +5,7 @@ using System.Diagnostics;
 namespace event_management_system.Controllers
 {
 
-    public class EventsController : Controller
+    public class OrganizationEventsController : Controller
     {
         public IActionResult Index()
         {
@@ -15,6 +15,14 @@ namespace event_management_system.Controllers
         public IActionResult ContentCreation()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult SendEventData() {
+            /* Add Field */
+
+
+            return Ok();
         }
 
         
@@ -41,21 +49,21 @@ namespace event_management_system.Controllers
 
 
 
-        public IActionResult EventDetails()
+        public IActionResult EventDetails(string EventID)
         {
             return PartialView("EventManagement/EventDetails");
 
         }
-        public IActionResult EventAttendanceLog()
+        public IActionResult EventAttendees(string EventID)
         {
+            return PartialView("EventManagement/EventAttendees");
+        }
 
+        public IActionResult EventAttendanceLog(string EventID)
+        {
             return PartialView("EventManagement/EventAttendanceLog");
         }
         
-        public IActionResult EventAttendees()
-        {
 
-            return PartialView("EventManagement/EventAttendees");
-        }
     }
 }
