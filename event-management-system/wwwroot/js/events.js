@@ -1,10 +1,14 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
+    console.log(1)
+    persistQueryData();
     initialLoadContent();
     setupSubcontentButtons();
 })
 
 function initialLoadContent() {
-    fetch(`/OrganizationEvents/EventsUpcoming`)
+    console.log("initial")
+    var queryString = getQueryData();
+    fetch(`/OrganizationEvents/EventsUpcoming${queryString}`)
         .then(response => response.text())
         .then(data => {
             document.getElementById('subcontent-container').innerHTML = data;
@@ -49,7 +53,8 @@ function loadContent(type) {
 
 
 function loadCategorySubContent(type) {
-    fetch(`/OrganizationEvents/Events${type}`)
+    var queryString = getQueryData();
+    fetch(`/OrganizationEvents/Events${type}${queryString}`)
         .then(response => response.text())
         .then(data => {
             document.getElementById('subcontent-container').innerHTML = data;
@@ -73,6 +78,29 @@ function setupCardRedirect() {
         });
     });
 }
+
+function getQueryData() {
+    var currentQueryString = window.location.search;
+    return currentQueryString;
+}
+
+function persistQueryData() {
+    // Get the current query parameters
+    var currentQueryString = window.location.search;
+
+    // Attach a click event handler to the "Create Event" link
+    document.getElementById('createEventLink').addEventListener('click', function () {
+        // Get the href attribute of the link
+        var linkHref = this.getAttribute('href');
+
+        // Append the current query parameters to the link's href
+        var updatedHref = linkHref + currentQueryString;
+
+        // Set the updated href back to the link
+        this.setAttribute('href', updatedHref);
+    });
+}
+
 
 function redirectToEventMain(eventID, queryString) {
     // Remove the leading "?" from the queryString if it exists

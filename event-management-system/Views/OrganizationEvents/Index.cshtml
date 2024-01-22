@@ -16,7 +16,7 @@
         </div>
         <div class="create-event-container">
             <h2 class="create-event-text medium-text text-glow-white">MAKE YOUR OWN EVENT</h2>
-            <a class="create-event-btn pill-box small-text" asp-area="" asp-controller="Events" asp-action="ContentCreation">
+            <a id="createEventLink" class="create-event-btn pill-box small-text" asp-area="" asp-controller="OrganizationEvents" asp-action="ContentCreation">
                 Create Event
             </a>
         </div>
@@ -34,7 +34,7 @@
 </div>
 
 <div class="subcontent-container" id="subcontent-container">
-    @await Html.PartialAsync("EventCategory/EventsUpcoming");
+    @* Insert Partial Views *@
 </div>
 
 @section Scripts {

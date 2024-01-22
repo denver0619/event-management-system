@@ -160,27 +160,49 @@ function validationCheck() {
         resetErrorStyles('description');
     }
 
-    
+    var organizationID = getOrganizationID();
 
     var eventDetails = {
-        eventTitle: eventTitle,
-        startDateTime: startDateTime,
-        endDateTime: endDateTime,
-        venue: venue,
-        participantNumber: participantNumber,
-        eventNature: eventNature,
-        typeOfEvent: typeOfEvent,
-        contactPerson: contactPerson,
-        contactNumber: contactNumber,
-        feedbackLink: feedbackLink,
-        paymentLink: paymentLink,
-        description: description,
+        
+        EventID: '',
+        EventNature: eventNature,
+        EventStatusId: '',
+        OrganizationID: organizationID,
+        DatePosted: '',
+        DateStart: startDateTime,
+        DateEnd: endDateTime,
+        Venue: venue,
+        Image: '',
+        Title: eventTitle,      
+        ParticipantNumber: participantNumber, 
+        EventType: typeOfEvent,
+        ContactPerson: contactPerson,
+        ContactNumber: contactNumber,
+        FeedbackLink: feedbackLink,
+        PaymentLink: paymentLink,
+        Description: description,
+
     }
 
-    if (isError == false) {
+    console.log(eventDetails);
+
+    /*if (isError == false) {
         sendData(eventDetails);
-    }
+    }*/
 
+}
+
+function getOrganizationID() {
+    
+        var queryString = window.location.search;
+        var urlParams = new URLSearchParams(queryString);
+
+        // Replace 'userId' with the actual query parameter name you are using
+        var organizationID = urlParams.get('userId');
+
+
+        return organizationID;
+    
 }
 
 function sendData(eventDetails) {
