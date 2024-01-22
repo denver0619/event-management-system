@@ -184,7 +184,7 @@ function validationCheck() {
 }
 
 function sendData(eventDetails) {
-    fetch('Events/SendEventData', {
+    fetch('/OrganizationEvents/SendEventData', {
         method: 'POST',
         header: {
             "Content-Type": "application/json",

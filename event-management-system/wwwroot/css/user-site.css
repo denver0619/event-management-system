@@ -511,7 +511,10 @@ header {
 
 
 
-
+/* My Events */
+.my-events-container {
+    margin: 60px auto;
+}
 
 
 

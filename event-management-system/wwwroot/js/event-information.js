@@ -6,7 +6,7 @@ function initialLoadContent() {
     var eventId = document.getElementById('subcontent-container').getAttribute('event-id');
 
     // LOAD EVENT ATTENDEES 
-    fetch(`/Events/EventAttendees?eventId=${eventId}`)
+    fetch(`/OrganizationEvents/EventAttendees?eventId=${eventId}`)
         .then(response => response.text())
         .then(data => {
             document.getElementById('subcontent-container').innerHTML = data;
@@ -50,7 +50,7 @@ function loadContent(type) {
 function loadSubContent(type) {
     var eventId = document.getElementById('subcontent-container').getAttribute('event-id');
 
-    fetch(`/Events/Event${type}?eventId=${eventId}`)
+    fetch(`/OrganizationEvents/Event${type}?eventId=${eventId}`)
         .then(response => response.text())
         .then(data => {
             document.getElementById('subcontent-container').innerHTML = data;

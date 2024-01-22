@@ -26,10 +26,5 @@ namespace event_management_system.Controllers
             //get card info from url then find from list then return model
             return View();
         }
-
-        public IActionResult MyEvents()
-        {
-            return View();
-        }
     }
 }

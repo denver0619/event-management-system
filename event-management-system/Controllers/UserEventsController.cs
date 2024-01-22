@@ -9,7 +9,7 @@ namespace event_management_system.Controllers
         {
             string userId = HttpContext.Request.Query["userId"]!;
             TempData["UserId"] = userId;
-            Debug.WriteLine(userId);
+            ViewData["UserId"] = userId;
             return View();
         }
 
@@ -28,6 +28,18 @@ namespace event_management_system.Controllers
         public IActionResult EventInfo()
         {
             //get card info from url then find from list then return model
+           /* Debug.Write("Here");
+            string userId = HttpContext.Request.Query["userId"]!;
+            TempData["UserId"] = userId;
+            Debug.Write(userId);
+            ViewData["UserId"] = userId;*/
+
+            return View();
+        }
+
+        public IActionResult MyEvents()
+        {
+            
             return View();
         }
     }
