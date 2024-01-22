@@ -41,7 +41,6 @@ namespace event_management_system.Controllers
 
         public IActionResult About()
         {
-            Debug.Write("Aboput");
             return View();
         }
 
