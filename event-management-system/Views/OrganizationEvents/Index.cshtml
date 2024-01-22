@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Events";
+    Layout = "~/Views/Shared/_OrganizationLayout.cshtml";
+}
+
+<div class="nav-bg">
+</div>
+
+<div class="introduction-container event-introduction" id="event-list-introduction">
+    <div class="introduction-content standard-container">
+        <div class="introduction-text-container">
+            <h1 class="introduction-text-title large-text"><span>ORGANIZATION EVENTS</span></h1>
+            <p class="introduction-text-p">
+                Welcome to the Events Tab, your go-to destination for a holistic view of the university's colorful event scene! Whether you're gearing up for upcoming activities, immersing yourself in ongoing happenings, or reminiscing about past memorable events, this section has got you covered. Organizers, dive into the details, from event names to dates and locations, all neatly organized for your convenience. Ready to make waves of your own? The "Create Event" button awaits, empowering you to kickstart your event planning journey. Experience the ease of navigation and a centralized hub designed to elevate your event management game. Welcome to the heart of the action, where every detail is at your fingertips!
+            </p>
+        </div>
+        <div class="create-event-container">
+            <h2 class="create-event-text medium-text text-glow-white">MAKE YOUR OWN EVENT</h2>
+            <a class="create-event-btn pill-box small-text" asp-area="" asp-controller="Events" asp-action="ContentCreation">
+                Create Event
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="content-navigation standard-container" id="event-list-navigation">
+    <div class="current-content" id="current-event-list-navigation"></div>
+    <button data-type="Upcoming">
+        <h1 class="medium-text" id="upcoming-btn">UPCOMING EVENTS</h1>
+    </button>
+    <button data-type="Previous">
+        <h1 class="medium-text" id="previous-btn">PREVIOUS EVENTS</h1>
+    </button>
+</div>
+
+<div class="subcontent-container" id="subcontent-container">
+    @await Html.PartialAsync("EventCategory/EventsUpcoming");
+</div>
+
+@section Scripts {
+    <script src="~/js/events.js"></script>
+}

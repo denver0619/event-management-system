@@ -4,7 +4,7 @@
     {
         public string? EventContentID { get; set; }
         public string? EventID { get; set; }
-        public string? EventTypeID { get; set; }
+        public string? EventContentTypeID { get; set; }
         public string? Content { get; set; }
     }
 }

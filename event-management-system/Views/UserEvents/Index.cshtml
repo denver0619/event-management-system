@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Events";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<div class="nav-bg">
+</div>
+
+<div class="introduction-container visitor-event-introduction">
+    <div class="introduction-content standard-container">
+        <div class="introduction-text-container">
+            <h1 class="introduction-text-title large-text"><span>EVENT LISTING</span></h1>
+            <p class="introduction-text-p">
+                Welcome to our Event Listing Tab - your comprehensive portal to a dynamic realm of captivating experiences within our college community. This curated space is designed to unveil a plethora of enriching events spanning diverse interests and passions.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="content-navigation standard-container" id="event-list-navigation">
+    <div class="current-content" id="current-event-list-navigation"></div>
+    <button data-type="Upcoming">
+        <h1 class="medium-text" id="upcoming-btn">UPCOMING EVENTS</h1>
+    </button>
+    <button data-type="Previous">
+        <h1 class="medium-text" id="previous-btn">PREVIOUS EVENTS</h1>
+    </button>
+</div>
+
+<div class="subcontent-container" id="subcontent-container">
+    @await Html.PartialAsync("EventCategory/EventsUpcoming")
+</div>
+
+@section Scripts {
+    <script src="~/js/user-events.js"></script>
+}
