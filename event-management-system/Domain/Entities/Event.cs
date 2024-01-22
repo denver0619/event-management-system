@@ -13,8 +13,8 @@
             string venue,
             string image,
             string title,
-            int numberOfParticipants,
-            string typeOfEvent,
+            int participantNumber,
+            string eventType,
             string contactPerson,
             string contactNumber,
             string feedbackLink,
@@ -31,8 +31,8 @@
             Venue = venue;
             Image = image;
             Title = title;
-            NumberOfParticipants = numberOfParticipants;
-            TypeOfEvent = typeOfEvent;
+            ParticipantNumber = participantNumber;
+            EventType = eventType;
             ContactPerson = contactPerson;
             ContactNumber = contactNumber;
             FeedbackLink = feedbackLink;
@@ -52,8 +52,8 @@
             Venue = eventEntity.Venue;
             Image = eventEntity.Image;
             Title = eventEntity.Title;
-            NumberOfParticipants = eventEntity.NumberOfParticipants;
-            TypeOfEvent = eventEntity.TypeOfEvent;
+            ParticipantNumber = eventEntity.ParticipantNumber;
+            EventType = eventEntity.EventType;
             ContactPerson = eventEntity.ContactPerson;
             ContactNumber = eventEntity.ContactNumber;
             FeedbackLink = eventEntity.FeedbackLink;
@@ -71,8 +71,8 @@
         public string? Venue { get; set; }
         public string? Image { get; set; }
         public string? Title { get; set; }
-        public int NumberOfParticipants { get; set; }
-        public string? TypeOfEvent { get; set; }
+        public int ParticipantNumber { get; set; }
+        public string? EventType { get; set; }
         public string? ContactPerson { get; set; }
         public string? ContactNumber { get; set; }
         public string? FeedbackLink { get; set; }
