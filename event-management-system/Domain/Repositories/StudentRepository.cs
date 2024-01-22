@@ -7,7 +7,7 @@ namespace event_management_system.Domain.Repositories
     public class StudentRepository: IStudentRepository, IDisposable
     {
         private DatabaseHelper<Student> databaseHelper;
-        private readonly string tableName = "student";
+        private readonly string tableName = "students";
 
         public StudentRepository()
         {

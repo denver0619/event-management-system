@@ -8,7 +8,7 @@ namespace event_management_system.Domain.Repositories
     public class OrganizationRepository: IOrganizationRepository, IDisposable
     {
         private DatabaseHelper<Organization> databaseHelper;
-        private readonly string tableName = "organization";
+        private readonly string tableName = "organizations";
 
         public OrganizationRepository()
         {
