@@ -35,7 +35,8 @@ namespace event_management_system.Services
 
         public void AuthenticateOrganization(string email, string secret)
         {
-            IOrganization organization = organizationRepository.GetByCredential(email, secret);
+            
+            IOrganization organization = organizationRepository.GetByCredential("'" + email + "'", secret);
             if (string.IsNullOrEmpty(organization.OrganizationID))
             {
                 Model.IsAuthenticated = false;

@@ -83,19 +83,27 @@ namespace event_management_system.Domain.Repositories
         {
             string constraints = "Email = " + email + " AND " + "Hash = " + secret; 
             DataTable dataTable = databaseHelper.SelectRecord(this.tableName, constraints);
-            DataRow row = dataTable.Rows[0];
-            return new Student(
-                    row["StudentID"].ToString()!,
-                    row["FirstName"].ToString()!,
-                    row["MiddleName"].ToString()!,
-                    row["LastName"].ToString()!,
-                    row["Suffix"].ToString()!,
-                    row["OrganizationID"].ToString()!,
-                    row["Hash"].ToString()!,
-                    row["Email"].ToString()!,
-                    row["YearLevel"].ToString()!,
-                    row["Contact"].ToString()!
-                );
+            if(dataTable.Rows[0] == null)
+            {
+                return new Student();
+            }
+            else
+            {
+                DataRow row = dataTable.Rows[0];
+                return new Student(
+                        row["StudentID"].ToString()!,
+                        row["FirstName"].ToString()!,
+                        row["MiddleName"].ToString()!,
+                        row["LastName"].ToString()!,
+                        row["Suffix"].ToString()!,
+                        row["OrganizationID"].ToString()!,
+                        row["Hash"].ToString()!,
+                        row["Email"].ToString()!,
+                        row["YearLevel"].ToString()!,
+                        row["Contact"].ToString()!
+                    );
+            }
+            
         }
     }
 }
