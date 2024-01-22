@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Text.Json;
+using event_management_system.Services;
+using Org.BouncyCastle.Bcpg;
 
 namespace event_management_system.Controllers
 {
@@ -25,19 +27,32 @@ namespace event_management_system.Controllers
             // get list of user then validate iif user or org
             string email = userCredential.Email!;
             string password = userCredential.Password!;
-            string userId = "3";
 
-            // Debug.WriteLine(email);
-
-            if (email == "org")
+            AuthenticationService authenticationService = new AuthenticationService();
+            authenticationService.AuthenticateStudent(email, password);
+            if(!authenticationService.Model.IsAuthenticated)
             {
-                return Json(new { redirectTo = Url.Action("Index", "OrganizationHome", new { userId = userId }) });
-            } else if (email == "user")
+                authenticationService.AuthenticateOrganization(email, password);
+                if(!authenticationService.Model.IsAuthenticated) 
+                { 
+                    return Ok();
+                }
+                else
+                {
+                    //string userId = authenticationService.Model.Organization!.OrganizationID!;
+                    return Json(new { redirectTo = Url.Action("Index", "OrganizationHome", new { userId = authenticationService.Model.Organization!.OrganizationID! }) });
+                }
+               
+            }
+            else
             {
-                return Json(new { redirectTo = Url.Action("Index", "UserHome", new { userId = userId }) });
+                //string userId = authenticationService.Model.Student!.StudentID!;
+                return Json(new { redirectTo = Url.Action("Index", "UserHome", new { userId = authenticationService.Model.Student!.StudentID! }) });
             }
 
-            return Ok();
+
+
+            
         }
 
         public IActionResult About()
