@@ -77,15 +77,22 @@ namespace event_management_system.Domain.Repositories
         {
             string constraints = "Email = " + email + " AND " + "Hash = " + secret;
             DataTable dataTable = databaseHelper.SelectRecord(this.tableName, constraints);
-            DataRow row = dataTable.Rows[0];
-            return new Organization(
-                    row["OrganizationID"].ToString()!,
-                    row["OrganizationName"].ToString()!,
-                    row["AccreditationStatus"].ToString()!,
-                    row["OrganizationDescription"].ToString()!,
-                    row["Hash"].ToString()!,
-                    row["Email"].ToString()!
-                );
+            if(dataTable.Rows[0] == null)
+            {
+                return new Organization();
+            }
+            else
+            {
+                DataRow row = dataTable.Rows[0];
+                return new Organization(
+                        row["OrganizationID"].ToString()!,
+                        row["OrganizationName"].ToString()!,
+                        row["AccreditationStatus"].ToString()!,
+                        row["OrganizationDescription"].ToString()!,
+                        row["Hash"].ToString()!,
+                        row["Email"].ToString()!
+                    );
+            }
         }
     }
 }
