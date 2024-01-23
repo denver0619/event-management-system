@@ -58,12 +58,20 @@ namespace event_management_system.Domain.Repositories
         {
             string constraints = "EventStatusID = " + id;
             DataTable dataTable = databaseHelper.SelectRecord(this.tableName, constraints);
-            DataRow row = dataTable.Rows[0];
-            return new EventStatus(
-                    row["EventStatusID"].ToString()!,
-                    row["StatusName"].ToString()!,
-                    row["StatusDescription"].ToString()!
-                );
+
+            if (!(dataTable.Rows.Count > 0))
+            {
+                return new EventStatus();
+            }
+            else
+            {
+                DataRow row = dataTable.Rows[0];
+                return new EventStatus(
+                        row["EventStatusID"].ToString()!,
+                        row["StatusName"].ToString()!,
+                        row["StatusDescription"].ToString()!
+                    );
+            }
         }
        
     }
