@@ -106,7 +106,96 @@ function setupSubmitButton(imageBlob) {
 }
 
 function validationCheck(imageData) {
-    console.log(imageData);
+    /*var Image = byteArray;
+        console.log(byte);
+    var eventTitle = document.getElementById('eventTitle').value;
+    var startDateTime = document.getElementById('startDateTime').value;
+    var endDateTime = document.getElementById('endDateTime').value;
+    var venue = document.getElementById('venue').value;
+    var participantNumber = document.getElementById('participantNumber').value;
+
+    var eventNatureDropdown = document.getElementById('eventNature');
+    var eventNature = eventNatureDropdown.value;
+
+    var typeOfEvent = document.getElementById('typeOfEvent').value;
+    var contactPerson = document.getElementById('contactPerson').value;
+    var contactNumber = document.getElementById('contactNumber').value;
+    var feedbackLink = document.getElementById('feedbackLink').value;
+    var paymentLink = document.getElementById('paymentLink').value;
+    var description = document.getElementById('description').value;
+
+
+    var isError = false;
+    if (eventTitle === '') {
+        applyErrorStyles('eventTitle');
+        isError = true;
+    } else {
+        resetErrorStyles('eventTitle');
+    }
+
+    if (startDateTime === '') {
+        applyErrorStyles('startDateTime');
+        isError = true;
+    } else {
+        resetErrorStyles('startDateTime');
+    }
+
+    if (endDateTime === '') {
+        applyErrorStyles('endDateTime');
+        isError = true;
+    } else {
+        resetErrorStyles('endDateTime');
+    }
+
+    if (venue === '') {
+        applyErrorStyles('venue');
+        isError = true;
+    } else {
+        resetErrorStyles('venue');
+    }
+
+    if (participantNumber === '') {
+        applyErrorStyles('participantNumber');
+        isError = true;
+    } else {
+        resetErrorStyles('participantNumber');
+    }
+
+    if (eventNature === '') {
+        applyErrorStyles('eventNature');
+        isError = true;
+    } else {
+        resetErrorStyles('eventNature');
+    }
+
+    if (typeOfEvent === '') {
+        applyErrorStyles('typeOfEvent');
+        isError = true;
+    } else {
+        resetErrorStyles('typeOfEvent');
+    }
+
+    if (contactPerson === '') {
+        applyErrorStyles('contactPerson');
+        isError = true;
+    } else {
+        resetErrorStyles('contactPerson');
+    }
+
+    if (contactNumber === '') {
+        applyErrorStyles('contactNumber');
+        isError = true;
+    } else {
+        resetErrorStyles('contactNumber');
+    }
+
+    if (description === '') {
+        applyErrorStyles('description');
+        isError = true;
+    } else {
+        resetErrorStyles('description');
+    }*/
+    
 
     // Other validation and data processing logic...
     var eventDetails = {

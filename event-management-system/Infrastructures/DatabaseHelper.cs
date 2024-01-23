@@ -55,6 +55,8 @@ namespace event_management_system.Infrastructures
 
             MySqlCommand command = new MySqlCommand(query, _connection);
             command.Parameters.Add(mySqlParameter);
+            Debug.WriteLine(command.CommandText);
+            
             command.ExecuteNonQuery();
             _connection.Close();
         }
