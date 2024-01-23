@@ -57,6 +57,37 @@ namespace event_management_system.Controllers
              }
          }*/
 
+        /* [HttpPost]
+         public async Task<IActionResult> SendImageData(IFormFile image)
+         {
+
+             if (image == null || image.Length == 0)
+             {
+                 return BadRequest("Invalid image file");
+             }
+
+             using (var stream = new MemoryStream())
+             {
+                 await image.CopyToAsync(stream);
+                 var imageData = stream.ToArray();
+                 Debug.WriteLine(imageData);
+
+                 var imageDataModel = new ImageDataModel
+                 {
+                     ImageData = imageData
+
+                 };
+
+
+                 Debug.WriteLine(JsonSerializer.Serialize(imageDataModel));
+
+                 // Save imageDataModel to your database or perform other actions
+
+                 // Return the base64-encoded image data in the response
+                 return Ok(new { ImageData = imageDataModel.ImageDataBase64 });
+             }
+         }*/
+
         [HttpPost]
         public async Task<IActionResult> SendImageData(IFormFile image)
         {
@@ -65,15 +96,21 @@ namespace event_management_system.Controllers
                 return BadRequest("Invalid image file");
             }
 
+            byte[] imageData;
+
             using (var stream = new MemoryStream())
             {
                 await image.CopyToAsync(stream);
-                var imageData = stream.ToArray();
+                imageData = stream.ToArray();
+                // Debug.WriteLine(imageData);
+                Debug.WriteLine(String.Join(", ", imageData));
 
                 var imageDataModel = new ImageDataModel
                 {
                     ImageData = imageData
                 };
+
+                
 
                 // Save imageDataModel to your database or perform other actions
 
@@ -235,6 +272,7 @@ namespace event_management_system.Controllers
         public string? PaymentLink { get; set; }
         public string? Description { get; set; }
 
-        public string? Image { get; set; }
+        public byte[] ImageData { get; set; }
+        public string ImageDataBase64 => ImageData != null ? Convert.ToBase64String(ImageData) : null;
     }
 }

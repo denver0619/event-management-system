@@ -465,6 +465,26 @@ function validationCheck(data) {
     console.log(data);
 
     // Other validation and data processing logic...
+    var eventDetails = {
+        
+        EventID: '',
+        EventNatureID: "1100003",
+        EventStatusID: "60001",
+        OrganizationID: organizationID,
+        OrganizationID: "1",
+        DateStart: "2024-02-14",
+        DateEnd: "2024-02-15",
+        Venue: "People Center",
+        Title: "Bataan Foundation Day",      
+        ParticipantNumber: 600, 
+        EventType: "Celebration",
+        ContactPerson: "Jaeia Mikaella Apad",
+        ContactNumber: "09463571592",
+        FeedbackLink: "sample1.com",
+        PaymentLink: "sample2.com",
+        Description: "napakalapet",
+
+    }
 
     sendData(data);
 }
@@ -502,7 +522,8 @@ function validationCheck(data) {
         });
 }*/
 
-function sendData(imageBlob) {
+function sendImageData(imageBlob) {
+    console.log(imageBlob)
     const formData = new FormData();
     formData.append('image', imageBlob, 'image.jpg');
 
