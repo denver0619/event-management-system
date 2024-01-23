@@ -2,6 +2,7 @@
 using event_management_system.Configurations;
 using System.Data;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace event_management_system.Infrastructures
 {public class DatabaseHelper<Entity> : IDisposable
@@ -48,6 +49,9 @@ namespace event_management_system.Infrastructures
                 recordValues += value + " ";
             }
             string query = querytype + tableName + " " + fields + recordValues + terminator;
+
+            Debug.WriteLine("hakdog");
+            Debug.WriteLine(query);
 
             MySqlCommand command = new MySqlCommand(query, _connection);
             command.Parameters.Add(mySqlParameter);
