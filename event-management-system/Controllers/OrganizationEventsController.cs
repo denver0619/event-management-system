@@ -70,10 +70,18 @@ namespace event_management_system.Controllers
                 await image.CopyToAsync(stream);
                 var imageData = stream.ToArray();
 
+                var imageDataModel = new ImageDataModel
+                {
+                    ImageData = imageData
+                };
+
+                // Save imageDataModel to your database or perform other actions
+
                 // Return the base64-encoded image data in the response
-                return Ok(new { ImageData = Convert.ToBase64String(imageData) });
+                return Ok(new { ImageData = imageDataModel.ImageDataBase64 });
             }
         }
+
 
 
 
