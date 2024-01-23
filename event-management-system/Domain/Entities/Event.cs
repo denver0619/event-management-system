@@ -11,7 +11,7 @@
             DateTime dateStart,
             DateTime dateEnd,
             string venue,
-            byte[]? image,
+            string image,
             string title,
             int participantNumber,
             string eventType,
@@ -69,7 +69,7 @@
         public DateTime? DateStart { get; set; }
         public DateTime? DateEnd { get; set; }
         public string? Venue { get; set; }
-        public byte[]? Image { get; set; }
+        public string? Image { get; set; }
         public string? Title { get; set; }
         public int ParticipantNumber { get; set; }
         public string? EventType { get; set; }

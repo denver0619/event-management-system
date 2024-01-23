@@ -24,7 +24,6 @@ namespace event_management_system.Controllers
         public IActionResult Index()
         {
             string userID = HttpContext.Request.Query["userId"]!;
-            Debug.WriteLine(userID);
             return View();
         }
 
@@ -34,36 +33,6 @@ namespace event_management_system.Controllers
             return View();
         }
 
-        [HttpPost]
-        /*        public async Task<IActionResult> SendImageData(IFormFile image)
-                {
-                    if (image == null || image.Length == 0)
-                    {
-                        return BadRequest("Invalid image file");
-                    }
-
-                    byte[] imageData;
-
-                    using (var stream = new MemoryStream())
-                    {
-                        await image.CopyToAsync(stream);
-                        imageData = stream.ToArray();
-                        // Debug.WriteLine(imageData);
-                        Debug.WriteLine(String.Join(", ", imageData));
-
-                        var imageDataModel = new ImageDataModel
-                        {
-                            ImageData = imageData
-                        };
-
-
-
-                        // Save imageDataModel to your database or perform other actions
-
-                        // Return the base64-encoded image data in the response
-                        return Ok(new { ImageData = imageDataModel.ImageDataBase64 });
-                    }
-                }*/
 
         [HttpPost]
         public IActionResult SendTextData([FromBody]CreateEventData eventEntity)
@@ -82,7 +51,7 @@ namespace event_management_system.Controllers
                 return BadRequest(new { Message = "Validation failed", Errors = errors });
             }*/
 
-            byte[] bytes = new byte[1];
+
 
             Debug.WriteLine(JsonSerializer.Serialize(eventEntity));
             Event eventData = new Event();
@@ -105,8 +74,6 @@ namespace event_management_system.Controllers
             eventData.PaymentLink = eventEntity.PaymentLink;
             eventData.Description = eventEntity.Description;
 
-
-            eventData.Image = bytes;
             eventData.DatePosted = DateTime.Now;
             EventCreateEditService eventCreateEditService = new EventCreateEditService();
 
@@ -117,17 +84,10 @@ namespace event_management_system.Controllers
             return Ok();
         }
 
-        public IActionResult EventMain()
-        {          
-            return View();
-        }
-
-
 
         public IActionResult EventsUpcoming() 
         {
             string userID = HttpContext.Request.Query["userId"]!;
-            Debug.WriteLine(userID);
 
             EventsServices eventsServices = new EventsServices();
             EventsModel eventsModel = eventsServices.GetAllUpcomingEventsByOrganizationID(userID);
@@ -141,7 +101,6 @@ namespace event_management_system.Controllers
         public IActionResult EventsPrevious()
         {
             string userID = HttpContext.Request.Query["userId"]!;
-            Debug.WriteLine(userID);
 
             EventsServices eventsServices = new EventsServices();
             EventsModel eventsModel = eventsServices.GetAllPreviousEventsByOrganizationID(userID);
@@ -151,20 +110,46 @@ namespace event_management_system.Controllers
             return PartialView("EventCategory/EventsPrevious", eventsModel);
         }
 
-
-
-        public IActionResult EventDetails(string EventID)
+        public IActionResult EventMain()
         {
-            return PartialView("EventManagement/EventDetails");
+            string eventID = HttpContext.Request.Query["eventId"]!;
+            TempData["EventId"] = eventID;
+            Debug.WriteLine("main " + eventID);
+            return View();
+        }
+
+
+
+        public IActionResult EventDetails()
+        {
+            string EventID = TempData["EventId"] as string;
+            Debug.WriteLine("details " + EventID);
+
+
+            EventCreateEditService eventCreateEditService = new EventCreateEditService();
+            EventCreateEditModel eventCreateEditModel = eventCreateEditService.GetEventData(EventID);
+            eventCreateEditService.Dispose();
+            return PartialView("EventManagement/EventDetails", eventCreateEditModel);
 
         }
-        public IActionResult EventAttendees(string EventID)
+
+
+        public IActionResult EventAttendees()
         {
+            string EventID = TempData["EventId"] as string;
+            Debug.WriteLine("att " + EventID);
+
+
             return PartialView("EventManagement/EventAttendees");
         }
 
-        public IActionResult EventAttendanceLog(string EventID)
+        public IActionResult EventAttendanceLog()
         {
+            string EventID = TempData["EventId"] as string;
+            Debug.WriteLine("log " + EventID);
+
+
+
             return PartialView("EventManagement/EventAttendanceLog");
         }
         

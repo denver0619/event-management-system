@@ -49,14 +49,9 @@ namespace event_management_system.Infrastructures
                 recordValues += value + " ";
             }
             string query = querytype + tableName + " " + fields + recordValues + terminator;
-
-            Debug.WriteLine("hakdog");
-            Debug.WriteLine(query);
-
+        
             MySqlCommand command = new MySqlCommand(query, _connection);
-            command.Parameters.Add(mySqlParameter);
-            Debug.WriteLine(command.CommandText);
-            
+            command.Parameters.Add(mySqlParameter);           
             command.ExecuteNonQuery();
             _connection.Close();
         }
@@ -69,8 +64,9 @@ namespace event_management_system.Infrastructures
             string whereClause = " WHERE ";
             string terminator = ";";
             string query = queryType + tableName + whereClause + constraints + terminator;
-
+            
             MySqlCommand command = new MySqlCommand(query, _connection);
+            Debug.WriteLine(query);
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);
             adapter.Fill(dataTable);
             _connection.Close();

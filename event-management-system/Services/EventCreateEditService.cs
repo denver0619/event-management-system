@@ -23,7 +23,9 @@ namespace event_management_system.Services
 
         public void AddEvent(IEvent eventEntity)
         {
-            eventRepository.AddEvent(eventEntity);
+            Event eventData = new Event(eventEntity);
+            eventData.Image = "";
+            eventRepository.AddEvent(eventData);
         }
 
         public EventCreateEditModel GetEventData(string eventID)
