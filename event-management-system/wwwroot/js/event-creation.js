@@ -1,5 +1,4 @@
-﻿let imageByteArray;
-
+﻿/*let imageByteArray;
 document.addEventListener('DOMContentLoaded', function () {
     setupFileUpload();
     setupSubmitButton();
@@ -9,12 +8,13 @@ function setupFileUpload() {
     const fileInput = document.getElementById('file-input');
 
     fileInput.addEventListener('change', handleFileSelect);
+    fileInput.addEventListener('change', loadImageToUI);
 }
 
-/*function handleFileSelect(event) {
-    const previewContainer = document.getElementById('preview-container');
+function handleFileSelect(event) {
     const files = event.target.files;
 
+    console.log(event.target.files)
     // Ensure only one file is selected
     if (files.length !== 1) {
         alert('Please select only one image.');
@@ -23,21 +23,16 @@ function setupFileUpload() {
 
     const file = files[0];
     const reader = new FileReader();
-
+    reader.readAsArrayBuffer(file);
     reader.onload = function (e) {
-        // Clear existing preview cards
-        clearPreviewContainer();
-
-        const previewCard = createPreviewCard(e.target.result);
-        previewContainer.appendChild(previewCard);
+        var byte = new Uint8Array(e.target.result)
+        setupSubmitButton(byte)
+        console.log("handalefileselect" + byte)
     };
+    //reader.readAsDataURL(file);
+}
 
-    reader.readAsDataURL(file);
-
-    console.log(file)
-}*/
-
-function handleFileSelect(event) {
+function loadImageToUI(event) {
     const previewContainer = document.getElementById('preview-container');
     const files = event.target.files;
 
@@ -58,37 +53,68 @@ function handleFileSelect(event) {
         previewContainer.appendChild(previewCard);
 
         // Convert the uploaded image to a byte array
-        convertImageToByteArray(file);
+
     };
 
     reader.readAsDataURL(file);
 }
 
-function convertImageToByteArray(imageFile) {
-    const reader = new FileReader();
+*//*function convertImageToByteArray(imageSrc) {
+    const img = new Image();
+    img.onload = function () {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, img.width, img.height);
 
-    reader.onload = function (e) {
-        const image = new Image();
-        image.src = e.target.result;
+        const imageData = ctx.getImageData(0, 0, img.width, img.height).data;
 
-        image.onload = function () {
-            const canvas = document.createElement('canvas');
-            canvas.width = image.width;
-            canvas.height = image.height;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(image, 0, 0, image.width, image.height);
+        // Convert the image data to a byte array
+        imageByteArray = Array.from(imageData);
 
-            const imageData = ctx.getImageData(0, 0, image.width, image.height);
-            imageByteArray = new Uint8Array(imageData.data.buffer);
+        // Log information about the blob file or its contents
+        console.log("BLOB")
+        console.log('Blob Image Data:', imageData);
+        console.log('Blob Image Width:', img.width);
+        console.log('Blob Image Height:', img.height);
+        console.log("BLOB")
 
-            // Now you have the byte array (Uint8Array) stored in imageByteArray
-            // You can use imageByteArray wherever needed
-            console.log(imageByteArray);
-        };
+
+        // Pass the byte array to validationCheck (you can also pass it to other functions as needed)
+        setupSubmitButton(imageByteArray);
     };
 
-    reader.readAsArrayBuffer(imageFile);
+    img.src = imageSrc;
+}*//*
+
+function convertImageToByteArray(imageSrc) {
+    const img = new Image();
+    img.onload = function () {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, img.width, img.height);
+
+        const imageData = ctx.getImageData(0, 0, img.width, img.height).data;
+
+        // Log information about the blob file or its contents
+        console.log('Blob Image Data:', imageData);
+        console.log('Blob Image Width:', img.width);
+        console.log('Blob Image Height:', img.height);
+
+        // Convert the image data to a byte array
+        imageByteArray = Array.from(imageData);
+
+        // Pass the byte array to validationCheck (you can also pass it to other functions as needed)
+        setupSubmitButton(imageByteArray);
+    };
+
+    // Use a data URL instead of directly setting the blob URL
+    img.src = imageSrc;
 }
+
 
 function clearPreviewContainer() {
     const previewContainer = document.getElementById('preview-container');
@@ -115,16 +141,27 @@ function createPreviewCard(imageSrc) {
 }
 
 
-function setupSubmitButton() {
+function setupSubmitButton(byte) {
+
+    console.log("setupsubmit" + byte)
     var submitBtn = document.getElementById('submit-event');
-    
-    submitBtn.addEventListener('click', function () {
-        // Pass the byte array to validationCheck inside setupSubmitButton
-        validationCheck(imageByteArray);
-    });
+    submitBtn.onclick = function () {
+        console.log("inisde setup" + byte)
+
+        validationCheck(byte)
+    }
+   //submitBtn.addEventListener('click', validationCheck(byte));
+
 }
 
-function validationCheck(byteArray) {
+function validationCheck(byte) {
+    *//*const byteArray = [];
+    Object.keys(byte).forEach((key) => {
+        const byteForKey = contentUint8Array[key];
+        byteArray.push(byteForKey);
+    });
+    var Image = byteArray;*//*
+    console.log(byte);
     var eventTitle = document.getElementById('eventTitle').value;
     var startDateTime = document.getElementById('startDateTime').value;
     var endDateTime = document.getElementById('endDateTime').value;
@@ -143,7 +180,7 @@ function validationCheck(byteArray) {
 
 
     var isError = false;
-    if (eventTitle === '') {
+    *//*if (eventTitle === '') {
         applyErrorStyles('eventTitle');
         isError = true;
     } else {
@@ -211,21 +248,20 @@ function validationCheck(byteArray) {
             isError = true;
     } else {
         resetErrorStyles('description');
-    }
+    }*//*
 
     var organizationID = getOrganizationID();
 
-    var eventDetails = {
-        
+    *//*var eventDetails = {     
         EventID: '',
         EventNature: eventNature,
-        EventStatusId: '',
+        EventStatusId: 60001,
         OrganizationID: organizationID,
         DatePosted: '',
         DateStart: startDateTime,
         DateEnd: endDateTime,
         Venue: venue,
-        Image: '',
+        Image: Image,
         Title: eventTitle,      
         ParticipantNumber: participantNumber, 
         EventType: typeOfEvent,
@@ -234,14 +270,46 @@ function validationCheck(byteArray) {
         FeedbackLink: feedbackLink,
         PaymentLink: paymentLink,
         Description: description,
+    }*//*
+
+    var eventDetails = {
+        
+        *//*EventID: '',
+        EventNatureID: "1100003",
+        EventStatusID: "60001",
+        OrganizationID: organizationID,
+        OrganizationID: "1",*//*
+        Image: btoa(new Uint8Array(byte).reduce(
+            function (data, arrayBuffer) {
+                return data + String.fromCharCode(arrayBuffer);
+            },
+            ''
+        )),
+       *//* DatePosted: '',
+        DateStart: "2024-02-14",
+        DateEnd: "2024-02-15",*//*
+        Venue: "People Center",
+        Title: "Bataan Foundation Day",      
+        ParticipantNumber: 600, 
+        EventType: "Celebration",
+        ContactPerson: "Jaeia Mikaella Apad",
+        ContactNumber: "09463571592",
+        FeedbackLink: "sample1.com",
+        PaymentLink: "sample2.com",
+        Description: "napakalapet",
 
     }
 
     console.log(eventDetails);
 
-    /*if (isError == false) {
-        sendData(eventDetails);
-    }*/
+    if (isError == false) {
+        sendData(btoa(new Uint8Array(byte).reduce(
+            function (data, arrayBuffer) {
+                return data + String.fromCharCode(arrayBuffer);
+            },
+            ''
+        )));
+    }
 
 }
 
@@ -259,6 +327,9 @@ function getOrganizationID() {
 }
 
 function sendData(eventDetails) {
+
+    console.log(eventDetails)
+
     fetch('/OrganizationEvents/SendEventData', {
         method: 'POST',
         header: {
@@ -281,4 +352,159 @@ function applyErrorStyles(elementId) {
 function resetErrorStyles(elementId) {
     var element = document.getElementById(elementId);
     element.style.border = 'none'; // Reset the border
+}*/
+
+let imageBlob;
+
+document.addEventListener('DOMContentLoaded', function () {
+    setupFileUpload();
+    setupSubmitButton();
+})
+
+function setupFileUpload() {
+    const fileInput = document.getElementById('file-input');
+
+    fileInput.addEventListener('change', handleFileSelect);
+    fileInput.addEventListener('change', loadImageToUI);
 }
+
+function handleFileSelect(event) {
+    const files = event.target.files;
+
+    // Ensure only one file is selected
+    if (files.length !== 1) {
+        alert('Please select only one image.');
+        return;
+    }
+
+    const file = files[0];
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const arrayBuffer = e.target.result;
+        const byteArray = new Uint8Array(arrayBuffer);
+        imageBlob = new Blob([byteArray], { type: file.type });
+
+        setupSubmitButton(imageBlob);
+    };
+    reader.readAsArrayBuffer(file);
+}
+
+function loadImageToUI(event) {
+    const previewContainer = document.getElementById('preview-container');
+    const files = event.target.files;
+
+    // Ensure only one file is selected
+    if (files.length !== 1) {
+        alert('Please select only one image.');
+        return;
+    }
+
+    const file = files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+        // Clear existing preview cards
+        clearPreviewContainer();
+
+        const previewCard = createPreviewCard(e.target.result);
+        previewContainer.appendChild(previewCard);
+    };
+
+    reader.readAsDataURL(file);
+}
+
+function convertImageToByteArray(imageBlob) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const arrayBuffer = e.target.result;
+        const byteArray = new Uint8Array(arrayBuffer);
+
+        // Log information about the blob file or its contents
+        console.log('Blob Image Data:', byteArray);
+        console.log('Blob Size:', byteArray.length);
+
+        // Pass the byte array to validationCheck (you can also pass it to other functions as needed)
+        setupSubmitButton(byteArray);
+    };
+
+    reader.readAsArrayBuffer(imageBlob);
+}
+
+function clearPreviewContainer() {
+    const previewContainer = document.getElementById('preview-container');
+    const existingPreviews = document.querySelectorAll('.preview-card');
+    existingPreviews.forEach(preview => previewContainer.removeChild(preview));
+}
+
+function createPreviewCard(imageSrc) {
+    const previewContainer = document.getElementById('preview-container');
+    const previewCard = document.createElement('div');
+    previewCard.className = 'preview-card';
+
+    previewCard.innerHTML = `
+        <span class="remove-button">&times; Remove</span>
+        <img src="${imageSrc}" alt="Preview">
+    `;
+
+    const removeButton = previewCard.querySelector('.remove-button');
+    removeButton.addEventListener('click', () => {
+        previewContainer.removeChild(previewCard);
+    });
+
+    return previewCard;
+}
+
+function setupSubmitButton(data) {
+    var submitBtn = document.getElementById('submit-event');
+    submitBtn.onclick = function () {
+        validationCheck(data);
+    }
+}
+
+function validationCheck(data) {
+    console.log(data);
+
+    // Other validation and data processing logic...
+
+    sendData(data);
+}
+
+function sendData(imageBlob) {
+    const formData = new FormData();
+    formData.append('image', imageBlob, 'image.jpg');
+
+    fetch('/OrganizationEvents/SendImageData', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to send image data');
+            }
+        })
+        .then(data => {
+            console.log('Received data:', data);
+
+            const imageData = data && data.imageData; 
+
+            //if (imageData) {
+                const imageElement = document.createElement('img');
+                imageElement.src = 'data:image/jpeg;base64,' + encodeURIComponent(imageData);
+                document.body.appendChild(imageElement);
+            //} else {
+            //    console.error('Invalid response format from the server');
+            //}
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+
+
+
+
+
+
