@@ -470,7 +470,6 @@ function validationCheck(data) {
         EventID: '',
         EventNatureID: "1100003",
         EventStatusID: "60001",
-        OrganizationID: organizationID,
         OrganizationID: "1",
         DateStart: "2024-02-14",
         DateEnd: "2024-02-15",
@@ -486,7 +485,7 @@ function validationCheck(data) {
 
     }
 
-    sendData(data);
+    sendImageData(data);
 }
 
 /*function sendData(imageBlob) {
