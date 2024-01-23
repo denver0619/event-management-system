@@ -36,10 +36,11 @@ namespace event_management_system.Controllers
             string EventID = HttpContext.Request.Query["id"];
             Debug.WriteLine(EventID);
             EventsServices eventsServices = new EventsServices();
+            EventsModel eventsModel = eventsServices.GetEventInfoById(EventID);
             //EventsModel eventsModel = eventsServices;
             
             //get card info from url then find from list then return model
-            return View();
+            return View(eventsModel);
         }
     }
 }
