@@ -136,7 +136,7 @@ function sendImageData(imageBlob) {
     const formData = new FormData();
 
     // Append the image blob
-    formData.append('image', imageBlob, 'image.jpg');
+    formData.append('Image', imageBlob, 'image.jpg');
 
     // Append the event details
     const eventDetails = {
@@ -144,8 +144,6 @@ function sendImageData(imageBlob) {
         EventNatureID: "1100003",
         EventStatusID: "60001",
         OrganizationID: "1",
-        DateStart: "2024-02-14",
-        DateEnd: "2024-02-15",
         Venue: "People Center",
         Title: "Bataan Foundation Day",
         ParticipantNumber: 600,
@@ -158,30 +156,31 @@ function sendImageData(imageBlob) {
     };
 
     // Convert the event details to a JSON string and append it to the form data
-    formData.append('eventDetails', JSON.stringify(eventDetails));
+    formData.append('EventDetails', JSON.stringify(eventDetails));
 
     fetch('/OrganizationEvents/SendImageData', {
         method: 'POST',
         body: formData
     })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Failed to send image data');
-            }
-        })
-        .then(data => {
-            console.log('Received data:', data);
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Failed to send image data');
+        }
+    })
+    .then(data => {
+        console.log('Received data:', data);
 
-            const imageElement = document.createElement('img');
-            imageElement.src = 'data:image/jpeg;base64,' + data.imageData; // Use 'imageData' instead of 'ImageData'
-            document.body.appendChild(imageElement);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+        const imageElement = document.createElement('img');
+        imageElement.src = 'data:image/jpeg;base64,' + data.ImageData;
+        document.body.appendChild(imageElement);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
+
 
 
 

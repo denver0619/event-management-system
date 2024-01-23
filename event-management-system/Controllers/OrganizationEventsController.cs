@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc.Diagnostics;
 using System.Diagnostics;
 using event_management_system.Domain.Entities;
 using System.Text.Json;
+using static System.Net.Mime.MediaTypeNames;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace event_management_system.Controllers
 {
@@ -25,12 +27,56 @@ namespace event_management_system.Controllers
         }
 
         [HttpPost]
-        public IActionResult SendImageData([FromForm] CombinedDataModel combinedData)
+        /*        public async Task<IActionResult> SendImageData(IFormFile image)
+                {
+                    if (image == null || image.Length == 0)
+                    {
+                        return BadRequest("Invalid image file");
+                    }
+
+                    byte[] imageData;
+
+                    using (var stream = new MemoryStream())
+                    {
+                        await image.CopyToAsync(stream);
+                        imageData = stream.ToArray();
+                        // Debug.WriteLine(imageData);
+                        Debug.WriteLine(String.Join(", ", imageData));
+
+                        var imageDataModel = new ImageDataModel
+                        {
+                            ImageData = imageData
+                        };
+
+
+
+                        // Save imageDataModel to your database or perform other actions
+
+                        // Return the base64-encoded image data in the response
+                        return Ok(new { ImageData = imageDataModel.ImageDataBase64 });
+                    }
+                }*/
+
+
+        [HttpPost]
+        public async Task<IActionResult> SendImageData([FromForm] CombinedDataModel combinedData)
         {
             try
-            {
+            { 
+
+
                 // Access the image using combinedData.Image
+                byte[] imageData;
+
+                using (var stream = new MemoryStream())
+                {
+                    await combinedData.Image.CopyToAsync(stream);
+                    imageData = stream.ToArray();
+                    Debug.WriteLine(String.Join(", ", imageData));
+                }
+
                 // Access event details using combinedData.EventDetails
+                Debug.WriteLine(JsonSerializer.Serialize(combinedData.EventDetails));
 
                 // Your logic to process the data goes here
 
@@ -48,6 +94,7 @@ namespace event_management_system.Controllers
                 return BadRequest(new { Message = $"Error: {ex.Message}" });
             }
         }
+
 
 
 
@@ -119,21 +166,21 @@ namespace event_management_system.Controllers
 
     public class EventDetailsModel
     {
-        public string EventID { get; set; }
-        public string EventNatureID { get; set; }
-        public string EventStatusID { get; set; }
-        public string OrganizationID { get; set; }
-        public string DateStart { get; set; }
-        public string DateEnd { get; set; }
-        public string Venue { get; set; }
-        public string Title { get; set; }
-        public int ParticipantNumber { get; set; }
-        public string EventType { get; set; }
-        public string ContactPerson { get; set; }
-        public string ContactNumber { get; set; }
-        public string FeedbackLink { get; set; }
-        public string PaymentLink { get; set; }
-        public string Description { get; set; }
+        public string? EventID { get; set; }
+        public string? EventNatureID { get; set; }
+        public string? EventStatusID { get; set; }
+        public string? OrganizationID { get; set; }
+       /* public string DateStart { get; set; }
+        public string DateEnd { get; set; }*/
+        public string? Venue { get; set; }
+        public string? Title { get; set; }
+        public int? ParticipantNumber { get; set; }
+        public string? EventType { get; set; }
+        public string? ContactPerson { get; set; }
+        public string? ContactNumber { get; set; }
+        public string? FeedbackLink { get; set; }
+        public string? PaymentLink { get; set; }
+        public string? Description { get; set; }
     }
 
     public class CombinedDataModel
