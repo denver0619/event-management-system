@@ -469,6 +469,39 @@ function validationCheck(data) {
     sendData(data);
 }
 
+/*function sendData(imageBlob) {
+    const formData = new FormData();
+    formData.append('image', imageBlob, 'image.jpg');
+
+    fetch('/OrganizationEvents/SendImageData', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to send image data');
+            }
+        })
+        .then(data => {
+            console.log('Received data:', data);
+
+            const imageData = data.imageData; 
+
+            //if (imageData) {
+                const imageElement = document.createElement('img');
+                imageElement.src = 'data:image/jpeg;base64,' + encodeURIComponent(imageData);
+                document.body.appendChild(imageElement);
+            //} else {
+            //    console.error('Invalid response format from the server');
+            //}
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}*/
+
 function sendData(imageBlob) {
     const formData = new FormData();
     formData.append('image', imageBlob, 'image.jpg');
@@ -487,20 +520,17 @@ function sendData(imageBlob) {
         .then(data => {
             console.log('Received data:', data);
 
-            const imageData = data && data.imageData; 
-
-            //if (imageData) {
-                const imageElement = document.createElement('img');
-                imageElement.src = 'data:image/jpeg;base64,' + encodeURIComponent(imageData);
-                document.body.appendChild(imageElement);
-            //} else {
-            //    console.error('Invalid response format from the server');
-            //}
+            const imageElement = document.createElement('img');
+            imageElement.src = 'data:image/jpeg;base64,' + data.imageData; // Use 'imageData' instead of 'ImageData'
+            document.body.appendChild(imageElement);
         })
         .catch(error => {
             console.error('Error:', error);
         });
 }
+
+
+
 
 
 

@@ -38,6 +38,25 @@ namespace event_management_system.Controllers
         }
 
 
+        /* [HttpPost]
+         public async Task<IActionResult> SendImageData(IFormFile image)
+         {
+             if (image == null || image.Length == 0)
+             {
+                 return BadRequest("Invalid image file");
+             }
+
+             using (var stream = new MemoryStream())
+             {
+                 await image.CopyToAsync(stream);
+                 var imageData = stream.ToArray();
+
+                 // Return the image data as a base64 string in the response
+                 var responseModel = new { ImageData = Convert.ToBase64String(imageData) };
+                 return Ok(responseModel);
+             }
+         }*/
+
         [HttpPost]
         public async Task<IActionResult> SendImageData(IFormFile image)
         {
@@ -51,11 +70,14 @@ namespace event_management_system.Controllers
                 await image.CopyToAsync(stream);
                 var imageData = stream.ToArray();
 
-                // Return the image data as a base64 string in the response
-                var responseModel = new { ImageData = Convert.ToBase64String(imageData) };
-                return Ok(responseModel);
+                // Return the base64-encoded image data in the response
+                return Ok(new { ImageData = Convert.ToBase64String(imageData) });
             }
         }
+
+
+
+
 
 
 
@@ -124,7 +146,10 @@ namespace event_management_system.Controllers
     {
         public int Id { get; set; }
         public byte[] ImageData { get; set; }
+        public string ImageDataBase64 => ImageData != null ? Convert.ToBase64String(ImageData) : null;
     }
+
+
 
     public class CreateEventData
     {
