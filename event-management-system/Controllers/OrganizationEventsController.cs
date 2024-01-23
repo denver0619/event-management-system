@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using event_management_system.Domain.Models;
+using event_management_system.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
 using System.Diagnostics;
 
@@ -43,8 +45,12 @@ namespace event_management_system.Controllers
             string userID = HttpContext.Request.Query["userId"]!;
             Debug.WriteLine(userID);
 
+            EventsServices eventsServices = new EventsServices();
+            EventsModel eventsModel = eventsServices.GetAllUpcomingEventsByOrganizationID(userID);
+            eventsServices.Dispose();
+
             // get list of upcoming based on orgID then return as model
-            return PartialView("EventCategory/EventsUpcoming");
+            return PartialView("EventCategory/EventsUpcoming", eventsModel);
             // return PartialView("EventCategory/EventsUpcoming", modelHere);
         }
 
@@ -52,8 +58,13 @@ namespace event_management_system.Controllers
         {
             string userID = HttpContext.Request.Query["userId"]!;
             Debug.WriteLine(userID);
+
+            EventsServices eventsServices = new EventsServices();
+            EventsModel eventsModel = eventsServices.GetAllPreviousEventsByOrganizationID(userID);
+            eventsServices.Dispose();
+
             // get list of previous based on orgID then return as model
-            return PartialView("EventCategory/EventsPrevious");
+            return PartialView("EventCategory/EventsPrevious", eventsModel);
         }
 
 
