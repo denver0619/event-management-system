@@ -101,6 +101,17 @@ namespace event_management_system.Services
             return Model;
         }
 
+        public EventsModel GetEventInfoById(string eventID)
+        {
+            IEvent eventEntity = eventRepository.GetByID(eventID);
+            EventDataTransferObject eventData = new EventDataTransferObject(eventEntity);
+            eventData.Organization = organizationRepository.GetByID(eventEntity.OrganizationID!);
+            eventData.Nature = eventNatureRepository.GetByID(eventEntity.EventNatureID!);
+            eventData.Status = eventStatusRepository.GetByID(eventEntity.EventStatusID!);
+            Model.EventInfo = eventData;
+            return Model;
+        }
+
         public void Dispose()
         {
             eventNatureRepository.Dispose();
