@@ -39,7 +39,7 @@ namespace event_management_system.Services
 
         public EventsModel GetAllUpcomingEvents()
         {
-            List<IEvent> events = eventRepository.GetUpcomingEvents();
+            List<IEvent> events = eventRepository.GetUpcomingEvents().OrderByDescending(eventEntity => eventEntity.DateStart).ToList();
             List<EventDataTransferObject> eventList = new List<EventDataTransferObject>();
             foreach (IEvent eventEntity in events)
             {
@@ -49,9 +49,7 @@ namespace event_management_system.Services
                 eventDataTransferObject.Status = eventStatusRepository.GetByID(eventEntity.EventStatusID!);
                 eventList.Add(eventDataTransferObject);
             }
-            Model.ListUpcomingEvents = eventList;
-            Debug.WriteLine(JsonSerializer.Serialize(eventRepository.GetUpcomingEvents()));
-            Debug.WriteLine(JsonSerializer.Serialize(events));
+            Model.ListUpcomingEvents = eventList;          
             return Model;
         }
 

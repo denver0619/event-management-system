@@ -14,9 +14,9 @@ namespace event_management_system.Controllers
             EventsServices eventsServices = new EventsServices();
             EventsModel eventsModel = eventsServices.GetAllUpcomingEvents();
             eventsServices.Dispose();
-            Debug.WriteLine("Controller");
+            /*Debug.WriteLine("Controller");
             Debug.WriteLine(JsonSerializer.Serialize(eventsModel));
-            Debug.WriteLine("Controller");
+            Debug.WriteLine("Controller");*/
             return View(eventsModel);
         }
 

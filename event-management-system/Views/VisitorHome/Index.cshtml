@@ -108,20 +108,20 @@
         <h1 class="event-gallery-header large-text">EVENT GALLERY</h1>
         <div class="event-gallery-card-container">
 
-            @* @if (!(Model.ListUpcomingEvents.Count > 0))
+            @if (!(Model.ListUpcomingEvents.Count > 0))
             {
 
             }
             else
-            { *@
-                @foreach(event_management_system.Domain.DataTransferObject.EventDataTransferObject eventDataTransferObject in Model.ListUpcomingEvents)
+            {
+                foreach(event_management_system.Domain.DataTransferObject.EventDataTransferObject eventDataTransferObject in Model.ListUpcomingEvents)
                 {
                     <div class="event-card" event-id="@eventDataTransferObject.EventID">
                         <img src="~/images/events/trick-or-treat-2022.png" alt="">
                         <div class="event-card-details">
                             <div class="event-date">
                                 <p class="event-month">@(((DateTime)eventDataTransferObject.DateStart!).ToString("MMM").ToUpper())</p>
-                                <p class="event-day">@(((DateTime)eventDataTransferObject.DateStart!).ToString("DD").ToUpper())</p>
+                                <p class="event-day">@(((DateTime)eventDataTransferObject.DateStart!).ToString("dd"))</p>
                             </div>
                             <div class="event-key-info">
                                 <h3>TRICK OR TREAT 2022</h3>
@@ -132,7 +132,7 @@
                         </div>
                     </div>
                 }
-            @* } *@
+            }
             
 
 
