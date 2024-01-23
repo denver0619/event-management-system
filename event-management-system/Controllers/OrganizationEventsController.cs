@@ -7,12 +7,20 @@ using event_management_system.Domain.Entities;
 using System.Text.Json;
 using static System.Net.Mime.MediaTypeNames;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.Logging;
 
 namespace event_management_system.Controllers
 {
 
     public class OrganizationEventsController : Controller
     {
+
+        private readonly ILogger<OrganizationEventsController> _logger;
+
+        public OrganizationEventsController(ILogger<OrganizationEventsController> logger)
+        {
+            _logger = logger;
+        }
         public IActionResult Index()
         {
             string userID = HttpContext.Request.Query["userId"]!;
@@ -57,61 +65,60 @@ namespace event_management_system.Controllers
                     }
                 }*/
 
-
         [HttpPost]
-        public async Task<IActionResult> SendImageData([FromForm] CombinedDataModel combinedData)
+        public IActionResult SendTextData([FromBody]CreateEventData eventEntity)
         {
-            try
-            { 
+           /* if (!ModelState.IsValid)
+            {
+                // The model is not valid, log validation errors
+                var errors = ModelState.Values
+                    .SelectMany(v => v.Errors.Select(e => e.ErrorMessage));
 
-
-                // Access the image using combinedData.Image
-                byte[] imageData;
-
-                using (var stream = new MemoryStream())
+                foreach (var error in errors)
                 {
-                    await combinedData.Image.CopyToAsync(stream);
-                    imageData = stream.ToArray();
-                    Debug.WriteLine(String.Join(", ", imageData));
+                    _logger.LogError($"Validation Error: {error}");
                 }
 
-                // Access event details using combinedData.EventDetails
-                Debug.WriteLine(JsonSerializer.Serialize(combinedData.EventDetails));
+                return BadRequest(new { Message = "Validation failed", Errors = errors });
+            }*/
 
-                // Your logic to process the data goes here
+            byte[] bytes = new byte[1];
 
-                // For demonstration purposes, returning a simple JSON response
-                var responseData = new
-                {
-                    Message = "Data received successfully",
-                    ImageData = "base64encodedimagestring" // You can replace this with your actual image data
-                };
+            Debug.WriteLine(JsonSerializer.Serialize(eventEntity));
+            Event eventData = new Event();
 
-                return Ok(responseData);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { Message = $"Error: {ex.Message}" });
-            }
+
+            eventData.EventID = eventEntity.EventID;
+            eventData.EventNatureID = eventEntity.EventNatureID;
+            eventData.EventStatusID = eventEntity.EventStatusID;
+            eventData.OrganizationID = eventEntity.OrganizationID;
+            eventData.Venue = eventEntity.Venue;
+            eventData.Title = eventEntity.Title;
+            eventData.DatePosted = eventEntity.DatePosted;
+            eventData.DateStart = eventEntity.DateStart;
+            eventData.DateEnd = eventEntity.DateEnd;
+            eventData.ParticipantNumber = eventEntity.ParticipantNumber;
+            eventData.EventType = eventEntity.EventType;
+            eventData.ContactPerson = eventEntity.ContactPerson;
+            eventData.ContactNumber = eventEntity.ContactNumber;
+            eventData.FeedbackLink = eventEntity.FeedbackLink;
+            eventData.PaymentLink = eventEntity.PaymentLink;
+            eventData.Description = eventEntity.Description;
+
+
+            eventData.Image = bytes;
+            eventData.DatePosted = DateTime.Now;
+            EventCreateEditService eventCreateEditService = new EventCreateEditService();
+
+            eventCreateEditService.AddEvent(eventData);
+            eventCreateEditService.Dispose();
+
+
+            return Ok();
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
         public IActionResult EventMain()
-        {
-            
-            
-
+        {          
             return View();
         }
 
@@ -166,115 +173,179 @@ namespace event_management_system.Controllers
 
     public class EventDetailsModel
     {
+        /* public string? EventID { get; set; }
+         public string? EventNatureID { get; set; }
+         public string? EventStatusID { get; set; }
+         public string? OrganizationID { get; set; }
+        *//* public string DateStart { get; set; }
+         public string DateEnd { get; set; }*//*
+         public string? Venue { get; set; }
+         public string? Title { get; set; }
+         public int? ParticipantNumber { get; set; }
+         public string? EventType { get; set; }
+         public string? ContactPerson { get; set; }
+         public string? ContactNumber { get; set; }
+         public string? FeedbackLink { get; set; }
+         public string? PaymentLink { get; set; }
+         public string? Description { get; set; }*/
+        public EventDetailsModel() { }
+        public EventDetailsModel(string eventID,
+            string eventNatureID,
+            string eventStatusID,
+            string organizationID,
+            string venue,
+            string title,
+            int participantNumber,
+            string eventType,
+            string contactPerson,
+            string contactNumber,
+            string feedbackLink,
+            string paymentLink,
+            string description)
+        {
+            EventID = eventID;
+            EventNatureID = eventNatureID;
+            EventStatusID = eventStatusID;
+            OrganizationID = organizationID;
+            Venue = venue;
+            Title = title;
+            ParticipantNumber = participantNumber;
+            EventType = eventType;
+            ContactPerson = contactPerson;
+            ContactNumber = contactNumber;
+            FeedbackLink = feedbackLink;
+            PaymentLink = paymentLink;
+            Description = description;
+        }
+
+        public EventDetailsModel(IEvent eventEntity)
+        {
+            EventID = eventEntity.EventID;
+            EventNatureID = eventEntity.EventNatureID;
+            EventStatusID = eventEntity.EventStatusID;
+            OrganizationID = eventEntity.OrganizationID;
+            Venue = eventEntity.Venue;
+            Title = eventEntity.Title;
+            ParticipantNumber = eventEntity.ParticipantNumber;
+            EventType = eventEntity.EventType;
+            ContactPerson = eventEntity.ContactPerson;
+            ContactNumber = eventEntity.ContactNumber;
+            FeedbackLink = eventEntity.FeedbackLink;
+            PaymentLink = eventEntity.PaymentLink;
+            Description = eventEntity.Description;
+        }
+
         public string? EventID { get; set; }
         public string? EventNatureID { get; set; }
         public string? EventStatusID { get; set; }
         public string? OrganizationID { get; set; }
-       /* public string DateStart { get; set; }
-        public string DateEnd { get; set; }*/
         public string? Venue { get; set; }
+
         public string? Title { get; set; }
-        public int? ParticipantNumber { get; set; }
+        public int ParticipantNumber { get; set; }
         public string? EventType { get; set; }
         public string? ContactPerson { get; set; }
         public string? ContactNumber { get; set; }
         public string? FeedbackLink { get; set; }
         public string? PaymentLink { get; set; }
         public string? Description { get; set; }
+
     }
 
     public class CombinedDataModel
     {
+        [FromForm(Name = "Image")]
         public IFormFile Image { get; set; }
+
+        [FromBody]
         public EventDetailsModel EventDetails { get; set; }
     }
 
-    /*    public class ImageDataModel
+
+/*    public class ImageDataModel
+    {
+        public int Id { get; set; }
+        public byte[] ImageData { get; set; }
+        public string ImageDataBase64 => ImageData != null ? Convert.ToBase64String(ImageData) : null;
+    }*/
+
+
+
+    public class CreateEventData
+    {
+        public CreateEventData() { }
+        public CreateEventData(string eventID,
+            string eventNatureID,
+            string eventStatusID,
+            string organizationID,
+            string venue,
+            string title,
+            DateTime datePosted,
+            DateTime dateStart,
+            DateTime dateEnd,
+            int participantNumber,
+            string eventType,
+            string contactPerson,
+            string contactNumber,
+            string feedbackLink,
+            string paymentLink,
+            string description)
         {
-            public int Id { get; set; }
-            public byte[] ImageData { get; set; }
-            public string ImageDataBase64 => ImageData != null ? Convert.ToBase64String(ImageData) : null;
+            EventID = eventID;
+            EventNatureID = eventNatureID;
+            EventStatusID = eventStatusID;
+            OrganizationID = organizationID;
+            Venue = venue;
+            Title = title;
+            DatePosted = datePosted;
+            DateStart = dateStart;
+            DateEnd = dateEnd;
+            ParticipantNumber = participantNumber;
+            EventType = eventType;
+            ContactPerson = contactPerson;
+            ContactNumber = contactNumber;
+            FeedbackLink = feedbackLink;
+            PaymentLink = paymentLink;
+            Description = description;
         }
 
-
-
-        public class CreateEventData
+        public CreateEventData(IEvent eventEntity)
         {
-            public CreateEventData() { }
-            public CreateEventData(string eventID,
-                string eventNatureID,
-                string eventStatusID,
-                string organizationID,
-               *//* DateTime datePosted,
-                DateTime dateStart,
-                DateTime dateEnd,*//*
-                string venue,
-                string title,
-                int participantNumber,
-                string eventType,
-                string contactPerson,
-                string contactNumber,
-                string feedbackLink,
-                string paymentLink,
-                string description)
-            {
-                EventID = eventID;
-                EventNatureID = eventNatureID;
-                EventStatusID = eventStatusID;
-                OrganizationID = organizationID;
-               *//* DatePosted = datePosted;
-                DateStart = dateStart;
-                DateEnd = dateEnd;*//*
-                Venue = venue;
-                Title = title;
-                ParticipantNumber = participantNumber;
-                EventType = eventType;
-                ContactPerson = contactPerson;
-                ContactNumber = contactNumber;
-                FeedbackLink = feedbackLink;
-                PaymentLink = paymentLink;
-                Description = description;
-            }
+            EventID = eventEntity.EventID;
+            EventNatureID = eventEntity.EventNatureID;
+            EventStatusID = eventEntity.EventStatusID;
+            OrganizationID = eventEntity.OrganizationID;
+            Venue = eventEntity.Venue;
+            Title = eventEntity.Title;
+            DatePosted = eventEntity.DatePosted;
+            DateStart = eventEntity.DateStart;
+            DateEnd = eventEntity.DateEnd;
+            ParticipantNumber = eventEntity.ParticipantNumber;
+            EventType = eventEntity.EventType;
+            ContactPerson = eventEntity.ContactPerson;
+            ContactNumber = eventEntity.ContactNumber;
+            FeedbackLink = eventEntity.FeedbackLink;
+            PaymentLink = eventEntity.PaymentLink;
+            Description = eventEntity.Description;
+        }
 
-            public CreateEventData(IEvent eventEntity)
-            {
-                EventID = eventEntity.EventID;
-                EventNatureID = eventEntity.EventNatureID;
-                EventStatusID = eventEntity.EventStatusID;
-                OrganizationID = eventEntity.OrganizationID;
-                *//*DatePosted = eventEntity.DatePosted;
-                DateStart = eventEntity.DateStart;
-                DateEnd = eventEntity.DateEnd;*//*
-                Venue = eventEntity.Venue;
-                Title = eventEntity.Title;
-                ParticipantNumber = eventEntity.ParticipantNumber;
-                EventType = eventEntity.EventType;
-                ContactPerson = eventEntity.ContactPerson;
-                ContactNumber = eventEntity.ContactNumber;
-                FeedbackLink = eventEntity.FeedbackLink;
-                PaymentLink = eventEntity.PaymentLink;
-                Description = eventEntity.Description;
-            }
+        public string? EventID { get; set; }
+        public string? EventNatureID { get; set; }
+        public string? EventStatusID { get; set; }
+        public string? OrganizationID { get; set; }
+        public string? Venue { get; set; }
+        public DateTime? DatePosted{ get; set; }
+        public DateTime? DateStart{ get; set; }
+        public DateTime? DateEnd{ get; set; }
+        public string? Title { get; set; }
+        public int ParticipantNumber { get; set; }
+        public string? EventType { get; set; }
+        public string? ContactPerson { get; set; }
+        public string? ContactNumber { get; set; }
+        public string? FeedbackLink { get; set; }
+        public string? PaymentLink { get; set; }
+        public string? Description { get; set; }
 
-            public string? EventID { get; set; }
-            public string? EventNatureID { get; set; }
-            public string? EventStatusID { get; set; }
-            public string? OrganizationID { get; set; }
-            *//*public DateTime? DatePosted { get; set; }
-            public DateTime? DateStart { get; set; }
-            public DateTime? DateEnd { get; set; }*//*
-            public string? Venue { get; set; }
-
-            public string? Title { get; set; }
-            public int ParticipantNumber { get; set; }
-            public string? EventType { get; set; }
-            public string? ContactPerson { get; set; }
-            public string? ContactNumber { get; set; }
-            public string? FeedbackLink { get; set; }
-            public string? PaymentLink { get; set; }
-            public string? Description { get; set; }
-
-            public byte[] ImageData { get; set; }
-            public string ImageDataBase64 => ImageData != null ? Convert.ToBase64String(ImageData) : null;
-        }*/
+        public byte[] Image { get; set; }
+    }
 }

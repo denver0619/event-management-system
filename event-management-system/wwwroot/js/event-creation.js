@@ -106,44 +106,17 @@ function setupSubmitButton(imageBlob) {
 }
 
 function validationCheck(imageData) {
-    console.log(imageBlob);
+    console.log(imageData);
 
     // Other validation and data processing logic...
-    /*var eventDetails = {
-        
+    var eventDetails = {
         EventID: '',
         EventNatureID: "1100003",
         EventStatusID: "60001",
         OrganizationID: "1",
+        DatePosted: Date.now,
         DateStart: "2024-02-14",
         DateEnd: "2024-02-15",
-        Venue: "People Center",
-        Title: "Bataan Foundation Day",      
-        ParticipantNumber: 600, 
-        EventType: "Celebration",
-        ContactPerson: "Jaeia Mikaella Apad",
-        ContactNumber: "09463571592",
-        FeedbackLink: "sample1.com",
-        PaymentLink: "sample2.com",
-        Description: "napakalapet",
-
-    }*/
-
-    sendImageData(imageBlob);
-}
-
-function sendImageData(imageBlob) {
-    const formData = new FormData();
-
-    // Append the image blob
-    formData.append('Image', imageBlob, 'image.jpg');
-
-    // Append the event details
-    const eventDetails = {
-        EventID: '',
-        EventNatureID: "1100003",
-        EventStatusID: "60001",
-        OrganizationID: "1",
         Venue: "People Center",
         Title: "Bataan Foundation Day",
         ParticipantNumber: 600,
@@ -153,32 +126,35 @@ function sendImageData(imageBlob) {
         FeedbackLink: "sample1.com",
         PaymentLink: "sample2.com",
         Description: "napakalapet",
+        Image: "",
     };
 
-    // Convert the event details to a JSON string and append it to the form data
-    formData.append('EventDetails', JSON.stringify(eventDetails));
+    sendTextData(eventDetails);
+    /*sendImageData(imageBlob);
+    sendData(imageBlob);*/
+}
 
-    fetch('/OrganizationEvents/SendImageData', {
+function sendTextData(eventDetails) {
+    fetch('/OrganizationEvents/SendTextData', {
         method: 'POST',
-        body: formData
+        headers: {
+            'Content-Type': 'application/json', // Set content type to JSON
+        },
+        body: JSON.stringify(eventDetails), // Send as JSON string
     })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error('Failed to send image data');
-        }
-    })
-    .then(data => {
-        console.log('Received data:', data);
-
-        const imageElement = document.createElement('img');
-        imageElement.src = 'data:image/jpeg;base64,' + data.ImageData;
-        document.body.appendChild(imageElement);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to send text data');
+            }
+        })
+        .then(data => {
+            console.log('Received data:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
 
 
