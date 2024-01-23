@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Text.Json;
 using event_management_system.Services;
 using Org.BouncyCastle.Bcpg;
+using event_management_system.Domain.Models;
 
 namespace event_management_system.Controllers
 {
@@ -10,7 +11,13 @@ namespace event_management_system.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            EventsServices eventsServices = new EventsServices();
+            EventsModel eventsModel = eventsServices.GetAllUpcomingEvents();
+            eventsServices.Dispose();
+            /*Debug.WriteLine("Controller");
+            Debug.WriteLine(JsonSerializer.Serialize(eventsModel));
+            Debug.WriteLine("Controller");*/
+            return View(eventsModel);
         }
 
         public IActionResult Login() 

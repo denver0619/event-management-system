@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using event_management_system.Domain.Models;
+using event_management_system.Services;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -15,14 +17,19 @@ namespace event_management_system.Controllers
 
         public IActionResult EventsUpcoming()
         {
-            // Get upcoming events list then pass model to view
-            return PartialView("EventCategory/EventsUpcoming");
+            EventsServices eventsServices = new EventsServices();
+            EventsModel eventsModel = eventsServices.GetAllUpcomingEvents();
+            eventsServices.Dispose();
+            //return Ok();
+            return PartialView("EventCategory/EventsUpcoming", eventsModel);
         }
 
         public IActionResult EventsPrevious()
         {
-            // Get upcoming events list then pass model to view
-            return PartialView("EventCategory/EventsPrevious");
+            EventsServices eventsServices = new EventsServices();
+            EventsModel eventsModel = eventsServices.GetAllPreviousEvents();
+            eventsServices.Dispose();
+            return PartialView("EventCategory/EventsPrevious", eventsModel);
         }
 
         public IActionResult EventInfo()

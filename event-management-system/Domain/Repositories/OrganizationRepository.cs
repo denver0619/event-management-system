@@ -46,12 +46,12 @@ namespace event_management_system.Domain.Repositories
             foreach (DataRow row in dataTable.Rows)
             {
                 Organization organization = new Organization(
-                    row["OrganizationID"].ToString()!,
-                    row["OrganizationName"].ToString()!,
-                    row["AccreditationStatus"].ToString()!,
-                    row["OrganizationDescription"].ToString()!,
-                    row["Hash"].ToString()!,
-                    row["Email"].ToString()!
+                        row["OrganizationID"].ToString()!,
+                        row["OrganizationName"].ToString()!,
+                        row["AccreditationStatus"].ToString()!,
+                        row["Description"].ToString()!,
+                        row["Hash"].ToString()!,
+                        row["Email"].ToString()!
                     );
                 organizations.Add(organization);
             }
@@ -64,20 +64,20 @@ namespace event_management_system.Domain.Repositories
             DataTable dataTable = databaseHelper.SelectRecord(this.tableName, constraints);
             DataRow row = dataTable.Rows[0];
             return new Organization(
-                    row["OrganizationID"].ToString()!,
-                    row["OrganizationName"].ToString()!,
-                    row["AccreditationStatus"].ToString()!,
-                    row["OrganizationDescription"].ToString()!,
-                    row["Hash"].ToString()!,
-                    row["Email"].ToString()!
-                );
+                        row["OrganizationID"].ToString()!,
+                        row["OrganizationName"].ToString()!,
+                        row["AccreditationStatus"].ToString()!,
+                        row["Description"].ToString()!,
+                        row["Hash"].ToString()!,
+                        row["Email"].ToString()!
+                    );
         }
 
         public IOrganization GetByCredential(string email, string secret)
         {
             string constraints = "Email = " + email + " AND " + "Hash = " + secret;
             DataTable dataTable = databaseHelper.SelectRecord(this.tableName, constraints);
-            if(dataTable.Rows[0] == null)
+            if(!(dataTable.Rows.Count > 0))
             {
                 return new Organization();
             }
@@ -88,7 +88,7 @@ namespace event_management_system.Domain.Repositories
                         row["OrganizationID"].ToString()!,
                         row["OrganizationName"].ToString()!,
                         row["AccreditationStatus"].ToString()!,
-                        row["OrganizationDescription"].ToString()!,
+                        row["Description"].ToString()!,
                         row["Hash"].ToString()!,
                         row["Email"].ToString()!
                     );

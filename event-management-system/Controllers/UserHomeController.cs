@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using event_management_system.Domain.Models;
+using event_management_system.Services;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace event_management_system.Controllers
@@ -7,10 +9,12 @@ namespace event_management_system.Controllers
     {
         public IActionResult Index()
         {
-            // Load Event Model then pas to controller to see list of events
+            EventsServices eventsServices = new EventsServices();
+            EventsModel eventsModel = eventsServices.GetAllUpcomingEvents();
+            eventsServices.Dispose();
             string userId = HttpContext.Request.Query["userId"]!;
             TempData["UserId"] = userId;
-            return View();
+            return View(eventsModel);
         }
 
         public IActionResult About()

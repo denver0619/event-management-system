@@ -35,7 +35,7 @@ namespace event_management_system.Services
 
         public HomeModel GetAllUpcommingEvents()
         {
-            List<IEvent> events = eventRepository.GetUpcommingEvents().OrderByDescending(eventEntity => eventEntity.DateStart).ToList();
+            List<IEvent> events = eventRepository.GetUpcomingEvents().OrderByDescending(eventEntity => eventEntity.DateStart).ToList();
             List<EventDataTransferObject> eventList = new List<EventDataTransferObject>();
             foreach (IEvent eventEntity in events)
             {
@@ -51,7 +51,7 @@ namespace event_management_system.Services
 
         public HomeModel GetAllUpcommingEventsByOrganizationID(string organizationID)
         {
-            List<IEvent> events =  eventRepository.GetUpcommingEventsByOrganizationID(organizationID).OrderByDescending(eventEntity => eventEntity.DateStart).ToList();
+            List<IEvent> events =  eventRepository.GetUpcomingEventsByOrganizationID(organizationID).OrderByDescending(eventEntity => eventEntity.DateStart).ToList();
             List<EventDataTransferObject> eventList = new List<EventDataTransferObject>();
             foreach (IEvent eventEntity in events)
             {

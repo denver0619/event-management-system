@@ -2,6 +2,8 @@
 using event_management_system.Domain.Entities;
 using event_management_system.Domain.Models;
 using event_management_system.Domain.Repositories;
+using System.Diagnostics;
+using System.Text.Json;
 
 namespace event_management_system.Services
 {
@@ -20,7 +22,7 @@ namespace event_management_system.Services
             eventRepository = new EventRepository();
             organizationRepository = new OrganizationRepository();
             Model = new EventsModel();
-            Model = GetAllUpcommingEvents();
+            Model = GetAllUpcomingEvents();
             Model = GetAllPreviousEvents();
         }
 
@@ -31,13 +33,13 @@ namespace event_management_system.Services
             eventRepository = new EventRepository();
             organizationRepository = new OrganizationRepository();
             Model = new EventsModel();
-            Model = GetAllUpcommingEventsByOrganizationID(organizationID);
+            Model = GetAllUpcomingEventsByOrganizationID(organizationID);
             Model = GetAllPreviousEventsByOrganizationID(organizationID);
         }
 
-        public EventsModel GetAllUpcommingEvents()
+        public EventsModel GetAllUpcomingEvents()
         {
-            List<IEvent> events = eventRepository.GetUpcommingEvents().OrderByDescending(eventEntity => eventEntity.DateStart).ToList();
+            List<IEvent> events = eventRepository.GetUpcomingEvents().OrderByDescending(eventEntity => eventEntity.DateStart).ToList();
             List<EventDataTransferObject> eventList = new List<EventDataTransferObject>();
             foreach (IEvent eventEntity in events)
             {
@@ -47,13 +49,13 @@ namespace event_management_system.Services
                 eventDataTransferObject.Status = eventStatusRepository.GetByID(eventEntity.EventStatusID!);
                 eventList.Add(eventDataTransferObject);
             }
-            Model.ListUpcommingEvents = eventList;
+            Model.ListUpcomingEvents = eventList;          
             return Model;
         }
 
-        public EventsModel GetAllUpcommingEventsByOrganizationID(string organizationID)
+        public EventsModel GetAllUpcomingEventsByOrganizationID(string organizationID)
         {
-            List<IEvent> events = eventRepository.GetUpcommingEventsByOrganizationID(organizationID).OrderByDescending(eventEntity => eventEntity.DateStart).ToList();
+            List<IEvent> events = eventRepository.GetUpcomingEventsByOrganizationID(organizationID).OrderByDescending(eventEntity => eventEntity.DateStart).ToList();
             List<EventDataTransferObject> eventList = new List<EventDataTransferObject>();
             foreach (IEvent eventEntity in events)
             {
@@ -63,7 +65,7 @@ namespace event_management_system.Services
                 eventDataTransferObject.Status = eventStatusRepository.GetByID(eventEntity.EventStatusID!);
                 eventList.Add(eventDataTransferObject);
             }
-            Model.ListUpcommingEvents = eventList;
+            Model.ListUpcomingEvents = eventList;
             return Model;
         }
 
@@ -79,7 +81,7 @@ namespace event_management_system.Services
                 eventDataTransferObject.Status = eventStatusRepository.GetByID(eventEntity.EventStatusID!);
                 eventList.Add(eventDataTransferObject);
             }
-            Model.ListUpcommingEvents = eventList;
+            Model.ListUpcomingEvents = eventList;
             return Model;
         }
 
@@ -95,7 +97,7 @@ namespace event_management_system.Services
                 eventDataTransferObject.Status = eventStatusRepository.GetByID(eventEntity.EventStatusID!);
                 eventList.Add(eventDataTransferObject);
             }
-            Model.ListUpcommingEvents = eventList;
+            Model.ListUpcomingEvents = eventList;
             return Model;
         }
 

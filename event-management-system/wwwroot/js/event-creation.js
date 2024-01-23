@@ -1,8 +1,9 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
+﻿let imageByteArray;
+
+document.addEventListener('DOMContentLoaded', function () {
     setupFileUpload();
     setupSubmitButton();
 })
-
 
 function setupFileUpload() {
     const fileInput = document.getElementById('file-input');
@@ -10,7 +11,7 @@ function setupFileUpload() {
     fileInput.addEventListener('change', handleFileSelect);
 }
 
-function handleFileSelect(event) {
+/*function handleFileSelect(event) {
     const previewContainer = document.getElementById('preview-container');
     const files = event.target.files;
 
@@ -34,6 +35,59 @@ function handleFileSelect(event) {
     reader.readAsDataURL(file);
 
     console.log(file)
+}*/
+
+function handleFileSelect(event) {
+    const previewContainer = document.getElementById('preview-container');
+    const files = event.target.files;
+
+    // Ensure only one file is selected
+    if (files.length !== 1) {
+        alert('Please select only one image.');
+        return;
+    }
+
+    const file = files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+        // Clear existing preview cards
+        clearPreviewContainer();
+
+        const previewCard = createPreviewCard(e.target.result);
+        previewContainer.appendChild(previewCard);
+
+        // Convert the uploaded image to a byte array
+        convertImageToByteArray(file);
+    };
+
+    reader.readAsDataURL(file);
+}
+
+function convertImageToByteArray(imageFile) {
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+        const image = new Image();
+        image.src = e.target.result;
+
+        image.onload = function () {
+            const canvas = document.createElement('canvas');
+            canvas.width = image.width;
+            canvas.height = image.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(image, 0, 0, image.width, image.height);
+
+            const imageData = ctx.getImageData(0, 0, image.width, image.height);
+            imageByteArray = new Uint8Array(imageData.data.buffer);
+
+            // Now you have the byte array (Uint8Array) stored in imageByteArray
+            // You can use imageByteArray wherever needed
+            console.log(imageByteArray);
+        };
+    };
+
+    reader.readAsArrayBuffer(imageFile);
 }
 
 function clearPreviewContainer() {
@@ -63,15 +117,14 @@ function createPreviewCard(imageSrc) {
 
 function setupSubmitButton() {
     var submitBtn = document.getElementById('submit-event');
-
-    submitBtn.addEventListener('click', function () {
-        validationCheck();
-    })
-
     
+    submitBtn.addEventListener('click', function () {
+        // Pass the byte array to validationCheck inside setupSubmitButton
+        validationCheck(imageByteArray);
+    });
 }
 
-function validationCheck() {
+function validationCheck(byteArray) {
     var eventTitle = document.getElementById('eventTitle').value;
     var startDateTime = document.getElementById('startDateTime').value;
     var endDateTime = document.getElementById('endDateTime').value;

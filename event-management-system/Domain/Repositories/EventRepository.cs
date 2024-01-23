@@ -3,6 +3,7 @@ using event_management_system.Infrastructures;
 using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Diagnostics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace event_management_system.Domain.Repositories
@@ -10,7 +11,7 @@ namespace event_management_system.Domain.Repositories
     public class EventRepository: IEventRepository, IDisposable
     {
         private DatabaseHelper<Event> databaseHelper;
-        private readonly string tableName = "event";
+        private readonly string tableName = "events";
 
         public EventRepository()
         {
@@ -54,7 +55,7 @@ namespace event_management_system.Domain.Repositories
                 Event eventEntity = new Event(
                     row["EventID"].ToString()!,
                     row["EventNatureID"].ToString()!,
-                    row["EventStatusID,"].ToString()!,
+                    row["EventStatusID"].ToString()!,
                     row["OrganizationID"].ToString()!,
                     DateTime.Parse(row["DatePosted"].ToString()!),
                     DateTime.Parse(row["DateStart"].ToString()!),
@@ -62,8 +63,8 @@ namespace event_management_system.Domain.Repositories
                     row["Venue"].ToString()!,
                     Convert.FromBase64String(row["Image"].ToString()!),
                     row["Title"].ToString()!,
-                    Int32.Parse(row["NumberOfParticipants"].ToString()!),
-                    row["TypeOfVenue"].ToString()!,
+                    Int32.Parse(row["ParticipantNumber"].ToString()!),
+                    row["EventType"].ToString()!,
                     row["ContactPerson"].ToString()!,
                     row["ContactNumber"].ToString()!,
                     row["FeedbackLink"].ToString()!,
@@ -83,7 +84,7 @@ namespace event_management_system.Domain.Repositories
             return new Event(
                     row["EventID"].ToString()!,
                     row["EventNatureID"].ToString()!,
-                    row["EventStatusID,"].ToString()!,
+                    row["EventStatusID"].ToString()!,
                     row["OrganizationID"].ToString()!,
                     DateTime.Parse(row["DatePosted"].ToString()!),
                     DateTime.Parse(row["DateStart"].ToString()!),
@@ -91,8 +92,8 @@ namespace event_management_system.Domain.Repositories
                     row["Venue"].ToString()!,
                     Convert.FromBase64String(row["Image"].ToString()!),
                     row["Title"].ToString()!,
-                    Int32.Parse(row["NumberOfParticipants"].ToString()!),
-                    row["TypeOfVenue"].ToString()!,
+                    Int32.Parse(row["ParticipantNumber"].ToString()!),
+                    row["EventType"].ToString()!,
                     row["ContactPerson"].ToString()!,
                     row["ContactNumber"].ToString()!,
                     row["FeedbackLink"].ToString()!,
@@ -111,7 +112,7 @@ namespace event_management_system.Domain.Repositories
                 Event eventEntity = new Event(
                     row["EventID"].ToString()!,
                     row["EventNatureID"].ToString()!,
-                    row["EventStatusID,"].ToString()!,
+                    row["EventStatusID"].ToString()!,
                     row["OrganizationID"].ToString()!,
                     DateTime.Parse(row["DatePosted"].ToString()!),
                     DateTime.Parse(row["DateStart"].ToString()!),
@@ -119,8 +120,8 @@ namespace event_management_system.Domain.Repositories
                     row["Venue"].ToString()!,
                     Convert.FromBase64String(row["Image"].ToString()!),
                     row["Title"].ToString()!,
-                    Int32.Parse(row["NumberOfParticipants"].ToString()!),
-                    row["TypeOfVenue"].ToString()!,
+                    Int32.Parse(row["ParticipantNumber"].ToString()!),
+                    row["EventType"].ToString()!,
                     row["ContactPerson"].ToString()!,
                     row["ContactNumber"].ToString()!,
                     row["FeedbackLink"].ToString()!,
@@ -142,7 +143,7 @@ namespace event_management_system.Domain.Repositories
                 Event eventEntity = new Event(
                     row["EventID"].ToString()!,
                     row["EventNatureID"].ToString()!,
-                    row["EventStatusID,"].ToString()!,
+                    row["EventStatusID"].ToString()!,
                     row["OrganizationID"].ToString()!,
                     DateTime.Parse(row["DatePosted"].ToString()!),
                     DateTime.Parse(row["DateStart"].ToString()!),
@@ -150,8 +151,8 @@ namespace event_management_system.Domain.Repositories
                     row["Venue"].ToString()!,
                     Convert.FromBase64String(row["Image"].ToString()!),
                     row["Title"].ToString()!,
-                    Int32.Parse(row["NumberOfParticipants"].ToString()!),
-                    row["TypeOfVenue"].ToString()!,
+                    Int32.Parse(row["ParticipantNumber"].ToString()!),
+                    row["EventType"].ToString()!,
                     row["ContactPerson"].ToString()!,
                     row["ContactNumber"].ToString()!,
                     row["FeedbackLink"].ToString()!,
@@ -173,7 +174,7 @@ namespace event_management_system.Domain.Repositories
                 Event eventEntity = new Event(
                     row["EventID"].ToString()!,
                     row["EventNatureID"].ToString()!,
-                    row["EventStatusID,"].ToString()!,
+                    row["EventStatusID"].ToString()!,
                     row["OrganizationID"].ToString()!,
                     DateTime.Parse(row["DatePosted"].ToString()!),
                     DateTime.Parse(row["DateStart"].ToString()!),
@@ -181,8 +182,8 @@ namespace event_management_system.Domain.Repositories
                     row["Venue"].ToString()!,
                     Convert.FromBase64String(row["Image"].ToString()!),
                     row["Title"].ToString()!,
-                    Int32.Parse(row["NumberOfParticipants"].ToString()!),
-                    row["TypeOfVenue"].ToString()!,
+                    Int32.Parse(row["ParticipantNumber"].ToString()!),
+                    row["EventType"].ToString()!,
                     row["ContactPerson"].ToString()!,
                     row["ContactNumber"].ToString()!,
                     row["FeedbackLink"].ToString()!,
@@ -194,10 +195,11 @@ namespace event_management_system.Domain.Repositories
             return eventsEntity;
         }
 
-        public List<IEvent> GetUpcommingEvents ()
+        public List<IEvent> GetUpcomingEvents ()
         {
             DateTime date = DateTime.Now;
             string constraints = "DateStart > " + "\'" + date.ToString("yyyy-MM-dd hh:mm:ss ") + date.ToString("tt").ToUpper() + "\'";
+            Debug.WriteLine(constraints);
             DataTable dataTable = databaseHelper.SelectAllRecordWith(tableName, constraints);
             List<IEvent> eventsEntity = new List<IEvent>();
             foreach (DataRow row in dataTable.Rows)
@@ -205,7 +207,7 @@ namespace event_management_system.Domain.Repositories
                 Event eventEntity = new Event(
                     row["EventID"].ToString()!,
                     row["EventNatureID"].ToString()!,
-                    row["EventStatusID,"].ToString()!,
+                    row["EventStatusID"].ToString()!,
                     row["OrganizationID"].ToString()!,
                     DateTime.Parse(row["DatePosted"].ToString()!),
                     DateTime.Parse(row["DateStart"].ToString()!),
@@ -213,8 +215,8 @@ namespace event_management_system.Domain.Repositories
                     row["Venue"].ToString()!,
                     Convert.FromBase64String(row["Image"].ToString()!),
                     row["Title"].ToString()!,
-                    Int32.Parse(row["NumberOfParticipants"].ToString()!),
-                    row["TypeOfVenue"].ToString()!,
+                    Int32.Parse(row["ParticipantNumber"].ToString()!),
+                    row["EventType"].ToString()!,
                     row["ContactPerson"].ToString()!,
                     row["ContactNumber"].ToString()!,
                     row["FeedbackLink"].ToString()!,
@@ -226,7 +228,7 @@ namespace event_management_system.Domain.Repositories
             return eventsEntity;
         }
 
-        public List<IEvent> GetUpcommingEventsByOrganizationID(string organizationID)
+        public List<IEvent> GetUpcomingEventsByOrganizationID(string organizationID)
         {
             DateTime date = DateTime.Now;
             string constraints = "DateStart > " + "\'" + date.ToString("yyyy-MM-dd hh:mm:ss ") + date.ToString("tt").ToUpper() + "\'" + " AND " + "OrganizationID = " + organizationID;
@@ -237,7 +239,7 @@ namespace event_management_system.Domain.Repositories
                 Event eventEntity = new Event(
                     row["EventID"].ToString()!,
                     row["EventNatureID"].ToString()!,
-                    row["EventStatusID,"].ToString()!,
+                    row["EventStatusID"].ToString()!,
                     row["OrganizationID"].ToString()!,
                     DateTime.Parse(row["DatePosted"].ToString()!),
                     DateTime.Parse(row["DateStart"].ToString()!),
@@ -245,8 +247,8 @@ namespace event_management_system.Domain.Repositories
                     row["Venue"].ToString()!,
                     Convert.FromBase64String(row["Image"].ToString()!),
                     row["Title"].ToString()!,
-                    Int32.Parse(row["NumberOfParticipants"].ToString()!),
-                    row["TypeOfVenue"].ToString()!,
+                    Int32.Parse(row["ParticipantNumber"].ToString()!),
+                    row["EventType"].ToString()!,
                     row["ContactPerson"].ToString()!,
                     row["ContactNumber"].ToString()!,
                     row["FeedbackLink"].ToString()!,
@@ -269,7 +271,7 @@ namespace event_management_system.Domain.Repositories
                 Event eventEntity = new Event(
                     row["EventID"].ToString()!,
                     row["EventNatureID"].ToString()!,
-                    row["EventStatusID,"].ToString()!,
+                    row["EventStatusID"].ToString()!,
                     row["OrganizationID"].ToString()!,
                     DateTime.Parse(row["DatePosted"].ToString()!),
                     DateTime.Parse(row["DateStart"].ToString()!),
@@ -277,8 +279,8 @@ namespace event_management_system.Domain.Repositories
                     row["Venue"].ToString()!,
                     Convert.FromBase64String(row["Image"].ToString()!),
                     row["Title"].ToString()!,
-                    Int32.Parse(row["NumberOfParticipants"].ToString()!),
-                    row["TypeOfVenue"].ToString()!,
+                    Int32.Parse(row["ParticipantNumber"].ToString()!),
+                    row["EventType"].ToString()!,
                     row["ContactPerson"].ToString()!,
                     row["ContactNumber"].ToString()!,
                     row["FeedbackLink"].ToString()!,
@@ -301,7 +303,7 @@ namespace event_management_system.Domain.Repositories
                 Event eventEntity = new Event(
                     row["EventID"].ToString()!,
                     row["EventNatureID"].ToString()!,
-                    row["EventStatusID,"].ToString()!,
+                    row["EventStatusID"].ToString()!,
                     row["OrganizationID"].ToString()!,
                     DateTime.Parse(row["DatePosted"].ToString()!),
                     DateTime.Parse(row["DateStart"].ToString()!),
@@ -309,8 +311,8 @@ namespace event_management_system.Domain.Repositories
                     row["Venue"].ToString()!,
                     Convert.FromBase64String(row["Image"].ToString()!),
                     row["Title"].ToString()!,
-                    Int32.Parse(row["NumberOfParticipants"].ToString()!),
-                    row["TypeOfVenue"].ToString()!,
+                    Int32.Parse(row["ParticipantNumber"].ToString()!),
+                    row["EventType"].ToString()!,
                     row["ContactPerson"].ToString()!,
                     row["ContactNumber"].ToString()!,
                     row["FeedbackLink"].ToString()!,

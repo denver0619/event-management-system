@@ -25,7 +25,7 @@ namespace event_management_system.Services
 
         public OrganizationEventsModel GetAllOrganizationEvents(string organizationID)
         {
-            List<IEvent> eventList = eventRepository.GetUpcommingEventsByOrganizationID(organizationID).OrderByDescending(eventEntity => eventEntity.DateStart!).ToList();
+            List<IEvent> eventList = eventRepository.GetUpcomingEventsByOrganizationID(organizationID).OrderByDescending(eventEntity => eventEntity.DateStart!).ToList();
             Model.OrganizationEventList = eventList;
             return Model;
         }

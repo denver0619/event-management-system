@@ -7,7 +7,7 @@ namespace event_management_system.Domain.Repositories
     public class EventNatureRepository: IEventNatureRepository, IDisposable
     {
         private DatabaseHelper<EventNature> databaseHelper;
-        private readonly string tableName = "eventnature";
+        private readonly string tableName = "eventnatures";
 
         public EventNatureRepository()
         {
@@ -52,12 +52,20 @@ namespace event_management_system.Domain.Repositories
         {
             string constraints = "EventNatureID = " + id;
             DataTable dataTable = databaseHelper.SelectRecord(this.tableName, constraints);
-            DataRow row = dataTable.Rows[0];
-            return new EventNature(
+            
+            if (!(dataTable.Rows.Count > 0))
+            {
+                return new EventNature();
+            }
+            else
+            {
+                DataRow row = dataTable.Rows[0];
+                return new EventNature(
                     row["EventNatureID"].ToString()!,
                     row["NatureName"].ToString()!,
                     row["NatureDescription"].ToString()!
                     );
+            }
         }
 
     }
