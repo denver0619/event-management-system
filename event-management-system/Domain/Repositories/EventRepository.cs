@@ -1,6 +1,7 @@
 ﻿using event_management_system.Domain.Entities;
 using event_management_system.Infrastructures;
 using Microsoft.Extensions.Logging;
+using MySql.Data.MySqlClient;
 using System.Data;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -26,7 +27,9 @@ namespace event_management_system.Domain.Repositories
 
         public void AddEvent(IEvent eventEntity)
         {
-            databaseHelper.InsertRecord(tableName, new Event(eventEntity));
+            Event eventData = new Event(eventEntity);
+            MySqlParameter parameter =  new MySqlParameter("@Image", MySqlDbType.Blob, ((eventData.Image != null && !(eventData.Image!.Length>0))?eventData.Image.Length:0));
+            databaseHelper.InsertRecordWithParam(tableName, eventData, parameter);
         }
 
         //RemoveEvent NOT IMPLEMENTED YET
@@ -37,7 +40,9 @@ namespace event_management_system.Domain.Repositories
 
         public void UpdateEvent(IEvent eventEntity)
         {
-            databaseHelper.UpdateRecord(tableName, new Event(eventEntity));
+            Event eventData = new Event(eventEntity);
+            MySqlParameter parameter = new MySqlParameter("@Image", MySqlDbType.Blob, ((eventData.Image != null && !(eventData.Image!.Length > 0)) ? eventData.Image.Length : 0));
+            databaseHelper.UpdateRecordWithParam(tableName, eventData, parameter);
         }
 
         public List<IEvent> GetAllEvents()
@@ -55,7 +60,7 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
                     row["Venue"].ToString()!,
-                    row["Image"].ToString()!,
+                    Convert.FromBase64String(row["Image"].ToString()!),
                     row["Title"].ToString()!,
                     Int32.Parse(row["NumberOfParticipants"].ToString()!),
                     row["TypeOfVenue"].ToString()!,
@@ -84,7 +89,7 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
                     row["Venue"].ToString()!,
-                    row["Image"].ToString()!,
+                    Convert.FromBase64String(row["Image"].ToString()!),
                     row["Title"].ToString()!,
                     Int32.Parse(row["NumberOfParticipants"].ToString()!),
                     row["TypeOfVenue"].ToString()!,
@@ -112,7 +117,7 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
                     row["Venue"].ToString()!,
-                    row["Image"].ToString()!,
+                    Convert.FromBase64String(row["Image"].ToString()!),
                     row["Title"].ToString()!,
                     Int32.Parse(row["NumberOfParticipants"].ToString()!),
                     row["TypeOfVenue"].ToString()!,
@@ -143,7 +148,7 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
                     row["Venue"].ToString()!,
-                    row["Image"].ToString()!,
+                    Convert.FromBase64String(row["Image"].ToString()!),
                     row["Title"].ToString()!,
                     Int32.Parse(row["NumberOfParticipants"].ToString()!),
                     row["TypeOfVenue"].ToString()!,
@@ -174,7 +179,7 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
                     row["Venue"].ToString()!,
-                    row["Image"].ToString()!,
+                    Convert.FromBase64String(row["Image"].ToString()!),
                     row["Title"].ToString()!,
                     Int32.Parse(row["NumberOfParticipants"].ToString()!),
                     row["TypeOfVenue"].ToString()!,
@@ -206,7 +211,7 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
                     row["Venue"].ToString()!,
-                    row["Image"].ToString()!,
+                    Convert.FromBase64String(row["Image"].ToString()!),
                     row["Title"].ToString()!,
                     Int32.Parse(row["NumberOfParticipants"].ToString()!),
                     row["TypeOfVenue"].ToString()!,
@@ -238,7 +243,7 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
                     row["Venue"].ToString()!,
-                    row["Image"].ToString()!,
+                    Convert.FromBase64String(row["Image"].ToString()!),
                     row["Title"].ToString()!,
                     Int32.Parse(row["NumberOfParticipants"].ToString()!),
                     row["TypeOfVenue"].ToString()!,
@@ -270,7 +275,7 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
                     row["Venue"].ToString()!,
-                    row["Image"].ToString()!,
+                    Convert.FromBase64String(row["Image"].ToString()!),
                     row["Title"].ToString()!,
                     Int32.Parse(row["NumberOfParticipants"].ToString()!),
                     row["TypeOfVenue"].ToString()!,
@@ -302,7 +307,7 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
                     row["Venue"].ToString()!,
-                    row["Image"].ToString()!,
+                    Convert.FromBase64String(row["Image"].ToString()!),
                     row["Title"].ToString()!,
                     Int32.Parse(row["NumberOfParticipants"].ToString()!),
                     row["TypeOfVenue"].ToString()!,
