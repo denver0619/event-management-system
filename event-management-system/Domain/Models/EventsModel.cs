@@ -7,5 +7,6 @@ namespace event_management_system.Domain.Models
     {
         public List<EventDataTransferObject>? ListUpcomingEvents { get; set; }
         public List<EventDataTransferObject>? ListPreviousEvents { get; set; }
+        public EventDataTransferObject? EventInfo { get; set; }
     }
 }
