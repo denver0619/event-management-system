@@ -692,6 +692,14 @@ header {
     text-align: center;
 }
 
+.faq-introduction h1 {
+    font-size: 48px
+}
+
+.faq-introduction p {
+    font-size: 20px
+}
+
 .faq-container {
     margin: 60px auto;
     display: flex;

@@ -557,6 +557,8 @@ header {
     text-align: center;
 }
 
+
+
 .about {
     margin: 60px auto;
 }
@@ -693,6 +695,14 @@ header {
     width: 60%;
     margin: 0 auto;
     text-align: center;
+}
+
+.faq-introduction h1 {
+    font-size: 48px;
+}
+
+.faq-introduction p {
+    font-size: 20px;
 }
 
 .faq-container {
