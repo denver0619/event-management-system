@@ -33,8 +33,8 @@ namespace event_management_system.Domain.Repositories
             Debug.WriteLine(JsonSerializer.Serialize(eventData));
             /*MySqlParameter parameter =  new MySqlParameter("@Image", MySqlDbType.Blob, ((eventData.Image != null && !(eventData.Image!.Length>0))?eventData.Image.Length:0));*/
             string query = "INSERT INTO events (ContactNumber,ContactPerson,DateEnd,DatePosted,DateStart,Description,EventType,FeedbackLink,Image,OrganizationID,ParticipantNumber,PaymentLink,Title,Venue, EventNatureID, EventStatusID) Values " +
-                "("+eventData.ContactNumber+eventData.ContactPerson+eventData.DateEnd+eventData.DatePosted+eventData.DateStart+eventData.Description+eventData.EventType+eventData.FeedbackLink+eventData.Image+eventData.OrganizationID+
-                eventData.ParticipantNumber+eventData.PaymentLink+eventData.Title+eventData.Venue+eventData.EventNatureID+eventData.EventStatusID+");";
+                "("+"\'"+eventData.ContactNumber + "\',\'" + eventData.ContactPerson + "\',\'" + eventData.DateEnd + "\',\'" + eventData.DatePosted + "\',\'" + eventData.DateStart + "\',\'" + eventData.Description + "\',\'" + eventData.EventType + "\',\'" + eventData.FeedbackLink + "\',\'" + eventData.Image + "\'," + eventData.OrganizationID+
+                eventData.ParticipantNumber + ",\'" + eventData.PaymentLink + "\',\'" + eventData.Title + "\',\'" + eventData.Venue + "\'," + eventData.EventNatureID + "," + eventData.EventStatusID+");";
             databaseHelper.InsertRecordEvent(query);
         }
 
