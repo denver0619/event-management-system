@@ -80,6 +80,25 @@ textarea:focus {
     margin: 0 auto;
 }
 
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 82px;
+    width: 100%;
+    background: #F84438;
+}
+
+    footer p {
+        color: #FFF;
+        text-align: center;
+        font-family: Poppins;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
 
 /* NAV BAR */
 header {
@@ -1094,11 +1113,11 @@ header {
     align-items: center;
     justify-content: center;
     padding: 10px 20px;
-    border: 3px solid #FF4000;
+    border: 3px solid #FFF;
     width: 200px;
     margin: 40px auto;
     transition: all 0.3s ease-in-out;
-    color: #FF4000;
+    color: #FFF;
     cursor: pointer;
     font-size: 18px;
 }

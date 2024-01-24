@@ -24,6 +24,7 @@ namespace event_management_system.Controllers
         public IActionResult Index()
         {
             string userID = HttpContext.Request.Query["userId"]!;
+            ViewData["OrganizationID"] = userID;
             return View();
         }
 
@@ -112,8 +113,14 @@ namespace event_management_system.Controllers
 
         public IActionResult EventMain()
         {
+            string userID = HttpContext.Request.Query["userId"]!;
+            ViewData["OrganizationID"] = userID;
+            Debug.WriteLine("main org " + userID);
+
+
             string eventID = HttpContext.Request.Query["eventId"]!;
             TempData["EventId"] = eventID;
+            ViewData["EventID"] = eventID;
             Debug.WriteLine("main " + eventID);
             return View();
         }
@@ -122,37 +129,46 @@ namespace event_management_system.Controllers
 
         public IActionResult EventDetails()
         {
-            string EventID = TempData["EventId"] as string;
-            Debug.WriteLine("details " + EventID);
+            // Use the name 'eventId' to match the query parameter
+            string eventId = HttpContext.Request.Query["eventId"]!;
 
+            EventCreateEditService eventsService = new EventCreateEditService();
+            EventCreateEditModel eventCreateEditModel = eventsService.GetEventData(eventId);
+            eventsService.Dispose();
 
-            EventCreateEditService eventCreateEditService = new EventCreateEditService();
-            EventCreateEditModel eventCreateEditModel = eventCreateEditService.GetEventData(EventID);
-            eventCreateEditService.Dispose();
             return PartialView("EventManagement/EventDetails", eventCreateEditModel);
-
         }
 
-
-        public IActionResult EventAttendees()
+        [HttpPost]
+        public IActionResult EditEvent()
         {
-            string EventID = TempData["EventId"] as string;
-            Debug.WriteLine("att " + EventID);
-
-
-            return PartialView("EventManagement/EventAttendees");
+            return Ok();
         }
 
         public IActionResult EventAttendanceLog()
         {
-            string EventID = TempData["EventId"] as string;
-            Debug.WriteLine("log " + EventID);
+            // Use the name 'eventId' to match the query parameter
+            string eventId = HttpContext.Request.Query["eventId"]!;
 
 
+            // Handle the eventId as needed
 
             return PartialView("EventManagement/EventAttendanceLog");
         }
-        
+
+
+
+        public IActionResult EventAttendees()
+        {
+            string eventId = HttpContext.Request.Query["eventId"]!;
+            Debug.WriteLine("att " + eventId);
+
+            // Handle the eventId as needed
+
+            return PartialView("EventManagement/EventAttendees");
+        }
+
+
 
     }
 

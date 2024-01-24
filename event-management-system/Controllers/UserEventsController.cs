@@ -35,7 +35,6 @@ namespace event_management_system.Controllers
         public IActionResult EventInfo()
         {
             string EventID = HttpContext.Request.Query["id"];
-            Debug.WriteLine(EventID);
             EventsServices eventsServices = new EventsServices();
             EventsModel eventsModel = eventsServices.GetEventInfoById(EventID);
             //EventsModel eventsModel = eventsServices;

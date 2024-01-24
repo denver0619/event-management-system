@@ -38,12 +38,11 @@
             <div class="form-row">
                 <div>
                     <label for="startDateTime">Start Date/Time</label>
-                    <input type="datetime-local" name="startDateTime" id="startDateTime" value="@Model.Event.DateStart">
+                    <input type="datetime-local" name="startDateTime" id="startDateTime" value="@((((DateTime)Model.Event.DateStart!).ToString("yyyy-MM-ddTHH:mm")))">
                 </div>
-
                 <div>
                     <label for="endDateTime">End Date/Time</label>
-                    <input type="datetime-local" name="endDateTime" id="endDateTime" value="@Model.Event.DateEnd">
+                    <input type="datetime-local" name="endDateTime" id="endDateTime" value="@((((DateTime)Model.Event.DateEnd!).ToString("yyyy-MM-ddTHH:mm")))">
                 </div>
             </div>
 
@@ -64,17 +63,18 @@
                     <label for="">Nature of Event</label>
                     <br>
                     <!-- <input type="text" name="venue" id="venue"> -->
-                    <select name="" id="">
+                    @Model.Event.EventNatureID
+                    <select name="" id="eventNature" data-event-nature-id="@Model.Event.EventNatureID">
                         <option value="" disabled selected hidden>Event Nature</option>
-                        <option value="">Curricular</option>
-                        <option value="">Co-curricular</option>
-                        <option value="">Non-curricular</option>
+                        <option value="1">Curricular</option>
+                        <option value="2">Co-curricular</option>
+                        <option value="3">Non-curricular</option>
                     </select>
                 </div>
 
                 <div>
                     <label for="typeOfEvent">Type of Event</label>
-                    <input type="text" name="typeOfEvent" id="typeOfEvent" value="@Model.Event.EventType">
+                    <input type="text" name="typeOfEvent" id="eventType" value="@Model.Event.EventType">
                 </div>
             </div>
 
@@ -111,7 +111,7 @@
 
         </fieldset>
 
-        <button id="edit-btn">
+        <button class="pill-box" id="edit-btn">
             Edit
         </button>
 
@@ -120,5 +120,3 @@
 
 </div>
 
-
-<script src="~js/event-details.js"></script>

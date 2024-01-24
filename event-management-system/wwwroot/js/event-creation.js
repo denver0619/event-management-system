@@ -1,11 +1,11 @@
-﻿let imageBlob;
+﻿// let imageBlob;
 
 document.addEventListener('DOMContentLoaded', function () {
-    setupFileUpload();
+    /*setupFileUpload();*/
     setupSubmitButton();
 })
 
-function setupFileUpload() {
+/*function setupFileUpload() {
     const fileInput = document.getElementById('file-input');
 
     fileInput.addEventListener('change', handleFileSelect);
@@ -96,18 +96,17 @@ function createPreviewCard(imageSrc) {
     });
 
     return previewCard;
-}
+}*/
 
-function setupSubmitButton(imageBlob) {
+function setupSubmitButton() {
     var submitBtn = document.getElementById('submit-event');
     submitBtn.onclick = function () {
-        validationCheck(imageBlob);
+        validationCheck();
     }
 }
 
-function validationCheck(imageData) {
-    /*var Image = byteArray;
-        console.log(byte);
+function validationCheck() {
+    // var Image;
     var eventTitle = document.getElementById('eventTitle').value;
     var startDateTime = document.getElementById('startDateTime').value;
     var endDateTime = document.getElementById('endDateTime').value;
@@ -194,14 +193,16 @@ function validationCheck(imageData) {
         isError = true;
     } else {
         resetErrorStyles('description');
-    }*/
+    }
+
+    
     
 
     // Other validation and data processing logic...
     var eventDetails = {
         EventID: '',
-        EventNatureID: "1100003",
-        EventStatusID: "60001",
+        EventNatureID: "1",
+        EventStatusID: "1",
         OrganizationID: "1",
         DatePosted: Date.now,
         DateStart: "2024-02-14",

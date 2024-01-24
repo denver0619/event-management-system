@@ -1,5 +1,6 @@
 ﻿@{
     var EventID = ViewData["EventID"];
+    var OrganizationID = ViewData["OrganizationID"];
     Layout = "~/Views/Shared/_OrganizationLayout.cshtml";
 }
 
@@ -33,7 +34,7 @@
     </button>
 </div>
 
-<div class="subcontent-container" id="subcontent-container">
+<div class="subcontent-container" id="subcontent-container" event-id="@EventID" organization-id="@OrganizationID">
     @* @await Html.PartialAsync("EventManagement/EventAttendees"); *@
 </div>
 

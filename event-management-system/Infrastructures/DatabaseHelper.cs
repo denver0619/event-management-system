@@ -66,7 +66,6 @@ namespace event_management_system.Infrastructures
             string query = queryType + tableName + whereClause + constraints + terminator;
             
             MySqlCommand command = new MySqlCommand(query, _connection);
-            Debug.WriteLine(query);
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);
             adapter.Fill(dataTable);
             _connection.Close();
