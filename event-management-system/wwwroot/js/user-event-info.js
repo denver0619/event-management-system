@@ -12,9 +12,11 @@ function getUserIdFromQueryString() {
     var userId = urlParams.get('userId');
     var eventId = urlParams.get('id');
 
+    console.log(userId);
     var registerInfo = {
-        UserID: userId,
-        eventID: eventId
+        StudentID: userId,
+        EventID: eventId,
+        IsApproved: false
     }
 
     return registerInfo;

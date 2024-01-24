@@ -509,6 +509,30 @@ header {
         margin-bottom: 50px;
     }
 
+    .start-event {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+        height: 60px;
+        margin-top: -100px;
+        margin-bottom: 30px;
+    }
+
+        .start-event #start-event-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+            padding: 10px 20px;
+            color: white;
+            border: 2px solid #fff;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+
 
     /* Search and Filter */
     .search-and-filter-container {
@@ -587,8 +611,8 @@ header {
 
 
     #event-attendees-table tr,
-    #event-attendance-log-table tr
-    {
+    #event-attendance-time-in-table tr, 
+    #event-attendance-time-out-table tr {
         height: 60px;
     }
 
@@ -1152,6 +1176,15 @@ header {
     margin: 0 auto;
     justify-content: center;
 }
+
+.time-in-btn,
+.time-out-btn {
+    background: #7ABD50;
+    color: #FFF;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
 
 
 
