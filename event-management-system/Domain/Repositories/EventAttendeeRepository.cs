@@ -29,7 +29,8 @@ namespace event_management_system.Domain.Repositories
 
         public void UpdateEventAttendee(IEventAttendee eventAttendee)
         {
-            databaseHelper.UpdateRecord(tableName, new EventAttendee(eventAttendee));
+            string constraints = "EventAttendeesID = " + eventAttendee.EventAttendeeID;
+            databaseHelper.UpdateRecordWithConstraint(tableName, new EventAttendee(eventAttendee), constraints);
         }
 
         public List<IEventAttendee> GetAllAttendees()
