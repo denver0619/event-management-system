@@ -44,6 +44,8 @@
             <table id="event-attendance-time-in-table">
                 <thead>
                     <tr>
+                        <th>Time In ID</th>
+                        <th>Ticket ID</th>
                         <th>Student ID</th>
                         <th>Name</th>
                         <th>Year Level</th>
@@ -54,16 +56,31 @@
                 </thead>
                 <tbody>
                     
-                    @if((Model.TimeInList.Count > 1))
+                    @if (!(Model.TimeInList[0].TicketID == null || Model.TimeInList[0].TicketID == ""))
                     {
                         foreach (event_management_system.Domain.DataTransferObject.TimeInDataTransferObject timeInDataTransfer in Model.TimeInList)
                         {
                             <tr>
+                                <td>@timeInDataTransfer.TimeInID</td>
+                                <td>@timeInDataTransfer.TicketID</td>
                                 <td>@timeInDataTransfer.Student.StudentID</td>
                                 <td>@String.Join(" ", new List<string>() { timeInDataTransfer.Student.FirstName, timeInDataTransfer.Student.MiddleName, timeInDataTransfer.Student.LastName })</td>
                                 <td>@timeInDataTransfer.Student.YearLevel</td>
-                                <td>@(((DateTime)timeInDataTransfer.TimeIn!).ToString("yyyy-MM-dd").ToUpper())</td>
-                                <td></td>
+                                @if ( !( ((DateTime)timeInDataTransfer.TimeIn!).ToString("yyyy-MM-dd").ToUpper() == "1000-01-01")){
+                                    <td>
+                                        @(((DateTime)timeInDataTransfer.TimeIn!).ToString("yyyy-MM-dd").ToUpper())
+                                    </td>
+                                    <td>@(((DateTime)timeInDataTransfer.TimeIn!).ToString("HH:MM tt").ToUpper())</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                    <td></td>
+
+                                }
+
+                                
+
                                 <td>
                                     <button class="time-in-btn">
                                         Time In
@@ -122,6 +139,8 @@
             <table id="event-attendance-time-out-table">
                 <thead>
                     <tr>
+                        <th>Time In ID</th>
+                        <th>Ticket ID</th>
                         <th>Student ID</th>
                         <th>Name</th>
                         <th>Year Level</th>
@@ -132,18 +151,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if(Model.TimeOutList.Count > 1)
+                    @if(!(Model.TimeOutList[0].TicketID == null || Model.TimeOutList[0].TicketID == ""))
                     {
                         foreach (event_management_system.Domain.DataTransferObject.TimeOutDataTransferObject timeOutDataTransfer in Model.TimeOutList)
                         {
                             <tr>
+                                <td>@timeOutDataTransfer.TimeOutID</td>
+                                <td>@timeOutDataTransfer.TicketID</td>
                                 <td>@timeOutDataTransfer.Student.StudentID</td>
                                 <td>@String.Join(" ", new List<string>() { timeOutDataTransfer.Student.FirstName, timeOutDataTransfer.Student.MiddleName, timeOutDataTransfer.Student.LastName })</td>
                                 <td>@timeOutDataTransfer.Student.YearLevel</td>
-                                <td>>@(((DateTime)timeOutDataTransfer.TimeOut!).ToString("yyyy-MM-dd").ToUpper())</td>
-                                <td></td>
+                                @if (!(((DateTime)timeOutDataTransfer.TimeOut!).ToString("yyyy-MM-dd").ToUpper() == "1000-01-01"))
+                                {
+                                    <td>
+                                        @(((DateTime)timeOutDataTransfer.TimeOut!).ToString("yyyy-MM-dd").ToUpper())
+                                    </td>
+                                    <td>@(((DateTime)timeOutDataTransfer.TimeOut!).ToString("HH:MM tt").ToUpper())</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                    <td></td>
+
+                                }
                                 <td>
-                                    <button class="time-in-btn">
+                                    <button class="time-out-btn">
                                         Time Out
                                     </button>
                                 </td>

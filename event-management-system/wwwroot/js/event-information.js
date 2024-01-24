@@ -290,8 +290,15 @@ function loadAttendanceLogScript() {
         });
     });
 
-    // Add event listeners for time-out buttons
     var timeOutButtons = document.querySelectorAll('.time-out-btn');
+    timeOutButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            handleTimeButtonClick(button, 'time-out');
+        });
+    });
+
+    // Add event listeners for time-out buttons
+/*    var timeOutButtons = document.querySelectorAll('.time-out-btn');
     timeOutButtons.forEach(function (button) {
         button.addEventListener('click', function () {
             handleTimeButtonClick(button, 'time-out');
@@ -334,15 +341,16 @@ function loadAttendanceLogScript() {
 
         // Send data to the controller (you need to implement this part)
         sendToController(rowData);
-    }
+    }*/
 
     function handleTimeButtonClick(button, eventType) {
+        console.log(eventType)
         // Traverse DOM to find the corresponding row
         var row = button.closest('tr');
 
         // Get the corresponding date and time column indices
-        var dateIndex = 3;
-        var timeIndex = 4;
+        var dateIndex = 5;
+        var timeIndex = 6;
 
         // Check if there are contents in column 3 and 4
         if (row.cells[dateIndex].textContent.trim() !== '' && row.cells[timeIndex].textContent.trim() !== '') {
@@ -369,29 +377,34 @@ function loadAttendanceLogScript() {
         // Extract data from the row
         if (eventType == "time-in") {
             var rowData = {
-                StudentId: row.cells[0].textContent,
-                Name: row.cells[1].textContent,
-                YearLevel: row.cells[2].textContent,
-                Date: currentDate,
-                TimeIn: currentTime
+                TimeInID: row.cells[0].textContent,
+                TicketID: row.cells[1].textContent,
+                /*TimeIn: currentDate + " " + currentTime,*/
+                TimeIn: Date.now,
+                IsIn: true
+
             };
+
+            sendToTimeInController(rowData);
         }
         else if (eventType == "time-out")
         {
             var rowData = {
-                StudentId: row.cells[0].textContent,
-                Name: row.cells[1].textContent,
-                YearLevel: row.cells[2].textContent,
-                Date: currentDate,
-                TimeOut: currentTime
+                TimeOutID: row.cells[0].textContent,
+                TicketID: row.cells[1].textContent,
+                /*TimeOut: currentDate + " " + currentTime,*/
+                TimeOut: Date.now,
+                IsOut: true
             };
+
+            sendToTimeOutController(rowData);
         }
         
 
         console.log(rowData);
 
         // Send data to the controller (you need to implement this part)
-        sendToController(rowData);
+        
 
         // Disable the button
         button.disabled = true;
@@ -399,18 +412,15 @@ function loadAttendanceLogScript() {
         button.style.cursor = "default";
     }
 
-    function sendToController(data) {
+    function sendToTimeInController(data) {
         // Implement your code to send data to the controller using AJAX or fetch
         // For example, you can use the Fetch API:
-        /*fetch('/your-controller-endpoint', {
+        fetch('/OrganizationEvents/TimeInAttendanceLog', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                data: data,
-                eventType: eventType
-            }),
+            body: JSON.stringify(data),
         })
             .then(response => response.json())
             .then(data => {
@@ -420,7 +430,27 @@ function loadAttendanceLogScript() {
             .catch((error) => {
                 console.error('Error:', error);
                 // Handle error
-            });*/
+            });
+    }
+    function sendToTimeOutController(data) {
+        // Implement your code to send data to the controller using AJAX or fetch
+        // For example, you can use the Fetch API:
+        fetch('/OrganizationEvents/TimeOutAttendanceLog', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Handle success response from the controller
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Handle error
+            });
     }
 }
 

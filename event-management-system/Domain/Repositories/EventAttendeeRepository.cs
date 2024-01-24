@@ -29,7 +29,7 @@ namespace event_management_system.Domain.Repositories
 
         public void UpdateEventAttendee(IEventAttendee eventAttendee)
         {
-            string constraints = "EventAttendeesID = " + eventAttendee.EventAttendeeID;
+            string constraints = "EventAttendeeID = " + eventAttendee.EventAttendeeID;
             databaseHelper.UpdateRecordWithConstraint(tableName, new EventAttendee(eventAttendee), constraints);
         }
 
@@ -40,7 +40,7 @@ namespace event_management_system.Domain.Repositories
             foreach (DataRow row in dataTable.Rows)
             {
                 EventAttendee eventAttendee = new EventAttendee(
-                    row["EventAttendeesID"].ToString()!,
+                    row["EventAttendeeID"].ToString()!,
                     row["EventID"].ToString()!,
                     row["StudentID"].ToString()!,
                     bool.Parse(row["IsApproved"].ToString()!)
@@ -56,7 +56,7 @@ namespace event_management_system.Domain.Repositories
             DataTable dataTable = databaseHelper.SelectRecord(this.tableName, constraints);
             DataRow row = dataTable.Rows[0];
             return new EventAttendee(
-                    row["EventAttendeesID"].ToString()!,
+                    row["EventAttendeeID"].ToString()!,
                     row["EventID"].ToString()!,
                     row["StudentID"].ToString()!,
                     bool.Parse(row["IsApproved"].ToString()!)
@@ -70,7 +70,7 @@ namespace event_management_system.Domain.Repositories
             foreach (DataRow row in dataTable.Rows)
             {
                 EventAttendee eventAttendee = new EventAttendee(
-                    row["EventAttendeesID"].ToString()!,
+                    row["EventAttendeeID"].ToString()!,
                     row["EventID"].ToString()!,
                     row["StudentID"].ToString()!,
                     bool.Parse(row["IsApproved"].ToString()!)
@@ -88,7 +88,7 @@ namespace event_management_system.Domain.Repositories
             foreach (DataRow row in dataTable.Rows)
             {
                 EventAttendee eventAttendee = new EventAttendee(
-                    row["EventAttendeesID"].ToString()!,
+                    row["EventAttendeeID"].ToString()!,
                     row["EventID"].ToString()!,
                     row["StudentID"].ToString()!,
                     bool.Parse(row["IsApproved"].ToString()!)

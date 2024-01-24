@@ -164,6 +164,26 @@ namespace event_management_system.Controllers
             return PartialView("EventManagement/EventAttendanceLog", attendanceLogModel);
         }
 
+        public IActionResult TimeInAttendanceLog([FromBody]TimeInEntity timeInEntity) 
+        {
+            timeInEntity.TimeIn = DateTime.Now;
+
+            Debug.WriteLine(JsonSerializer.Serialize(timeInEntity));
+            AttendanceLogService attendanceLogService = new AttendanceLogService();
+            attendanceLogService.TimeIn(timeInEntity);
+            return Ok();
+        }
+        
+        public IActionResult TimeOutAttendanceLog([FromBody]TimeOutEntity timeOutEntity) 
+        {
+            timeOutEntity.TimeOut = DateTime.Now;
+
+            Debug.WriteLine(JsonSerializer.Serialize(timeOutEntity));
+            AttendanceLogService attendanceLogService = new AttendanceLogService();
+            attendanceLogService.TimeOut(timeOutEntity);
+            return Ok();
+        }
+
 
 
         public IActionResult EventAttendees()

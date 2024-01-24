@@ -104,7 +104,7 @@ namespace event_management_system.Domain.Repositories
         public ITicket GetByStudentIDandEventID(string studentID, string eventID)
         {
 
-            string constraints = "StudentID = " + studentID + "EventID = " + eventID;
+            string constraints = "StudentID = " + studentID + " AND EventID = " + eventID;
             DataTable dataTable = databaseHelper.SelectAllRecordWith(this.tableName, constraints);
             if (!(dataTable.Rows.Count > 0))
             {

@@ -2,6 +2,8 @@
 using event_management_system.Domain.Entities;
 using event_management_system.Domain.Models;
 using event_management_system.Domain.Repositories;
+using System.Diagnostics;
+using System.Text.Json;
 
 namespace event_management_system.Services
 {
@@ -16,10 +18,13 @@ namespace event_management_system.Services
 
         public AttendeeManagementService()
         {
+            timeInRepository = new TimeInRepository();
+            timeOutRepository = new TimeOutRepository();
             eventAttendeeRepository = new EventAttendeeRepository();
             ticketRepository = new TicketRepository();
             studentRepository = new StudentRepository();
             Model = new AttendeeManagementModel();
+
         }
 
         public AttendeeManagementModel GetAllAttendees(string eventID)
@@ -49,33 +54,47 @@ namespace event_management_system.Services
             List<ITimeInEntity> timeInEntities = new List<ITimeInEntity>();
             foreach(IEventAttendee attendee in attendees)
             {
+                Debug.WriteLine(attendee.IsApproved);
+
                 if (attendee.IsApproved)
                 {
                     ITicket existingTickets = ticketRepository.GetByStudentIDandEventID(attendee.StudentID!, eventID);
-                    if(existingTickets.StudentID != null && existingTickets.StudentID == attendee.StudentID)
+                    Debug.WriteLine(JsonSerializer.Serialize(existingTickets));
+                    if (!(existingTickets.StudentID != null))
                     {
+                        Debug.WriteLine("hatdog");
+
                         Ticket ticket = new Ticket()
                         {
                             EventID = eventID,
                             StudentID = attendee.StudentID,
                         };
                         ticketList.Add(ticket);
+                        ticketRepository.AddTicket(ticket);
+                        ITicket ticketAdded = ticketRepository.GetByStudentIDandEventID(attendee.StudentID!, eventID);
                         TimeOutEntity timeOutEntity = new TimeOutEntity()
                         {
-                            TicketID = ticket.TicketID
+                            TimeOut = Convert.ToDateTime("1000-01-01"),
+                            IsOut = false,
+                            TimeOutID = "",
+                            TicketID = ticketAdded.TicketID
                         };
                         TimeInEntity timeInEntity = new TimeInEntity()
                         {
-                            TicketID = ticket.TicketID,
+                            TimeIn = Convert.ToDateTime("1000-01-01"),
+                            IsIn = false,
+                            TimeInID = "",
+                            TicketID = ticketAdded.TicketID,
                         };
                         timeOutEntities.Add(timeOutEntity);
                         timeInEntities.Add(timeInEntity);
                     }
                 }
             }
-            for(int i = 0; i < ticketList.Count; i++)
+            
+            for (int i = 0; i < ticketList.Count; i++)
             {
-                ticketRepository.AddTicket(ticketList[i]);
+               
                 timeInRepository.AddTimeIn(timeInEntities[i]);
                 timeOutRepository.AddTimeOut(timeOutEntities[i]);
             }

@@ -2,6 +2,7 @@
 using event_management_system.Domain.Entities;
 using event_management_system.Domain.Models;
 using event_management_system.Domain.Repositories;
+using System.Threading;
 
 namespace event_management_system.Services
 {
@@ -12,6 +13,15 @@ namespace event_management_system.Services
         private TicketRepository _ticketRepository;
         private StudentRepository _studentRepository;
         public AttendanceLogModel Model { get; set; }
+
+        public AttendanceLogService()
+        {
+            _timeInRepository = new TimeInRepository();
+            _timeOutRepository = new TimeOutRepository();
+            _ticketRepository = new TicketRepository();
+            _studentRepository = new StudentRepository();
+            Model = new AttendanceLogModel();
+        }
 
         public AttendanceLogService(string eventID)
         {
@@ -48,12 +58,12 @@ namespace event_management_system.Services
 
         public void TimeOut(ITimeOutEntity timeOut)
         {
-            _timeOutRepository.UpdateTimeOut(timeOut);
+            _timeOutRepository.UpdateTimeOut(new TimeOutEntity(timeOut));
         }
 
         public void TimeIn(ITimeInEntity timeIn)
         {
-            _timeInRepository.UpdateTimeIn(timeIn);
+            _timeInRepository.UpdateTimeIn(new TimeInEntity(timeIn));
         }
 
         public void Dispose()

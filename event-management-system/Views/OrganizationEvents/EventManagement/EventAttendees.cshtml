@@ -64,7 +64,7 @@
                             <td>@eventAttendee.Student.Email</td>
                             <td>@eventAttendee.Student.Contact</td>
                             <td>
-                                <input type="checkbox" name="approve-checkbox" id="" value="@eventAttendee.IsApproved">
+                                <input type="checkbox" name="approve-checkbox" id="" value="" @(eventAttendee.IsApproved ? "checked" : "")>
                             </td>
                         </tr>
                     }

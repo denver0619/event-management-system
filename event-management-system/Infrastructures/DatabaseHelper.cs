@@ -101,6 +101,7 @@ namespace event_management_system.Infrastructures
             string whereClause = " WHERE ";
             string terminator = ";";
             string query = queryType + tableName + whereClause + constraints + terminator;
+
             MySqlCommand command = new MySqlCommand(query, _connection);
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);
             adapter.Fill(dataTable);
@@ -180,7 +181,7 @@ namespace event_management_system.Infrastructures
                 {
                     output.Add(property.Name + " = \'" + property.GetValue(entity) + "\'");
                 }
-                else if (property.Name.Contains("Date"))
+                else if ((property.Name.Contains("Date") || property.Name.Contains("Time")) && !(property.Name.EndsWith("ID")))
                 {
                     DateTime date = (DateTime)property.GetValue(entity)!;
                     output.Add(property.Name + " = \'" + date.ToString("yyyy-MM-dd hh:mm:ss ") + date.ToString("tt").ToUpper() + "\'");
@@ -223,7 +224,7 @@ namespace event_management_system.Infrastructures
             List<PropertyInfo> properties = type.GetProperties().OrderBy(property => property.Name).ToList();
             foreach (PropertyInfo property in properties)
             {
-                if (property.Name.EndsWith("ID") && property.Name.Contains(tableName.Substring(1, tableName.Length - 2)))
+                if (property.Name.EndsWith("ID") && (property.Name.Contains(tableName.Substring(1, tableName.Length - 2)) || property.Name.ToLower().Contains("time")))
                 {
                     output = property.Name + " = " + property.GetValue(entity);
                 }
@@ -265,7 +266,7 @@ namespace event_management_system.Infrastructures
                             {
                                 currentEntityValue.Add("\'"+value.ToString()!+ "\'");
                             }
-                            else if ( property.Name.Contains("Date"))
+                            else if ( property.Name.Contains("Date") || property.Name.Contains("Time"))
                             {
                                 DateTime date = (DateTime)value;
                                 currentEntityValue.Add("\'"+ date.ToString("yyyy-MM-dd hh:mm:ss ") + date.ToString("tt").ToUpper() + "\'");
