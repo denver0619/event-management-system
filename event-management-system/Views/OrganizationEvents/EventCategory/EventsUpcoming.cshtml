@@ -1,0 +1,63 @@
+﻿@{
+    @model event_management_system.Domain.Models.EventsModel;
+}
+<div class="event-container standard-container">
+
+    <div class="sort-container">
+        <div class="month-dropdown-container pill-box">
+            <select id="month-dropdown">
+                <option value="" disabled selected hidden>Month</option>
+                <option value="All">All</option>
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+            </select>
+        </div>
+        <div class="event-nature-dropdown-container pill-box">
+            <select id="event-nature-dropdown">
+                <option value="" disabled selected hidden>Event Nature</option>
+                <option value="All">All</option>
+                <option value="January">Curricular</option>
+                <option value="February">Co-curricular </option>
+                <option value="March">Non-curricular </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="event-gallery-card-container">
+
+        @foreach (event_management_system.Domain.DataTransferObject.EventDataTransferObject eventDataTransferObject in Model.ListUpcomingEvents)
+        {
+            <div class="event-card" event-id="@eventDataTransferObject.EventID">
+                <img src="~/images/events/trick-or-treat-2022.png" alt="">
+                <div class="event-card-details">
+                    <div class="event-date">
+                        <p class="event-month">@(((DateTime)eventDataTransferObject.DateStart!).ToString("MMM").ToUpper())</p>
+                        <p class="event-day">@(((DateTime)eventDataTransferObject.DateStart!).ToString("dd"))</p>
+                    </div>
+                    <div class="event-key-info">
+                        <h3>@eventDataTransferObject.Title</h3>
+                        <p class="xs-text"><span class="tangerine-text">Host:</span> @eventDataTransferObject.Organization!.OrganizationName</p>
+                        <p class="xs-text"><span class="tangerine-text">Time:</span> @(((DateTime)eventDataTransferObject.DateStart!).ToString("hh:mm tt")) - @(((DateTime)eventDataTransferObject.DateEnd!).ToString("hh:mm tt"))</p>
+                        <p class="xs-text"><span class="tangerine-text">Venue:</span> @eventDataTransferObject.Venue</p>
+                    </div>
+                </div>
+            </div>
+        }
+        
+    </div>
+
+</div>
+
+@* @section Scripts {
+    <script src="~/js/events.js"></script>
+} *@

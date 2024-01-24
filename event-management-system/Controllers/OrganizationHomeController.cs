@@ -4,21 +4,26 @@ using System.Diagnostics;
 
 namespace event_management_system.Controllers
 {
-    public class HomeController : Controller
+    public class OrganizationHomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<OrganizationHomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public OrganizationHomeController(ILogger<OrganizationHomeController> logger)
         {
             _logger = logger;
-        }
+        }    
 
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
         {
             return View();
         }

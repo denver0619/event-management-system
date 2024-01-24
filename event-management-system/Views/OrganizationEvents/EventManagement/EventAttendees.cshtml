@@ -1,0 +1,101 @@
+﻿@{
+    @model event_management_system.Domain.Models.AttendeeManagementModel;
+}
+
+
+<div class="event-attendees-container standard-container">
+
+    <div class="event-attendees-header">
+        <h1 class="text-glow-white">EVENT ATTENDEES</h1>
+    </div>
+
+    <div class="start-event">
+        <button id="start-event-btn">Start Event</button>
+    </div>
+
+    <div class="table-wrapper">
+        <div class="table-container">
+
+            <!-- Search and Filter  -->
+            <form class="search-and-filter-container">
+
+                <!-- Search -->
+                <fieldset class="search-container">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <g clip-path="url(#clip0_11_108)">
+                            <path d="M6 11.5C9.03757 11.5 11.5 9.03757 11.5 6C11.5 2.96243 9.03757 0.5 6 0.5C2.96243 0.5 0.5 2.96243 0.5 6C0.5 9.03757 2.96243 11.5 6 11.5Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M13.5 13.5L10 10" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_11_108">
+                                <rect width="14" height="14" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+
+                    <input type="text" name="" id="search-input" placeholder="Search anything here..">
+
+                </fieldset>        
+
+            </form>
+
+            <!-- TABLE -->
+            <table id="event-attendees-table">
+                <thead>
+                    <tr>
+                        <th>Attendee ID</th>
+                        <th>Student ID</th>
+                        <th>Name</th>
+                        <th>Year Level</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                        <th>Approve</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (event_management_system.Domain.DataTransferObject.EventAttendeeDataTransferObject eventAttendee in Model.AttendeeList)
+                    {
+                        <tr>
+                            <td>@eventAttendee.EventAttendeeID</td>
+                            <td>@eventAttendee.StudentID</td>
+                            <td>@String.Join(" ", new List<string>() { eventAttendee.Student.FirstName, eventAttendee.Student.MiddleName, eventAttendee.Student.LastName})</td>
+                            <td>@eventAttendee.Student.YearLevel</td>
+                            <td>@eventAttendee.Student.Email</td>
+                            <td>@eventAttendee.Student.Contact</td>
+                            <td>
+                                <input type="checkbox" name="approve-checkbox" id="" value="" @(eventAttendee.IsApproved ? "checked" : "")>
+                            </td>
+                        </tr>
+                    }
+
+                    @* <tr>
+                        <td>123456</td>
+                        <td>John Denv</td>
+                        <td>Junior</td>
+                        <td>john.doe@example.com</td>
+                        <td>(123) 456-7890</td>
+                        <td>
+                            <input type="checkbox" name="approve-checkbox" id="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>123456</td>
+                        <td>Jiyah</td>
+                        <td>Junior</td>
+                        <td>john.doe@example.com</td>
+                        <td>(123) 456-7890</td>
+                        <td>
+                            <input type="checkbox" name="approve-checkbox" id="">
+                        </td>
+                    </tr> *@
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+@section Script {
+    <script src="~/js/event-information.js"></script>
+}

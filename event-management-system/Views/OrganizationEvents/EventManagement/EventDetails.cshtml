@@ -1,0 +1,122 @@
+﻿@{
+    @model event_management_system.Domain.Models.EventCreateEditModel;
+    
+}
+
+
+<div class="event-content-container standard-container">
+
+    <div class="event-content-header">
+        <h1 class="form-title text-glow-white">CREATE YOUR EVENT!</h1>
+    </div>
+
+
+    <form action="" id="upload-image-form">
+
+        <fieldset class="add-image">
+            <p>Image</p>
+            <div id="upload-container">
+                <div id="preview-container"></div>
+                <div class="upload-button-container">
+                    <label for="file-input" class="upload-button">
+                        Choose Image/s
+                    </label>
+                    <input type="file" id="file-input" class="file-input" accept="image/*" multiple>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="event-details" id="event-details-field" date-posted="@Model.Event.DatePosted">
+
+            <div class="form-row">
+                <div>
+                    <label for="eventTitle">Event Title</label>
+                    <input type="text" name="eventTitle" id="eventTitle" value="@Model.Event.Title">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="startDateTime">Start Date/Time</label>
+                    <input type="datetime-local" name="startDateTime" id="startDateTime" value="@((((DateTime)Model.Event.DateStart!).ToString("yyyy-MM-ddTHH:mm")))">
+                </div>
+                <div>
+                    <label for="endDateTime">End Date/Time</label>
+                    <input type="datetime-local" name="endDateTime" id="endDateTime" value="@((((DateTime)Model.Event.DateEnd!).ToString("yyyy-MM-ddTHH:mm")))">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="venue">Venue</label>
+                    <input type="text" name="venue" id="venue" value="@Model.Event.Venue">
+                </div>
+
+                <div>
+                    <label for="participantNumber">Number of Participants</label>
+                    <input type="number" name="participantNumber" id="participantNumber" value="@Model.Event.ParticipantNumber">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="">Nature of Event</label>
+                    <br>
+                    <!-- <input type="text" name="venue" id="venue"> -->
+                    @Model.Event.EventNatureID
+                    <select name="" id="eventNature" data-event-nature-id="@Model.Event.EventNatureID">
+                        <option value="" disabled selected hidden>Event Nature</option>
+                        <option value="1">Curricular</option>
+                        <option value="2">Co-curricular</option>
+                        <option value="3">Non-curricular</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="typeOfEvent">Type of Event</label>
+                    <input type="text" name="typeOfEvent" id="eventType" value="@Model.Event.EventType">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="contactPerson">Contact Person</label>
+                    <input type="text" name="contactPerson" id="contactPerson" value="@Model.Event.ContactPerson">
+                </div>
+
+                <div>
+                    <label for="contactNumber">Contact Number</label>
+                    <input type="text" name="contactNumber" id="contactNumber" value="@Model.Event.ContactNumber">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="feedbackLink">Feedback Link</label>
+                    <input type="text" name="feedbackLink" id="feedbackLink" value="@Model.Event.FeedbackLink">
+                </div>
+
+                <div>
+                    <label for="paymentLink">Payment Link</label>
+                    <input type="text" name="paymentLink" id="paymentLink" value="@Model.Event.PaymentLink">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="description">Description</label>
+                    <textarea type="text" name="description" id="description" rows="10">@Model.Event.Description</textarea>
+                </div>
+            </div>
+
+        </fieldset>
+
+        <button class="pill-box" id="edit-btn">
+            Edit
+        </button>
+
+    </form>
+
+
+</div>
+

@@ -1,0 +1,43 @@
+﻿@{
+    var EventID = ViewData["EventID"];
+    var OrganizationID = ViewData["OrganizationID"];
+    Layout = "~/Views/Shared/_OrganizationLayout.cshtml";
+}
+
+<div class="nav-bg">
+</div>
+
+<div class="introduction-container event-introduction" id="event-information-introduction">
+    <div class="introduction-content standard-container">
+        <div class="introduction-text-container">
+            <h1 class="introduction-text-title large-text"><span>EVENTS EDIT AND PROCESSING</span></h1>
+            <p class="introduction-text-p">
+                The Event Creation and Processing Tab is the epicenter of your event management journey on TicketFlare! Here, you wield the power to shape your event's narrative, inputting essential details that showcase its uniqueness. Navigate effortlessly through event creation, providing a smooth experience for organizers. Monitor attendees with precision, approving their participation with a simple checkbox. Dive into the attendance tracking, where every scan is documented, allowing you to view the time in and time out of participants who've embraced the event through QR code verification. With TicketFlare's powerful tools, event management becomes an art form, and your events take center stage with efficiency and accuracy.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="content-navigation standard-container" id="event-information-navigation">
+    <div class="current-content" id="current-event-information-navigation"></div>
+
+    <button data-type="Details">
+        <h1 class="medium-text" id="event-info-btn">EVENT DETAILS</h1>
+    </button>
+
+    <button data-type="Attendees">
+        <h1 class="medium-text" id="event-info-btn">ATTENDEES</h1>
+    </button>
+
+    <button data-type="AttendanceLog">
+        <h1 class="medium-text" id="event-info-btn">ATTENDANCE LOG</h1>
+    </button>
+</div>
+
+<div class="subcontent-container" id="subcontent-container" event-id="@EventID" organization-id="@OrganizationID">
+    @* @await Html.PartialAsync("EventManagement/EventAttendees"); *@
+</div>
+
+@section Scripts {
+    <script src="~/js/event-information.js"></script>
+}

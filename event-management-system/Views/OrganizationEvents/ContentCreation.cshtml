@@ -1,0 +1,142 @@
+﻿@{
+    ViewData["Title"] = "Content Creation";
+    Layout = "~/Views/Shared/_OrganizationLayout.cshtml";
+    var OrganizationID = ViewData["OrganizationID"];
+}
+
+<div class="nav-bg">
+</div>
+
+<div class="introduction-container event-introduction" id="event-information-introduction">
+    <div class="introduction-content standard-container">
+        <div class="introduction-text-container">
+            <h1 class="introduction-text-title large-text"><span>EVENTS CONTENT CREATION</span></h1>
+            <p class="introduction-text-p">
+                Welcome to the Events Tab, your go-to destination for a holistic view of the university's colorful event scene! Whether you're gearing up for upcoming activities, immersing yourself in ongoing happenings, or reminiscing about past memorable events, this section has got you covered. Organizers, dive into the details, from event names to dates and locations, all neatly organized for your convenience. Ready to make waves of your own? The "Create Event" button awaits, empowering you to kickstart your event planning journey. Experience the ease of navigation and a centralized hub designed to elevate your event management game. Welcome to the heart of the action, where every detail is at your fingertips!
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="content-navigation small-container" id="create-event-information">
+    <div class="current-content create-event-background">
+        <h1 class="medium-text" id="event-content-btn">EVENT CONTENT</h1>
+    </div>
+</div>
+
+<div class="event-content-container small-container">
+
+    <div class="event-content-header">
+        <h1 class="form-title text-glow-white">CREATE YOUR EVENT!</h1>
+    </div>
+
+
+    <form action="" id="upload-event-form" organization-id="@OrganizationID">
+
+        <fieldset class="add-image" >
+            <p>Image</p>
+            <div id="upload-container">
+                <div id="preview-container"></div>
+                <div class="upload-button-container">
+                    <label for="file-input" class="upload-button">
+                        Choose Image/s
+                    </label>
+                    <input type="file" id="file-input" class="file-input" accept="image/*" multiple>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="event-details">
+
+            <div class="form-row">
+                <div>
+                    <label for="eventTitle">Event Title</label>
+                    <input type="text" name="eventTitle" id="eventTitle">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="startDateTime">Start Date/Time</label>
+                    <input type="datetime-local" name="startDateTime" id="startDateTime">
+                </div>
+
+                <div>
+                    <label for="endDateTime">End Date/Time</label>
+                    <input type="datetime-local" name="endDateTime" id="endDateTime">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="venue">Venue</label>
+                    <input type="text" name="venue" id="venue">
+                </div>
+
+                <div>
+                    <label for="participantNumber">Number of Participants</label>
+                    <input type="number" name="participantNumber" id="participantNumber">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="eventNature">Nature of Event</label>
+                    <br>
+                    <!-- <input type="text" name="venue" id="venue"> -->
+                    <select name="eventNature" id="eventNature">
+                        <option value="" disabled selected hidden>Event Nature</option>
+                        <option value="1">Curricular</option>
+                        <option value="2">Co-curricular</option>
+                        <option value="3">Non-curricular</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="eventType">Type of Event</label>
+                    <input type="text" name="eventType" id="eventType">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="contactPerson">Contact Person</label>
+                    <input type="text" name="contactPerson" id="contactPerson">
+                </div>
+
+                <div>
+                    <label for="contactNumber">Contact Number</label>
+                    <input type="text" name="contactNumber" id="contactNumber">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="feedbackLink">Feedback Link</label>
+                    <input type="text" name="feedbackLink" id="feedbackLink">
+                </div>
+
+                <div>
+                    <label for="paymentLink">Payment Link</label>
+                    <input type="text" name="paymentLink" id="paymentLink">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="description">Description</label>
+                    <textarea type="text" name="description" id="description" rows="10"></textarea>
+                </div>
+            </div>
+
+        </fieldset>
+
+    </form>
+    <div class="btn-group">
+        <button class="pill-btn pill-box" id="preview-event">Preview Event</button>
+        <button class="pill-btn pill-box" id="submit-event">Submit Event</button>
+    </div>
+    
+</div>
+
+<script src="~/js/event-creation.js"></script>
