@@ -8,6 +8,7 @@ using System.Text.Json;
 using static System.Net.Mime.MediaTypeNames;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
+using event_management_system.Domain.Repositories;
 
 namespace event_management_system.Controllers
 {
@@ -115,13 +116,11 @@ namespace event_management_system.Controllers
         {
             string userID = HttpContext.Request.Query["userId"]!;
             ViewData["OrganizationID"] = userID;
-            Debug.WriteLine("main org " + userID);
 
 
             string eventID = HttpContext.Request.Query["eventId"]!;
             TempData["EventId"] = eventID;
             ViewData["EventID"] = eventID;
-            Debug.WriteLine("main " + eventID);
             return View();
         }
 
@@ -143,7 +142,6 @@ namespace event_management_system.Controllers
         public IActionResult EditEvent([FromBody]Event eventEntity)
         {
             eventEntity.DatePosted = DateTime.Now;
-            Debug.WriteLine(JsonSerializer.Serialize(eventEntity));
             EventCreateEditService editService = new EventCreateEditService();
             editService.UpdateEvent(eventEntity);
             editService.Dispose();
@@ -151,15 +149,16 @@ namespace event_management_system.Controllers
             return Ok();
         }
 
+
         public IActionResult EventAttendanceLog()
         {
             // Use the name 'eventId' to match the query parameter
             string eventId = HttpContext.Request.Query["eventId"]!;
+            AttendanceLogService attendanceLogService = new AttendanceLogService(eventId);
+            AttendanceLogModel attendanceLogModel = attendanceLogService.Model;
+            attendanceLogService.Dispose();
 
-
-            // Handle the eventId as needed
-
-            return PartialView("EventManagement/EventAttendanceLog");
+            return PartialView("EventManagement/EventAttendanceLog", attendanceLogModel);
         }
 
 
@@ -167,16 +166,41 @@ namespace event_management_system.Controllers
         public IActionResult EventAttendees()
         {
             string eventId = HttpContext.Request.Query["eventId"]!;
-            Debug.WriteLine("att " + eventId);
 
-            /*AttendeeManagementService attendeeManagementService = new AttendeeManagementService();
-            AttendeeManagementModel attendeeManagementModel = attendeeManagementService;*/
+            AttendeeManagementService attendeeManagementService = new AttendeeManagementService();
+            AttendeeManagementModel attendeeManagementModel = attendeeManagementService.GetAllAttendees(eventId);
+            attendeeManagementService.Dispose();
 
-            return PartialView("EventManagement/EventAttendees");
+            return PartialView("EventManagement/EventAttendees", attendeeManagementModel);
+        }
+
+        public IActionResult CreateTicket([FromBody]EventIDModel eventID)
+        {
+            Debug.WriteLine(eventID.EventID);
+            AttendeeManagementService attendeeManagementService = new AttendeeManagementService();
+            attendeeManagementService.GenerateTickets(eventID.EventID);
+            attendeeManagementService.Dispose();
+
+            return Ok();
         }
 
 
 
+        public IActionResult UpdateAttendeeStatus([FromBody]EventAttendee eventAttendee)
+        {
+            AttendeeManagementService attendeeManagementService = new AttendeeManagementService();
+            attendeeManagementService.UpdateStudentApproveStatus(eventAttendee);
+            attendeeManagementService.Dispose();
+            return Ok();
+        }
+
+
+
+    }
+
+    public class EventIDModel
+    {
+        public string? EventID { get; set; }
     }
 
     public class EventDetailsModel

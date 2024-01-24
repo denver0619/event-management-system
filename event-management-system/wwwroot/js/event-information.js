@@ -15,8 +15,8 @@ function initialLoadContent() {
         .then(response => response.text())
         .then(data => {
             document.getElementById('subcontent-container').innerHTML = data;
-            loadAttendeesScript();
             setupSubcontentButtons();
+            loadAttendeesScript();
         })
         .catch(error => console.error('Error:', error));
 }
@@ -28,6 +28,7 @@ function setupSubcontentButtons() {
         button.addEventListener('click', function () {
             var eventType = button.getAttribute('data-type');
             loadContent(eventType);
+            console.log(eventType)
         });
     });
 }
@@ -56,11 +57,13 @@ function loadContent(type) {
 
 function loadSubContent(type) {
     var eventId = document.getElementById('subcontent-container').getAttribute('event-id');
+    
 
     fetch(`/OrganizationEvents/Event${type}?eventId=${eventId}`)
         .then(response => response.text())
         .then(data => {
             document.getElementById('subcontent-container').innerHTML = data;
+
             if (type == "Details") {
                 loadEventDetailScript();
             }
@@ -260,15 +263,21 @@ function loadAttendanceLogScript() {
         filterTable('event-attendance-time-out-table', searchInputTimeOut.value);
     });
 
-
     function filterTable(tableId, searchText) {
         var rows = document.querySelectorAll('#' + tableId + ' tbody tr');
+
+        // Check if there are no rows in the table
+        if (rows.length === 0) {
+            console.log('No rows in the table.');
+            return;
+        }
 
         rows.forEach(function (row) {
             var textContent = row.textContent.toLowerCase();
             row.style.display = textContent.includes(searchText) ? 'table-row' : 'none';
         });
     }
+
 
 
 
@@ -327,6 +336,69 @@ function loadAttendanceLogScript() {
         sendToController(rowData);
     }
 
+    function handleTimeButtonClick(button, eventType) {
+        // Traverse DOM to find the corresponding row
+        var row = button.closest('tr');
+
+        // Get the corresponding date and time column indices
+        var dateIndex = 3;
+        var timeIndex = 4;
+
+        // Check if there are contents in column 3 and 4
+        if (row.cells[dateIndex].textContent.trim() !== '' && row.cells[timeIndex].textContent.trim() !== '') {
+            // If there are contents, disable the button and return
+            button.disabled = true;
+            button.style.background = "gray";
+            button.style.cursor = "default";
+            return;
+        }
+
+        // If columns 3 and 4 are empty, proceed to update them
+        // Get the current date
+        var currentDate = new Date().toLocaleDateString();
+
+        // Update the corresponding date column in the row
+        row.cells[dateIndex].textContent = currentDate;
+
+        // Get the current time
+        var currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        // Update the corresponding time column in the row
+        row.cells[timeIndex].textContent = currentTime;
+
+        // Extract data from the row
+        if (eventType == "time-in") {
+            var rowData = {
+                StudentId: row.cells[0].textContent,
+                Name: row.cells[1].textContent,
+                YearLevel: row.cells[2].textContent,
+                Date: currentDate,
+                TimeIn: currentTime
+            };
+        }
+        else if (eventType == "time-out")
+        {
+            var rowData = {
+                StudentId: row.cells[0].textContent,
+                Name: row.cells[1].textContent,
+                YearLevel: row.cells[2].textContent,
+                Date: currentDate,
+                TimeOut: currentTime
+            };
+        }
+        
+
+        console.log(rowData);
+
+        // Send data to the controller (you need to implement this part)
+        sendToController(rowData);
+
+        // Disable the button
+        button.disabled = true;
+        button.style.background = "gray";
+        button.style.cursor = "default";
+    }
+
     function sendToController(data) {
         // Implement your code to send data to the controller using AJAX or fetch
         // For example, you can use the Fetch API:
@@ -355,6 +427,7 @@ function loadAttendanceLogScript() {
 function loadAttendeesScript() {
     console.log("attendees")
     var approveCheckboxes = document.querySelectorAll('input[name="approve-checkbox"]');
+    var eventId = document.getElementById('subcontent-container').getAttribute('event-id');
 
     approveCheckboxes.forEach(function (checkbox) {
         checkbox.addEventListener('change', function () {
@@ -371,11 +444,9 @@ function loadAttendeesScript() {
 
                 // Send data to the server (you need to implement this part)
                 sendToServer({
-                    studentId: studentId,
-                    name: name,
-                    yearLevel: yearLevel,
-                    email: email,
-                    contact: contact,
+                    EventAttendeeID: '',
+                    EventID: eventId,
+                    StudentID: studentId,
                     isApprove: true
                 });
             } else {
@@ -390,11 +461,9 @@ function loadAttendeesScript() {
 
                 // Send data to the server (you need to implement this part)
                 sendToServer({
-                    studentId: studentId,
-                    name: name,
-                    yearLevel: yearLevel,
-                    email: email,
-                    contact: contact,
+                    EventAttendeeID: '',
+                    EventID: eventId,
+                    StudentID: studentId,
                     isApprove: false
                 });
             }
@@ -411,6 +480,12 @@ function loadAttendeesScript() {
     function filterTable(tableId, searchText) {
         var rows = document.querySelectorAll('#' + tableId + ' tbody tr');
 
+        // Check if there are no rows in the table
+        if (rows.length === 0) {
+            console.log('No rows in the table.');
+            return;
+        }
+
         rows.forEach(function (row) {
             var textContent = row.textContent.toLowerCase();
             row.style.display = textContent.includes(searchText) ? 'table-row' : 'none';
@@ -423,7 +498,7 @@ function loadAttendeesScript() {
 
         // Implement your code to send data to the server using AJAX or fetch
         // For example, you can use the Fetch API:
-        /*fetch('OrganizationEvents/UpdateAttendeeStatus', {
+        fetch('/OrganizationEvents/UpdateAttendeeStatus', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -438,6 +513,34 @@ function loadAttendeesScript() {
             .catch((error) => {
                 console.error('Error:', error);
                 // Handle error
-            });*/
+            });
     }
+
+
+    var startEventBtn = document.getElementById('start-event-btn');
+    startEventBtn.addEventListener('click', function () {
+        CreateTicket(eventId);
+    })
+
+    function CreateTicket(eventId) {
+        console.log(eventId);
+        fetch('/OrganizationEvents/CreateTicket', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ EventID: eventId })  // Convert the object to JSON string
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Handle success response from the server
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle error
+            });
+    }
+
+
 }

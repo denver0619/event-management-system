@@ -71,7 +71,7 @@ namespace event_management_system.Domain.Repositories
             DataTable dataTable = databaseHelper.SelectRecord(this.tableName, constraints);
             if (!(dataTable.Rows.Count > 0))
             {
-                return null;
+                return new TimeInEntity();
             }
             else
             {

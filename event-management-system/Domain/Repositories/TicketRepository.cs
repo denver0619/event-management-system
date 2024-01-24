@@ -8,7 +8,7 @@ namespace event_management_system.Domain.Repositories
     public class TicketRepository : ITicketRepository, IDisposable
     {
         private DatabaseHelper<Ticket> databaseHelper;
-        private readonly string tableName = "ticket";
+        private readonly string tableName = "tickets";
 
         public TicketRepository()
         {

@@ -1,5 +1,5 @@
 ﻿@{
-
+    @model event_management_system.Domain.Models.AttendeeManagementModel;
 }
 
 
@@ -7,6 +7,10 @@
 
     <div class="event-attendees-header">
         <h1 class="text-glow-white">EVENT ATTENDEES</h1>
+    </div>
+
+    <div class="start-event">
+        <button id="start-event-btn">Start Event</button>
     </div>
 
     <div class="table-wrapper">
@@ -49,17 +53,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>123456</td>
-                        <td>John Doe</td>
-                        <td>Junior</td>
-                        <td>john.doe@example.com</td>
-                        <td>(123) 456-7890</td>
-                        <td>
-                            <input type="checkbox" name="approve-checkbox" id="">
-                        </td>
-                    </tr>
-                    <tr>
+                    @foreach (event_management_system.Domain.DataTransferObject.EventAttendeeDataTransferObject eventAttendee in Model.AttendeeList)
+                    {
+                        <tr>
+                            <td>@eventAttendee.EventAttendeeID</td>
+                            <td>@String.Join(" ", new List<string>() { eventAttendee.Student.FirstName, eventAttendee.Student.MiddleName, eventAttendee.Student.LastName})</td>
+                            <td>@eventAttendee.Student.YearLevel</td>
+                            <td>@eventAttendee.Student.Email</td>
+                            <td>@eventAttendee.Student.Contact</td>
+                            <td>
+                                @eventAttendee.IsApproved
+                                <input type="checkbox" name="approve-checkbox" id="" value="@eventAttendee.IsApproved">
+                            </td>
+                        </tr>
+                    }
+
+                    @* <tr>
                         <td>123456</td>
                         <td>John Denv</td>
                         <td>Junior</td>
@@ -78,7 +87,7 @@
                         <td>
                             <input type="checkbox" name="approve-checkbox" id="">
                         </td>
-                    </tr>
+                    </tr> *@
                 </tbody>
             </table>
         </div>

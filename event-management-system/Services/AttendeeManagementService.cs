@@ -22,7 +22,7 @@ namespace event_management_system.Services
             Model = new AttendeeManagementModel();
         }
 
-        /*public AttendeeManagementModel GetAllAttendees(string eventID)
+        public AttendeeManagementModel GetAllAttendees(string eventID)
         {
             List<IEventAttendee> attendeeData = eventAttendeeRepository.GetByEventID(eventID);
             List<EventAttendeeDataTransferObject> attendeeList = new List<EventAttendeeDataTransferObject>();

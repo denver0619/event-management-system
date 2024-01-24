@@ -1,4 +1,9 @@
-﻿<div class="event-attendance-log-container standard-container">
+﻿@{
+    @model event_management_system.Domain.Models.AttendanceLogModel;
+}
+
+
+<div class="event-attendance-log-container standard-container">
 
     <div class="event-attendance-log-header">
         <h1 class="text-glow-white">EVENT ATTENDANCE</h1>
@@ -48,42 +53,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>123456</td>
-                        <td>Jiyah Apad</td>
-                        <td>Junior</td>
-                        <td>01/21/2024</td>
-                        <td></td>
-                        <td>
-                            <button class="time-in-btn">
-                                Time In
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>123456</td>
-                        <td>John Drex</td>
-                        <td>Junior</td>
-                        <td>01/21/2024</td>
-                        <td></td>
-                        <td>
-                            <button class="time-in-btn">
-                                Time In
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>123456</td>
-                        <td>John Denv</td>
-                        <td>Junior</td>
-                        <td>01/21/2024</td>
-                        <td></td>
-                        <td>
-                            <button class="time-in-btn">
-                                Time In
-                            </button>
-                        </td>
-                    </tr>
+                    
+                    @if((Model.TimeInList.Count > 1))
+                    {
+                        foreach (event_management_system.Domain.DataTransferObject.TimeInDataTransferObject timeInDataTransfer in Model.TimeInList)
+                        {
+                            <tr>
+                                <td>@timeInDataTransfer.Student.StudentID</td>
+                                <td>@String.Join(" ", new List<string>() { timeInDataTransfer.Student.FirstName, timeInDataTransfer.Student.MiddleName, timeInDataTransfer.Student.LastName })</td>
+                                <td>@timeInDataTransfer.Student.YearLevel</td>
+                                <td>@(((DateTime)timeInDataTransfer.TimeIn!).ToString("yyyy-MM-dd").ToUpper())</td>
+                                <td></td>
+                                <td>
+                                    <button class="time-in-btn">
+                                        Time In
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        
+                        
+                    }
+
+                    
                 </tbody>
             </table>
         </div>
@@ -137,42 +132,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>123456</td>
-                        <td>Jiyah Apad</td>
-                        <td>Junior</td>
-                        <td>01/21/2024</td>
-                        <td></td>  
-                        <td>
-                            <button class="time-out-btn">
-                                Time Out
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>123456</td>
-                        <td>John Drex</td>
-                        <td>Junior</td>
-                        <td>01/21/2024</td>
-                        <td></td>    
-                        <td>
-                            <button class="time-out-btn">
-                                Time Out
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>123456</td>
-                        <td>John Denv</td>
-                        <td>Junior</td>
-                        <td>01/21/2024</td>
-                        <td></td>      
-                        <td>
-                            <button class="time-out-btn">
-                                Time Out
-                            </button>
-                        </td>
-                    </tr>
+                    @if(Model.TimeOutList.Count > 1)
+                    {
+                        foreach (event_management_system.Domain.DataTransferObject.TimeOutDataTransferObject timeOutDataTransfer in Model.TimeOutList)
+                        {
+                            <tr>
+                                <td>@timeOutDataTransfer.Student.StudentID</td>
+                                <td>@String.Join(" ", new List<string>() { timeOutDataTransfer.Student.FirstName, timeOutDataTransfer.Student.MiddleName, timeOutDataTransfer.Student.LastName })</td>
+                                <td>@timeOutDataTransfer.Student.YearLevel</td>
+                                <td>>@(((DateTime)timeOutDataTransfer.TimeOut!).ToString("yyyy-MM-dd").ToUpper())</td>
+                                <td></td>
+                                <td>
+                                    <button class="time-in-btn">
+                                        Time Out
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    
                 </tbody>
             </table>
         </div>
