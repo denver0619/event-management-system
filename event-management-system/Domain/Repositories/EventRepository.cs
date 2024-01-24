@@ -42,6 +42,7 @@ namespace event_management_system.Domain.Repositories
         public void UpdateEvent(IEvent eventEntity)
         {
             Event eventData = new Event(eventEntity);
+            string constraint = "EventID = " + eventData.EventID;
             // MySqlParameter parameter = new MySqlParameter("@Image", MySqlDbType.Blob, ((eventData.Image != null && !(eventData.Image!.Length > 0)) ? eventData.Image.Length : 0));
             databaseHelper.UpdateRecord(tableName, eventData);
         }
