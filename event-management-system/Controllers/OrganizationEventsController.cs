@@ -31,7 +31,8 @@ namespace event_management_system.Controllers
 
         public IActionResult ContentCreation()
         {
-
+            string userID = HttpContext.Request.Query["userId"]!;
+            ViewData["OrganizationID"] = userID;
             return View();
         }
 
@@ -39,7 +40,7 @@ namespace event_management_system.Controllers
         [HttpPost]
         public IActionResult SendTextData([FromBody]CreateEventData eventEntity)
         {
-           /* if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 // The model is not valid, log validation errors
                 var errors = ModelState.Values
@@ -51,7 +52,7 @@ namespace event_management_system.Controllers
                 }
 
                 return BadRequest(new { Message = "Validation failed", Errors = errors });
-            }*/
+            }
 
 
 
@@ -77,6 +78,8 @@ namespace event_management_system.Controllers
             eventData.Description = eventEntity.Description;
 
             eventData.DatePosted = DateTime.Now;
+            Debug.WriteLine(JsonSerializer.Serialize(eventData));
+
             EventCreateEditService eventCreateEditService = new EventCreateEditService();
 
             eventCreateEditService.AddEvent(eventData);

@@ -106,6 +106,9 @@ function setupSubmitButton() {
 }
 
 function validationCheck() {
+    var uploadEventForm = document.getElementById('upload-event-form');
+    // Get the organization-id attribute value
+    var organizationId = uploadEventForm.getAttribute('organization-id');
     // var Image;
     var eventTitle = document.getElementById('eventTitle').value;
     var startDateTime = document.getElementById('startDateTime').value;
@@ -116,7 +119,7 @@ function validationCheck() {
     var eventNatureDropdown = document.getElementById('eventNature');
     var eventNature = eventNatureDropdown.value;
 
-    var typeOfEvent = document.getElementById('typeOfEvent').value;
+    var eventType = document.getElementById('eventType').value;
     var contactPerson = document.getElementById('contactPerson').value;
     var contactNumber = document.getElementById('contactNumber').value;
     var feedbackLink = document.getElementById('feedbackLink').value;
@@ -167,11 +170,11 @@ function validationCheck() {
         resetErrorStyles('eventNature');
     }
 
-    if (typeOfEvent === '') {
-        applyErrorStyles('typeOfEvent');
+    if (eventType === '') {
+        applyErrorStyles('eventType');
         isError = true;
     } else {
-        resetErrorStyles('typeOfEvent');
+        resetErrorStyles('eventType');
     }
 
     if (contactPerson === '') {
@@ -195,15 +198,39 @@ function validationCheck() {
         resetErrorStyles('description');
     }
 
-    
+    var eventDetails = {
+        EventID: '',
+        EventNatureID: eventNature,
+        EventStatusID: "1",
+        OrganizationID: organizationId,
+        DatePosted: Date.now,
+        DateStart: startDateTime,
+        DateEnd: endDateTime,
+        Venue: venue,
+        Title: eventTitle,
+        ParticipantNumber: participantNumber,
+        EventType: eventType,
+        ContactPerson: contactPerson,
+        ContactNumber: contactNumber,
+        FeedbackLink: feedbackLink,
+        PaymentLink: paymentLink,
+        Description: description,
+        Image: "",
+    };
+
+
+
+    if (isError == false) {
+        sendTextData(eventDetails);
+    }
     
 
     // Other validation and data processing logic...
-    var eventDetails = {
+/*    var eventDetails = {
         EventID: '',
-        EventNatureID: "1",
+        EventNatureID: eventNature,
         EventStatusID: "1",
-        OrganizationID: "1",
+        OrganizationID: organizationId,
         DatePosted: Date.now,
         DateStart: "2024-02-14",
         DateEnd: "2024-02-15",
@@ -217,9 +244,11 @@ function validationCheck() {
         PaymentLink: "sample2.com",
         Description: "napakalapet",
         Image: "",
-    };
+    };*/
 
-    sendTextData(eventDetails);
+    console.log(eventDetails)
+
+    //sendTextData(eventDetails);
     /*sendImageData(imageBlob);
     sendData(imageBlob);*/
 }
@@ -245,6 +274,23 @@ function sendTextData(eventDetails) {
         .catch(error => {
             console.error('Error:', error);
         });
+}
+
+function applyErrorStyles(elementId) {
+    var element = document.getElementById(elementId);
+    element.style.boxShadow = '0 0 5px 2px rgba(255, 255, 255, 0.5)';
+    element.style.border = '1px solid red';
+    element.classList.add('shake'); // Adding a shake class for animation
+    setTimeout(function () {
+        element.classList.remove('shake'); // Remove the shake class after the animation ends
+    }, 500);
+}
+
+function resetErrorStyles(elementId) {
+    var element = document.getElementById(elementId);
+    element.style.border = '1px solid #ccc'; // Reset the border
+    element.style.boxShadow = "none";
+
 }
 
 

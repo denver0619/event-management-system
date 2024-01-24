@@ -801,6 +801,14 @@ header {
     text-align: center;
 }
 
+.about-introduction h1 {
+    font-size: 48px;
+}
+
+.about-introduction p {
+    font-size: 20px;
+}
+
 .about {
     margin: 60px auto;
 }
@@ -938,6 +946,15 @@ header {
     margin: 0 auto;
     text-align: center;
 }
+
+.faq-introduction h1 {
+    font-size: 48px;
+}
+
+.faq-introduction p {
+    font-size: 20px;
+}
+
 
 .faq-container {
     margin: 60px auto;
