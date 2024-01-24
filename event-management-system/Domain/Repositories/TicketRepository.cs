@@ -100,6 +100,26 @@ namespace event_management_system.Domain.Repositories
             }
             return tickets;
         }
+
+        public ITicket GetByStudentIDandEventID(string studentID, string eventID)
+        {
+
+            string constraints = "StudentID = " + studentID + "EventID = " + eventID;
+            DataTable dataTable = databaseHelper.SelectAllRecordWith(this.tableName, constraints);
+            if (!(dataTable.Rows.Count > 0))
+            {
+                return new Ticket();
+            }
+            else
+            {
+                DataRow row = dataTable.Rows[0];
+                return new Ticket(
+                    row["TicketID"].ToString()!,
+                    row["EventID"].ToString()!,
+                    row["StudentID"].ToString()!
+                    );
+            }
+        }
     }
     
 }
