@@ -554,6 +554,15 @@ header {
     text-align: center;
 }
 
+.about-introduction h1 {
+    font-size: 48px;
+}
+
+.about-introduction p {
+    font-size: 20px;
+}
+
+
 .about {
     margin: 60px auto;
 }

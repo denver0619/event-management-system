@@ -127,8 +127,8 @@ function validationCheck() {
     var description = document.getElementById('description').value;
 
 
-    var isError = false;
-    /*if (eventTitle === '') {
+/*    var isError = false;
+    if (eventTitle === '') {
         applyErrorStyles('eventTitle');
         isError = true;
     } else {
@@ -196,9 +196,9 @@ function validationCheck() {
         isError = true;
     } else {
         resetErrorStyles('description');
-    }*/
+    }
 
-/*    var eventDetails = {
+    var eventDetails = {
         EventID: '',
         EventNatureID: eventNature,
         EventStatusID: "1",
@@ -220,7 +220,7 @@ function validationCheck() {
 
 
 
-    /*if (isError == false) {
+   /* if (isError == false) {
         sendTextData(eventDetails);
     }*/
     
