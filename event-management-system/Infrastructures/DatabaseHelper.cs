@@ -12,7 +12,7 @@ namespace event_management_system.Infrastructures
 
         public DatabaseHelper()
         {
-            Configuration.MySQL.ConnectionString = "server=localhost;port=3307;user=root;database=eventmanagementdb;password=;Convert Zero Datetime=True;"; //Temporary
+            Configuration.MySQL.ConnectionString = "server=26.223.107.167;port=3306;user=root;database=eventmanagementdb;password=;Convert Zero Datetime=True;"; //Temporary
             _connectionManager = new DatabaseConnectionManager(Configuration.MySQL.ConnectionString);
             _connection = _connectionManager.Connection;
         }
@@ -115,6 +115,23 @@ namespace event_management_system.Infrastructures
             command.ExecuteNonQuery();
             _connection.Close();
         }
+
+        public void UpdateRecordWithConstraint(string tableName, Entity entity, string constraints)
+        {
+            _connection.Open();
+            string queryType = "UPDATE ";
+            string setValues = " SET ";
+            string values = this.ConvertUpdateValuesToString(entity);
+            string whereClause = " WHERE ";
+            /*string constraints = this.GetIDConstraint(tableName, entity);*/
+            string terminator = ";";
+            string query = queryType + tableName + setValues + values + whereClause + constraints + terminator;
+
+            MySqlCommand command = new MySqlCommand(query, _connection);
+            command.ExecuteNonQuery();
+            _connection.Close();
+        }
+
         public void UpdateRecordWithParam(string tableName, Entity entity, MySqlParameter parameter)
         {
             _connection.Open();
