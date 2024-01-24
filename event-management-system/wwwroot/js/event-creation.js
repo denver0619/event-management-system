@@ -1,43 +1,39 @@
-﻿let imageByteArray;
+﻿// let imageBlob;
 
 document.addEventListener('DOMContentLoaded', function () {
-    setupFileUpload();
+    /*setupFileUpload();*/
     setupSubmitButton();
 })
 
-function setupFileUpload() {
+/*function setupFileUpload() {
     const fileInput = document.getElementById('file-input');
 
     fileInput.addEventListener('change', handleFileSelect);
+    fileInput.addEventListener('change', loadImageToUI);
 }
-
-/*function handleFileSelect(event) {
-    const previewContainer = document.getElementById('preview-container');
-    const files = event.target.files;
-
-    // Ensure only one file is selected
-    if (files.length !== 1) {
-        alert('Please select only one image.');
-        return;
-    }
-
-    const file = files[0];
-    const reader = new FileReader();
-
-    reader.onload = function (e) {
-        // Clear existing preview cards
-        clearPreviewContainer();
-
-        const previewCard = createPreviewCard(e.target.result);
-        previewContainer.appendChild(previewCard);
-    };
-
-    reader.readAsDataURL(file);
-
-    console.log(file)
-}*/
 
 function handleFileSelect(event) {
+    const files = event.target.files;
+
+    // Ensure only one file is selected
+    if (files.length !== 1) {
+        alert('Please select only one image.');
+        return;
+    }
+
+    const file = files[0];
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const arrayBuffer = e.target.result;
+        const byteArray = new Uint8Array(arrayBuffer);
+        imageBlob = new Blob([byteArray], { type: file.type });
+
+        setupSubmitButton(imageBlob);
+    };
+    reader.readAsArrayBuffer(file);
+}
+
+function loadImageToUI(event) {
     const previewContainer = document.getElementById('preview-container');
     const files = event.target.files;
 
@@ -56,38 +52,26 @@ function handleFileSelect(event) {
 
         const previewCard = createPreviewCard(e.target.result);
         previewContainer.appendChild(previewCard);
-
-        // Convert the uploaded image to a byte array
-        convertImageToByteArray(file);
     };
 
     reader.readAsDataURL(file);
 }
 
-function convertImageToByteArray(imageFile) {
+function convertImageToByteArray(imageBlob) {
     const reader = new FileReader();
-
     reader.onload = function (e) {
-        const image = new Image();
-        image.src = e.target.result;
+        const arrayBuffer = e.target.result;
+        const byteArray = new Uint8Array(arrayBuffer);
 
-        image.onload = function () {
-            const canvas = document.createElement('canvas');
-            canvas.width = image.width;
-            canvas.height = image.height;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(image, 0, 0, image.width, image.height);
+        // Log information about the blob file or its contents
+        console.log('Blob Image Data:', byteArray);
+        console.log('Blob Size:', byteArray.length);
 
-            const imageData = ctx.getImageData(0, 0, image.width, image.height);
-            imageByteArray = new Uint8Array(imageData.data.buffer);
-
-            // Now you have the byte array (Uint8Array) stored in imageByteArray
-            // You can use imageByteArray wherever needed
-            console.log(imageByteArray);
-        };
+        // Pass the byte array to validationCheck (you can also pass it to other functions as needed)
+        setupSubmitButton(byteArray);
     };
 
-    reader.readAsArrayBuffer(imageFile);
+    reader.readAsArrayBuffer(imageBlob);
 }
 
 function clearPreviewContainer() {
@@ -102,9 +86,9 @@ function createPreviewCard(imageSrc) {
     previewCard.className = 'preview-card';
 
     previewCard.innerHTML = `
-            <span class="remove-button">&times; Remove</span>
-            <img src="${imageSrc}" alt="Preview">
-        `;
+        <span class="remove-button">&times; Remove</span>
+        <img src="${imageSrc}" alt="Preview">
+    `;
 
     const removeButton = previewCard.querySelector('.remove-button');
     removeButton.addEventListener('click', () => {
@@ -112,19 +96,17 @@ function createPreviewCard(imageSrc) {
     });
 
     return previewCard;
-}
-
+}*/
 
 function setupSubmitButton() {
     var submitBtn = document.getElementById('submit-event');
-    
-    submitBtn.addEventListener('click', function () {
-        // Pass the byte array to validationCheck inside setupSubmitButton
-        validationCheck(imageByteArray);
-    });
+    submitBtn.onclick = function () {
+        validationCheck();
+    }
 }
 
-function validationCheck(byteArray) {
+function validationCheck() {
+    // var Image;
     var eventTitle = document.getElementById('eventTitle').value;
     var startDateTime = document.getElementById('startDateTime').value;
     var endDateTime = document.getElementById('endDateTime').value;
@@ -208,77 +190,71 @@ function validationCheck(byteArray) {
 
     if (description === '') {
         applyErrorStyles('description');
-            isError = true;
+        isError = true;
     } else {
         resetErrorStyles('description');
     }
 
-    var organizationID = getOrganizationID();
+    
+    
 
+    // Other validation and data processing logic...
     var eventDetails = {
-        
         EventID: '',
-        EventNature: eventNature,
-        EventStatusId: '',
-        OrganizationID: organizationID,
-        DatePosted: '',
-        DateStart: startDateTime,
-        DateEnd: endDateTime,
-        Venue: venue,
-        Image: '',
-        Title: eventTitle,      
-        ParticipantNumber: participantNumber, 
-        EventType: typeOfEvent,
-        ContactPerson: contactPerson,
-        ContactNumber: contactNumber,
-        FeedbackLink: feedbackLink,
-        PaymentLink: paymentLink,
-        Description: description,
+        EventNatureID: "1",
+        EventStatusID: "1",
+        OrganizationID: "1",
+        DatePosted: Date.now,
+        DateStart: "2024-02-14",
+        DateEnd: "2024-02-15",
+        Venue: "People Center",
+        Title: "Bataan Foundation Day",
+        ParticipantNumber: 600,
+        EventType: "Celebration",
+        ContactPerson: "Jaeia Mikaella Apad",
+        ContactNumber: "09463571592",
+        FeedbackLink: "sample1.com",
+        PaymentLink: "sample2.com",
+        Description: "napakalapet",
+        Image: "",
+    };
 
-    }
-
-    console.log(eventDetails);
-
-    /*if (isError == false) {
-        sendData(eventDetails);
-    }*/
-
+    sendTextData(eventDetails);
+    /*sendImageData(imageBlob);
+    sendData(imageBlob);*/
 }
 
-function getOrganizationID() {
-    
-        var queryString = window.location.search;
-        var urlParams = new URLSearchParams(queryString);
-
-        // Replace 'userId' with the actual query parameter name you are using
-        var organizationID = urlParams.get('userId');
-
-
-        return organizationID;
-    
-}
-
-function sendData(eventDetails) {
-    fetch('/OrganizationEvents/SendEventData', {
+function sendTextData(eventDetails) {
+    fetch('/OrganizationEvents/SendTextData', {
         method: 'POST',
-        header: {
-            "Content-Type": "application/json",
+        headers: {
+            'Content-Type': 'application/json', // Set content type to JSON
         },
-        body: JSON.stringify(eventDetails)
+        body: JSON.stringify(eventDetails), // Send as JSON string
     })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to send text data');
+            }
+        })
+        .then(data => {
+            console.log('Received data:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
 
-function applyErrorStyles(elementId) {
-    var element = document.getElementById(elementId);
-    element.style.border = '2px solid red';
-    element.style.boxShadow = '0 0 0 1px white, 0 0 0 1px white';
-    element.classList.add('shake'); // Adding a shake class for animation
-    setTimeout(function () {
-        element.classList.remove('shake'); // Remove the shake class after the animation ends
-    }, 500);
-}
 
-function resetErrorStyles(elementId) {
-    var element = document.getElementById(elementId);
-    element.style.border = 'none'; // Reset the border
-}
+
+
+
+
+
+
+
+
+
+

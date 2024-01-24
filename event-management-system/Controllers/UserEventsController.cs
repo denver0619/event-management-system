@@ -34,14 +34,13 @@ namespace event_management_system.Controllers
 
         public IActionResult EventInfo()
         {
-            string eventId = HttpContext.Request.Query["id"]!;
-            Debug.WriteLine(eventId);
+            string EventID = HttpContext.Request.Query["id"];
+            EventsServices eventsServices = new EventsServices();
+            EventsModel eventsModel = eventsServices.GetEventInfoById(EventID);
+            //EventsModel eventsModel = eventsServices;
 
-            // Find event details based on the event id then return it to view
-            
-            
-
-            return View();
+            //get card info from url then find from list then return model
+            return View(eventsModel);
         }
 
         [HttpPost]
@@ -56,9 +55,6 @@ namespace event_management_system.Controllers
 
         public IActionResult MyEvents()
         {
-            string userId = HttpContext.Request.Query["userId"]!;
-            Debug.WriteLine(userId);
-            // get list of vents based on who is user
             return View();
         }
     }

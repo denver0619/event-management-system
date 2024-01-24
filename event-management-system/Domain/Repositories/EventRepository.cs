@@ -29,8 +29,8 @@ namespace event_management_system.Domain.Repositories
         public void AddEvent(IEvent eventEntity)
         {
             Event eventData = new Event(eventEntity);
-            MySqlParameter parameter =  new MySqlParameter("@Image", MySqlDbType.Blob, ((eventData.Image != null && !(eventData.Image!.Length>0))?eventData.Image.Length:0));
-            databaseHelper.InsertRecordWithParam(tableName, eventData, parameter);
+            /*MySqlParameter parameter =  new MySqlParameter("@Image", MySqlDbType.Blob, ((eventData.Image != null && !(eventData.Image!.Length>0))?eventData.Image.Length:0));*/
+            databaseHelper.InsertRecord(tableName, eventData);
         }
 
         //RemoveEvent NOT IMPLEMENTED YET
@@ -42,8 +42,8 @@ namespace event_management_system.Domain.Repositories
         public void UpdateEvent(IEvent eventEntity)
         {
             Event eventData = new Event(eventEntity);
-            MySqlParameter parameter = new MySqlParameter("@Image", MySqlDbType.Blob, ((eventData.Image != null && !(eventData.Image!.Length > 0)) ? eventData.Image.Length : 0));
-            databaseHelper.UpdateRecordWithParam(tableName, eventData, parameter);
+            // MySqlParameter parameter = new MySqlParameter("@Image", MySqlDbType.Blob, ((eventData.Image != null && !(eventData.Image!.Length > 0)) ? eventData.Image.Length : 0));
+            databaseHelper.UpdateRecord(tableName, eventData);
         }
 
         public List<IEvent> GetAllEvents()
@@ -61,7 +61,7 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
                     row["Venue"].ToString()!,
-                    (byte[])row["Image"],
+                    row["Image"].ToString()!,
                     row["Title"].ToString()!,
                     Int32.Parse(row["ParticipantNumber"].ToString()!),
                     row["EventType"].ToString()!,
@@ -90,7 +90,7 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
                     row["Venue"].ToString()!,
-                    (byte[])row["Image"],
+                    row["Image"].ToString()!,
                     row["Title"].ToString()!,
                     Int32.Parse(row["ParticipantNumber"].ToString()!),
                     row["EventType"].ToString()!,
@@ -118,7 +118,7 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
                     row["Venue"].ToString()!,
-                    (byte[])row["Image"],
+                    row["Image"].ToString()!,
                     row["Title"].ToString()!,
                     Int32.Parse(row["ParticipantNumber"].ToString()!),
                     row["EventType"].ToString()!,
@@ -149,7 +149,7 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
                     row["Venue"].ToString()!,
-                    (byte[])row["Image"],
+                    row["Image"].ToString()!,
                     row["Title"].ToString()!,
                     Int32.Parse(row["ParticipantNumber"].ToString()!),
                     row["EventType"].ToString()!,
@@ -180,7 +180,7 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
                     row["Venue"].ToString()!,
-                    (byte[])row["Image"],
+                    row["Image"].ToString()!,
                     row["Title"].ToString()!,
                     Int32.Parse(row["ParticipantNumber"].ToString()!),
                     row["EventType"].ToString()!,
@@ -199,7 +199,6 @@ namespace event_management_system.Domain.Repositories
         {
             DateTime date = DateTime.Now;
             string constraints = "DateStart > " + "\'" + date.ToString("yyyy-MM-dd hh:mm:ss ") + date.ToString("tt").ToUpper() + "\'";
-            Debug.WriteLine(constraints);
             DataTable dataTable = databaseHelper.SelectAllRecordWith(tableName, constraints);
             List<IEvent> eventsEntity = new List<IEvent>();
             foreach (DataRow row in dataTable.Rows)
@@ -213,7 +212,7 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
                     row["Venue"].ToString()!,
-                    (byte[])row["Image"],
+                    row["Image"].ToString()!,
                     row["Title"].ToString()!,
                     Int32.Parse(row["ParticipantNumber"].ToString()!),
                     row["EventType"].ToString()!,
@@ -245,7 +244,7 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
                     row["Venue"].ToString()!,
-                    (byte[])row["Image"],
+                    row["Image"].ToString()!,
                     row["Title"].ToString()!,
                     Int32.Parse(row["ParticipantNumber"].ToString()!),
                     row["EventType"].ToString()!,
@@ -277,7 +276,7 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
                     row["Venue"].ToString()!,
-                    (byte[])row["Image"],
+                    row["Image"].ToString()!,
                     row["Title"].ToString()!,
                     Int32.Parse(row["ParticipantNumber"].ToString()!),
                     row["EventType"].ToString()!,
@@ -309,7 +308,7 @@ namespace event_management_system.Domain.Repositories
                     DateTime.Parse(row["DateStart"].ToString()!),
                     DateTime.Parse(row["DateEnd"].ToString()!),
                     row["Venue"].ToString()!,
-                    (byte[])row["Image"],
+                    row["Image"].ToString()!,
                     row["Title"].ToString()!,
                     Int32.Parse(row["ParticipantNumber"].ToString()!),
                     row["EventType"].ToString()!,

@@ -124,7 +124,7 @@
                                 <p class="event-day">@(((DateTime)eventDataTransferObject.DateStart!).ToString("dd"))</p>
                             </div>
                             <div class="event-key-info">
-                                <h3>TRICK OR TREAT 2022</h3>
+                                <h3>@eventDataTransferObject.Title</h3>
                                 <p class="xs-text"><span class="tangerine-text">Host:</span> @eventDataTransferObject.Organization!.OrganizationName</p>
                                 <p class="xs-text"><span class="tangerine-text">Time:</span> @(((DateTime)eventDataTransferObject.DateStart!).ToString("hh:mm tt")) - @(((DateTime)eventDataTransferObject.DateEnd!).ToString("hh:mm tt"))</p>
                                 <p class="xs-text"><span class="tangerine-text">Venue:</span> @eventDataTransferObject.Venue</p>

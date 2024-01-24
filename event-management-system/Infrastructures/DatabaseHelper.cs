@@ -2,6 +2,7 @@
 using event_management_system.Configurations;
 using System.Data;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace event_management_system.Infrastructures
 {public class DatabaseHelper<Entity> : IDisposable
@@ -48,9 +49,9 @@ namespace event_management_system.Infrastructures
                 recordValues += value + " ";
             }
             string query = querytype + tableName + " " + fields + recordValues + terminator;
-
+        
             MySqlCommand command = new MySqlCommand(query, _connection);
-            command.Parameters.Add(mySqlParameter);
+            command.Parameters.Add(mySqlParameter);           
             command.ExecuteNonQuery();
             _connection.Close();
         }
@@ -63,7 +64,7 @@ namespace event_management_system.Infrastructures
             string whereClause = " WHERE ";
             string terminator = ";";
             string query = queryType + tableName + whereClause + constraints + terminator;
-
+            
             MySqlCommand command = new MySqlCommand(query, _connection);
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);
             adapter.Fill(dataTable);

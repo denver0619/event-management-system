@@ -1,6 +1,9 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@{
+    @model event_management_system.Domain.Models.EventCreateEditModel;
+    
+}
+
+
 <div class="event-content-container standard-container">
 
     <div class="event-content-header">
@@ -28,31 +31,30 @@
             <div class="form-row">
                 <div>
                     <label for="eventTitle">Event Title</label>
-                    <input type="text" name="eventTitle" id="eventTitle">
+                    <input type="text" name="eventTitle" id="eventTitle" value="@Model.Event.Title">
                 </div>
             </div>
 
             <div class="form-row">
                 <div>
                     <label for="startDateTime">Start Date/Time</label>
-                    <input type="datetime-local" name="startDateTime" id="startDateTime">
+                    <input type="datetime-local" name="startDateTime" id="startDateTime" value="@((((DateTime)Model.Event.DateStart!).ToString("yyyy-MM-ddTHH:mm")))">
                 </div>
-
                 <div>
                     <label for="endDateTime">End Date/Time</label>
-                    <input type="datetime-local" name="endDateTime" id="endDateTime">
+                    <input type="datetime-local" name="endDateTime" id="endDateTime" value="@((((DateTime)Model.Event.DateEnd!).ToString("yyyy-MM-ddTHH:mm")))">
                 </div>
             </div>
 
             <div class="form-row">
                 <div>
                     <label for="venue">Venue</label>
-                    <input type="text" name="venue" id="venue">
+                    <input type="text" name="venue" id="venue" value="@Model.Event.Venue">
                 </div>
 
                 <div>
                     <label for="participantNumber">Number of Participants</label>
-                    <input type="number" name="participantNumber" id="participantNumber">
+                    <input type="number" name="participantNumber" id="participantNumber" value="@Model.Event.ParticipantNumber">
                 </div>
             </div>
 
@@ -61,57 +63,60 @@
                     <label for="">Nature of Event</label>
                     <br>
                     <!-- <input type="text" name="venue" id="venue"> -->
-                    <select name="" id="">
+                    @Model.Event.EventNatureID
+                    <select name="" id="eventNature" data-event-nature-id="@Model.Event.EventNatureID">
                         <option value="" disabled selected hidden>Event Nature</option>
-                        <option value="">Curricular</option>
-                        <option value="">Co-curricular</option>
-                        <option value="">Non-curricular</option>
+                        <option value="1">Curricular</option>
+                        <option value="2">Co-curricular</option>
+                        <option value="3">Non-curricular</option>
                     </select>
                 </div>
 
                 <div>
                     <label for="typeOfEvent">Type of Event</label>
-                    <input type="text" name="typeOfEvent" id="typeOfEvent">
+                    <input type="text" name="typeOfEvent" id="eventType" value="@Model.Event.EventType">
                 </div>
             </div>
 
             <div class="form-row">
                 <div>
                     <label for="contactPerson">Contact Person</label>
-                    <input type="text" name="contactPerson" id="contactPerson">
+                    <input type="text" name="contactPerson" id="contactPerson" value="@Model.Event.ContactPerson">
                 </div>
 
                 <div>
                     <label for="contactNumber">Contact Number</label>
-                    <input type="text" name="contactNumber" id="contactNumber">
+                    <input type="text" name="contactNumber" id="contactNumber" value="@Model.Event.ContactNumber">
                 </div>
             </div>
 
             <div class="form-row">
                 <div>
                     <label for="feedbackLink">Feedback Link</label>
-                    <input type="text" name="feedbackLink" id="feedbackLink">
+                    <input type="text" name="feedbackLink" id="feedbackLink" value="@Model.Event.FeedbackLink">
                 </div>
 
                 <div>
                     <label for="paymentLink">Payment Link</label>
-                    <input type="text" name="paymentLink" id="paymentLink">
+                    <input type="text" name="paymentLink" id="paymentLink" value="@Model.Event.PaymentLink">
                 </div>
             </div>
 
             <div class="form-row">
                 <div>
                     <label for="description">Description</label>
-                    <textarea type="text" name="description" id="description" rows="10"></textarea>
+                    <textarea type="text" name="description" id="description" rows="10">@Model.Event.Description</textarea>
                 </div>
             </div>
 
         </fieldset>
+
+        <button class="pill-box" id="edit-btn">
+            Edit
+        </button>
 
     </form>
 
 
 </div>
 
-
-<script src="~js/event-details.js"></script>

@@ -106,7 +106,7 @@ function redirectToEventMain(eventID, queryString) {
     // Remove the leading "?" from the queryString if it exists
     queryString = queryString.startsWith('?') ? queryString.substring(1) : queryString;
 
-    var url = '/OrganizationEvents/EventMain?id=' + encodeURIComponent(eventID);
+    var url = '/OrganizationEvents/EventMain?eventId=' + encodeURIComponent(eventID);
 
     // Append the queryString if it's not empty
     if (queryString) {
