@@ -285,6 +285,7 @@ function loadAttendanceLogScript() {
     // Add event listeners for time-in buttons
     var timeInButtons = document.querySelectorAll('.time-in-btn');
     timeInButtons.forEach(function (button) {
+        initializeButtonState(button, 'time-in');
         button.addEventListener('click', function () {
             handleTimeButtonClick(button, 'time-in');
         });
@@ -292,56 +293,28 @@ function loadAttendanceLogScript() {
 
     var timeOutButtons = document.querySelectorAll('.time-out-btn');
     timeOutButtons.forEach(function (button) {
+        initializeButtonState(button, 'time-out');
         button.addEventListener('click', function () {
             handleTimeButtonClick(button, 'time-out');
         });
     });
 
-    // Add event listeners for time-out buttons
-/*    var timeOutButtons = document.querySelectorAll('.time-out-btn');
-    timeOutButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-            handleTimeButtonClick(button, 'time-out');
-        });
-    });
-
-    function handleTimeButtonClick(button, eventType) {
-        // Get the current time
-        var currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
+    function initializeButtonState(button, eventType) {
         // Traverse DOM to find the corresponding row
         var row = button.closest('tr');
 
-        // Update the corresponding time column in the row
-        var timeIndex = eventType === 'time-in' ? 4 : 4; // Assuming time-in column index is 4, and time-out column index is 5
-        row.cells[timeIndex].textContent = currentTime;
+        // Get the corresponding date and time column indices
+        var dateIndex = 5;
+        var timeIndex = 6;
 
-        if (eventType == "time-in") {
-            // Extract data from the row
-            var rowData = {
-                StudentId: row.cells[0].textContent,
-                Name: row.cells[1].textContent,
-                YearLevel: row.cells[2].textContent,
-                Date: row.cells[3].textContent,
-                TimeIn: currentTime
-            }
-        } else if (eventType == "time-out") {
-            // Extract data from the row
-            var rowData = {
-                StudentId: row.cells[0].textContent,
-                Name: row.cells[1].textContent,
-                YearLevel: row.cells[2].textContent,
-                Date: row.cells[3].textContent,
-                TimeOut: currentTime
-            }
+        // Check if there are contents in column 5 and 6
+        if (row.cells[dateIndex].textContent.trim() !== '' || row.cells[timeIndex].textContent.trim() !== '') {
+            // If there are contents, disable the button
+            button.disabled = true;
+            button.style.background = 'gray';
+            button.style.cursor = 'default';
         }
-        
-
-        console.log(rowData)
-
-        // Send data to the controller (you need to implement this part)
-        sendToController(rowData);
-    }*/
+    }
 
     function handleTimeButtonClick(button, eventType) {
         console.log(eventType)
@@ -352,8 +325,10 @@ function loadAttendanceLogScript() {
         var dateIndex = 5;
         var timeIndex = 6;
 
-        // Check if there are contents in column 3 and 4
-        if (row.cells[dateIndex].textContent.trim() !== '' && row.cells[timeIndex].textContent.trim() !== '') {
+        console.log(row.cells[dateIndex].textContent)
+        console.log(row.cells[timeIndex].textContent)
+        // Check if there are contents in column 5 and 6
+        if (row.cells[dateIndex].textContent !== '' || row.cells[timeIndex].textContent !== '') {
             // If there are contents, disable the button and return
             button.disabled = true;
             button.style.background = "gray";
