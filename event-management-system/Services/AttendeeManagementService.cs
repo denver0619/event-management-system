@@ -10,6 +10,8 @@ namespace event_management_system.Services
         private EventAttendeeRepository eventAttendeeRepository;
         private TicketRepository ticketRepository;
         private StudentRepository studentRepository;
+        private TimeOutRepository timeOutRepository;
+        private TimeInRepository timeInRepository;
         public AttendeeManagementModel Model { get; set; }
 
         public AttendeeManagementService()
@@ -43,6 +45,8 @@ namespace event_management_system.Services
         {
             List<IEventAttendee> attendees = eventAttendeeRepository.GetByEventID(eventID);
             List<ITicket> ticketList = new List<ITicket>(); 
+            List<ITimeOutEntity> timeOutEntities = new List<ITimeOutEntity>();
+            List<ITimeInEntity> timeInEntities = new List<ITimeInEntity>();
             foreach(IEventAttendee attendee in attendees)
             {
                 if (attendee.IsApproved)
@@ -56,12 +60,24 @@ namespace event_management_system.Services
                             StudentID = attendee.StudentID,
                         };
                         ticketList.Add(ticket);
+                        TimeOutEntity timeOutEntity = new TimeOutEntity()
+                        {
+                            TicketID = ticket.TicketID
+                        };
+                        TimeInEntity timeInEntity = new TimeInEntity()
+                        {
+                            TicketID = ticket.TicketID,
+                        };
+                        timeOutEntities.Add(timeOutEntity);
+                        timeInEntities.Add(timeInEntity);
                     }
                 }
             }
-            foreach (ITicket ticket in ticketList)
+            for(int i = 0; i < ticketList.Count; i++)
             {
-                ticketRepository.AddTicket(ticket);
+                ticketRepository.AddTicket(ticketList[i]);
+                timeInRepository.AddTimeIn(timeInEntities[i]);
+                timeOutRepository.AddTimeOut(timeOutEntities[i]);
             }
         }
 
