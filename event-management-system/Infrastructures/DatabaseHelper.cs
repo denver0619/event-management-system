@@ -36,6 +36,14 @@ namespace event_management_system.Infrastructures
             _connection.Close();
         }
 
+        public void InsertRecordEvent(string query)
+        {
+            _connection.Open();
+            MySqlCommand command = new MySqlCommand(query, _connection);
+            command.ExecuteNonQuery();
+            _connection.Close();
+        }
+
         public void InsertRecordWithParam(string tableName, Entity entity, MySqlParameter mySqlParameter)
         {
             _connection.Open();
@@ -235,6 +243,7 @@ namespace event_management_system.Infrastructures
             }
             return "(" + String.Join(",", fields) + ")";
         }
+
 
         public List<string> GetInsertValues(String tableName, List<Entity> entities)
         {
