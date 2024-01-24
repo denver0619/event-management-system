@@ -172,6 +172,11 @@ namespace event_management_system.Infrastructures
                 {
                     output.Add(property.Name + " = \'" + property.GetValue(entity) + "\'");
                 }
+                else if (property.Name.Contains("Date"))
+                {
+                    DateTime date = (DateTime)property.GetValue(entity)!;
+                    output.Add(property.Name + " = \'" + date.ToString("yyyy-MM-dd hh:mm:ss ") + date.ToString("tt").ToUpper() + "\'");
+                }
                 else
                 {
                     output.Add(property.Name + " = " + property.GetValue(entity));
