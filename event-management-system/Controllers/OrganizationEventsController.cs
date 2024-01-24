@@ -191,6 +191,8 @@ namespace event_management_system.Controllers
 
         public IActionResult UpdateAttendeeStatus([FromBody]EventAttendee eventAttendee)
         {
+            Debug.WriteLine(JsonSerializer.Serialize(eventAttendee));
+
             AttendeeManagementService attendeeManagementService = new AttendeeManagementService();
             attendeeManagementService.UpdateStudentApproveStatus(eventAttendee);
             attendeeManagementService.Dispose();

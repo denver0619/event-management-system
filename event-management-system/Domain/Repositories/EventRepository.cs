@@ -34,9 +34,9 @@ namespace event_management_system.Domain.Repositories
             /*MySqlParameter parameter =  new MySqlParameter("@Image", MySqlDbType.Blob, ((eventData.Image != null && !(eventData.Image!.Length>0))?eventData.Image.Length:0));*/
             string query = "INSERT INTO events (ContactNumber,ContactPerson,DateEnd,DatePosted,DateStart,Description,EventType,FeedbackLink,Image,OrganizationID,ParticipantNumber,PaymentLink,Title,Venue, EventNatureID, EventStatusID) Values " +
                 "("+"\'"+eventData.ContactNumber + "\',\'" + eventData.ContactPerson + "\',\'" + 
-                string.Join("", new List<string> { ((DateTime)eventData.DateEnd!).ToString("yyyy-MM-dd hh:mm:ss "), ((DateTime)eventData.DateEnd!).ToString("tt").ToUpper()}) + "\',\'" +
-                string.Join("", new List<string> { ((DateTime)eventData.DatePosted!).ToString("yyyy-MM-dd hh:mm:ss "), ((DateTime)eventData.DatePosted!).ToString("tt").ToUpper() }) + "\',\'" +
-                string.Join("", new List<string> { ((DateTime)eventData.DateStart!).ToString("yyyy-MM-dd hh:mm:ss "), ((DateTime)eventData.DateStart!).ToString("tt").ToUpper() }) + "\',\'" + 
+                string.Join(" ", new List<string> { ((DateTime)eventData.DateEnd!).ToString("yyyy-MM-dd hh:mm:ss "), ((DateTime)eventData.DateEnd!).ToString("tt").ToUpper()}) + "\',\'" +
+                string.Join(" ", new List<string> { ((DateTime)eventData.DatePosted!).ToString("yyyy-MM-dd hh:mm:ss "), ((DateTime)eventData.DatePosted!).ToString("tt").ToUpper() }) + "\',\'" +
+                string.Join(" ", new List<string> { ((DateTime)eventData.DateStart!).ToString("yyyy-MM-dd hh:mm:ss "), ((DateTime)eventData.DateStart!).ToString("tt").ToUpper() }) + "\',\'" + 
                 eventData.Description + "\',\'" + eventData.EventType + "\',\'" + eventData.FeedbackLink + "\',\'" + eventData.Image + "\'," + eventData.OrganizationID + "," +
                 eventData.ParticipantNumber + ",\'" + eventData.PaymentLink + "\',\'" + eventData.Title + "\',\'" + eventData.Venue + "\'," + eventData.EventNatureID + "," + eventData.EventStatusID+");";
             databaseHelper.InsertRecordEvent(query);

@@ -44,6 +44,7 @@
             <table id="event-attendees-table">
                 <thead>
                     <tr>
+                        <th>Attendee ID</th>
                         <th>Student ID</th>
                         <th>Name</th>
                         <th>Year Level</th>
@@ -57,12 +58,12 @@
                     {
                         <tr>
                             <td>@eventAttendee.EventAttendeeID</td>
+                            <td>@eventAttendee.StudentID</td>
                             <td>@String.Join(" ", new List<string>() { eventAttendee.Student.FirstName, eventAttendee.Student.MiddleName, eventAttendee.Student.LastName})</td>
                             <td>@eventAttendee.Student.YearLevel</td>
                             <td>@eventAttendee.Student.Email</td>
                             <td>@eventAttendee.Student.Contact</td>
                             <td>
-                                @eventAttendee.IsApproved
                                 <input type="checkbox" name="approve-checkbox" id="" value="@eventAttendee.IsApproved">
                             </td>
                         </tr>

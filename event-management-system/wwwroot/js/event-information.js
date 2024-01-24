@@ -436,37 +436,45 @@ function loadAttendeesScript() {
                 var row = checkbox.closest('tr');
 
                 // Extract data from the row
-                var studentId = row.cells[0].textContent;  // Assuming Student ID is in the first cell
-                var name = row.cells[1].textContent;       // Assuming Name is in the second cell
-                var yearLevel = row.cells[2].textContent;  // Assuming Year Level is in the third cell
-                var email = row.cells[3].textContent;      // Assuming Email is in the fourth cell
-                var contact = row.cells[4].textContent;    // Assuming Contact is in the fifth cell
+                var eventAttendeeID = row.cells[0].textContent;  
+                var studentId = row.cells[1].textContent;  
+                var name = row.cells[2].textContent;       
+                var yearLevel = row.cells[3].textContent;  
+                var email = row.cells[4].textContent;      
+                var contact = row.cells[5].textContent;    
 
                 // Send data to the server (you need to implement this part)
-                sendToServer({
-                    EventAttendeeID: '',
-                    EventID: eventId,
+                var attendeeInfo = {
+                    EventAttendeeID: eventAttendeeID,
                     StudentID: studentId,
-                    isApprove: true
-                });
+                    EventID: eventId,
+                    IsApproved: true
+                };
+                console.log("if")
             } else {
                 var row = checkbox.closest('tr');
 
                 // Extract data from the row
-                var studentId = row.cells[0].textContent;  // Assuming Student ID is in the first cell
-                var name = row.cells[1].textContent;       // Assuming Name is in the second cell
-                var yearLevel = row.cells[2].textContent;  // Assuming Year Level is in the third cell
-                var email = row.cells[3].textContent;      // Assuming Email is in the fourth cell
-                var contact = row.cells[4].textContent;    // Assuming Contact is in the fifth cell
+                var eventAttendeeID = row.cells[0].textContent;
+                var studentId = row.cells[1].textContent;
+                var name = row.cells[2].textContent;
+                var yearLevel = row.cells[3].textContent;
+                var email = row.cells[4].textContent;
+                var contact = row.cells[5].textContent;    
 
                 // Send data to the server (you need to implement this part)
-                sendToServer({
-                    EventAttendeeID: '',
-                    EventID: eventId,
+                var attendeeInfo = {
+                    EventAttendeeID: eventAttendeeID,
                     StudentID: studentId,
-                    isApprove: false
-                });
+                    EventID: eventId,
+                    IsApproved: false
+                };
+                console.log("else")
+
             }
+
+            sendToServer(attendeeInfo);
+            console.log(attendeeInfo);
         });
     });
 
@@ -493,8 +501,9 @@ function loadAttendeesScript() {
     }
 
 
-    function sendToServer(data) {
-        console.log(data)
+    function sendToServer(attendeeInfo) {
+        console.log(attendeeInfo);
+
 
         // Implement your code to send data to the server using AJAX or fetch
         // For example, you can use the Fetch API:
@@ -503,7 +512,7 @@ function loadAttendeesScript() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(attendeeInfo),
         })
             .then(response => response.json())
             .then(data => {
