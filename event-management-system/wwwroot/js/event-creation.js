@@ -127,7 +127,7 @@ function validationCheck() {
     var description = document.getElementById('description').value;
 
 
-/*    var isError = false;
+    var isError = false;
     if (eventTitle === '') {
         applyErrorStyles('eventTitle');
         isError = true;
@@ -216,17 +216,17 @@ function validationCheck() {
         PaymentLink: paymentLink,
         Description: description,
         Image: "",
-    };*/
+    };
 
 
 
-   /* if (isError == false) {
+    if (isError == false) {
         sendTextData(eventDetails);
-    }*/
+    }
     
 
     // Other validation and data processing logic...
-    var eventDetails = {
+/*    var eventDetails = {
         EventID: '',
         EventNatureID: eventNature,
         EventStatusID: "1",
@@ -244,11 +244,11 @@ function validationCheck() {
         PaymentLink: "sample2.com",
         Description: "napakalapet",
         Image: "",
-    };
+    };*/
 
     console.log(eventDetails)
 
-    sendTextData(eventDetails);
+    //sendTextData(eventDetails);
     /*sendImageData(imageBlob);
     sendData(imageBlob);*/
 }
