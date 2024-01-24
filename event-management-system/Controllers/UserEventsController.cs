@@ -1,4 +1,5 @@
-﻿using event_management_system.Domain.Models;
+﻿using event_management_system.Domain.Entities;
+using event_management_system.Domain.Models;
 using event_management_system.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -44,12 +45,11 @@ namespace event_management_system.Controllers
         }
 
         [HttpPost]
-        public IActionResult RegisterUser([FromBody]RegisterCredentials registerCredentials)
+        public IActionResult RegisterUser([FromBody]EventAttendee eventAttendee)
         {
-
-            Debug.WriteLine(JsonSerializer.Serialize(registerCredentials));
-            Debug.WriteLine(registerCredentials.UserID);
-            Debug.WriteLine(registerCredentials.EventID);
+            RegisterEventService registerEventService = new RegisterEventService();
+            registerEventService.AddEventAttendee(eventAttendee);
+            registerEventService.Dispose();
             return Ok();
         }
 
@@ -59,9 +59,4 @@ namespace event_management_system.Controllers
         }
     }
 
-    public class RegisterCredentials()
-    {
-        public string? UserID { get; set; }
-        public string? EventID { get; set; }
-    }
 }

@@ -587,8 +587,8 @@ header {
 
 
     #event-attendees-table tr,
-    #event-attendance-log-table tr
-    {
+    #event-attendance-time-in-table tr, 
+    #event-attendance-time-out-table tr {
         height: 60px;
     }
 

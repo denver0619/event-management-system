@@ -169,7 +169,8 @@ namespace event_management_system.Controllers
             string eventId = HttpContext.Request.Query["eventId"]!;
             Debug.WriteLine("att " + eventId);
 
-            // Handle the eventId as needed
+            /*AttendeeManagementService attendeeManagementService = new AttendeeManagementService();
+            AttendeeManagementModel attendeeManagementModel = attendeeManagementService;*/
 
             return PartialView("EventManagement/EventAttendees");
         }

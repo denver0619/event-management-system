@@ -15,6 +15,7 @@ function initialLoadContent() {
         .then(response => response.text())
         .then(data => {
             document.getElementById('subcontent-container').innerHTML = data;
+            loadAttendeesScript();
             setupSubcontentButtons();
         })
         .catch(error => console.error('Error:', error));
@@ -62,6 +63,12 @@ function loadSubContent(type) {
             document.getElementById('subcontent-container').innerHTML = data;
             if (type == "Details") {
                 loadEventDetailScript();
+            }
+            if (type == "AttendanceLog") {
+                loadAttendanceLogScript();
+            }
+            if (type == "Attendees") {
+                loadAttendeesScript();
             }
         })
         .catch(error => console.error('Error:', error));
@@ -239,4 +246,117 @@ function loadEventDetailScript() {
 
     }
 
+}
+
+function loadAttendanceLogScript() {
+    var searchInputTimeIn = document.getElementById('search-input-time-in');
+    searchInputTimeIn.addEventListener('input', function () {
+        filterTable('event-attendance-time-in-table', searchInputTimeIn.value);
+    });
+
+    // Function to perform search for time-out table
+    var searchInputTimeOut = document.getElementById('search-input-time-out');
+    searchInputTimeOut.addEventListener('input', function () {
+        filterTable('event-attendance-time-out-table', searchInputTimeOut.value);
+    });
+
+
+    function filterTable(tableId, searchText) {
+        var rows = document.querySelectorAll('#' + tableId + ' tbody tr');
+
+        rows.forEach(function (row) {
+            var textContent = row.textContent.toLowerCase();
+            row.style.display = textContent.includes(searchText) ? 'table-row' : 'none';
+        });
+    }
+}
+
+function loadAttendeesScript() {
+    console.log("attendees")
+    var approveCheckboxes = document.querySelectorAll('input[name="approve-checkbox"]');
+
+    approveCheckboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            if (checkbox.checked) {
+                // Traverse DOM to find the corresponding row
+                var row = checkbox.closest('tr');
+
+                // Extract data from the row
+                var studentId = row.cells[0].textContent;  // Assuming Student ID is in the first cell
+                var name = row.cells[1].textContent;       // Assuming Name is in the second cell
+                var yearLevel = row.cells[2].textContent;  // Assuming Year Level is in the third cell
+                var email = row.cells[3].textContent;      // Assuming Email is in the fourth cell
+                var contact = row.cells[4].textContent;    // Assuming Contact is in the fifth cell
+
+                // Send data to the server (you need to implement this part)
+                sendToServer({
+                    studentId: studentId,
+                    name: name,
+                    yearLevel: yearLevel,
+                    email: email,
+                    contact: contact,
+                    isApprove: true
+                });
+            } else {
+                var row = checkbox.closest('tr');
+
+                // Extract data from the row
+                var studentId = row.cells[0].textContent;  // Assuming Student ID is in the first cell
+                var name = row.cells[1].textContent;       // Assuming Name is in the second cell
+                var yearLevel = row.cells[2].textContent;  // Assuming Year Level is in the third cell
+                var email = row.cells[3].textContent;      // Assuming Email is in the fourth cell
+                var contact = row.cells[4].textContent;    // Assuming Contact is in the fifth cell
+
+                // Send data to the server (you need to implement this part)
+                sendToServer({
+                    studentId: studentId,
+                    name: name,
+                    yearLevel: yearLevel,
+                    email: email,
+                    contact: contact,
+                    isApprove: false
+                });
+            }
+        });
+    });
+
+
+    var searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', function () {
+        filterTable('event-attendees-table', searchInput.value);
+    });
+
+
+    function filterTable(tableId, searchText) {
+        var rows = document.querySelectorAll('#' + tableId + ' tbody tr');
+
+        rows.forEach(function (row) {
+            var textContent = row.textContent.toLowerCase();
+            row.style.display = textContent.includes(searchText) ? 'table-row' : 'none';
+        });
+    }
+
+
+    function sendToServer(data) {
+        console.log(data)
+
+        // Implement your code to send data to the server using AJAX or fetch
+        // For example, you can use the Fetch API:
+        /*fetch('OrganizationEvents/UpdateAttendeeStatus', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Handle success response from the server
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Handle error
+            });*/
+    }
 }
