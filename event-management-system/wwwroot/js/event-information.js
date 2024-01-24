@@ -269,6 +269,87 @@ function loadAttendanceLogScript() {
             row.style.display = textContent.includes(searchText) ? 'table-row' : 'none';
         });
     }
+
+
+
+
+    // Add event listeners for time-in buttons
+    var timeInButtons = document.querySelectorAll('.time-in-btn');
+    timeInButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            handleTimeButtonClick(button, 'time-in');
+        });
+    });
+
+    // Add event listeners for time-out buttons
+    var timeOutButtons = document.querySelectorAll('.time-out-btn');
+    timeOutButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            handleTimeButtonClick(button, 'time-out');
+        });
+    });
+
+    function handleTimeButtonClick(button, eventType) {
+        // Get the current time
+        var currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        // Traverse DOM to find the corresponding row
+        var row = button.closest('tr');
+
+        // Update the corresponding time column in the row
+        var timeIndex = eventType === 'time-in' ? 4 : 4; // Assuming time-in column index is 4, and time-out column index is 5
+        row.cells[timeIndex].textContent = currentTime;
+
+        if (eventType == "time-in") {
+            // Extract data from the row
+            var rowData = {
+                StudentId: row.cells[0].textContent,
+                Name: row.cells[1].textContent,
+                YearLevel: row.cells[2].textContent,
+                Date: row.cells[3].textContent,
+                TimeIn: currentTime
+            }
+        } else if (eventType == "time-out") {
+            // Extract data from the row
+            var rowData = {
+                StudentId: row.cells[0].textContent,
+                Name: row.cells[1].textContent,
+                YearLevel: row.cells[2].textContent,
+                Date: row.cells[3].textContent,
+                TimeOut: currentTime
+            }
+        }
+        
+
+        console.log(rowData)
+
+        // Send data to the controller (you need to implement this part)
+        sendToController(rowData);
+    }
+
+    function sendToController(data) {
+        // Implement your code to send data to the controller using AJAX or fetch
+        // For example, you can use the Fetch API:
+        /*fetch('/your-controller-endpoint', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                data: data,
+                eventType: eventType
+            }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Handle success response from the controller
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Handle error
+            });*/
+    }
 }
 
 function loadAttendeesScript() {

@@ -1153,6 +1153,13 @@ header {
     justify-content: center;
 }
 
+.time-in-btn,
+.time-out-btn {
+    background: #7ABD50;
+    color: #FFF;
+    padding: 5px 10px;
+    cursor: pointer;
+}
 
 
 .tangerine-text {
