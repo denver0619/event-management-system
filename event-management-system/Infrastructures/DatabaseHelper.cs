@@ -30,9 +30,9 @@ namespace event_management_system.Infrastructures
                 recordValues += value + " ";
             }
             string query = querytype + tableName + " " + fields + recordValues + terminator;
-
-            MySqlCommand command = new MySqlCommand(query, _connection);
-            command.ExecuteNonQuery();
+            Debug.WriteLine(query);
+            /*MySqlCommand command = new MySqlCommand(query, _connection);
+            command.ExecuteNonQuery();*/
             _connection.Close();
         }
 

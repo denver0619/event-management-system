@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Content Creation";
     Layout = "~/Views/Shared/_OrganizationLayout.cshtml";
+    var OrganizationID = ViewData["OrganizationID"];
 }
 
 <div class="nav-bg">
@@ -30,9 +31,9 @@
     </div>
 
 
-    <form action="" id="upload-event-form">
+    <form action="" id="upload-event-form" organization-id="@OrganizationID">
 
-        <fieldset class="add-image">
+        <fieldset class="add-image" >
             <p>Image</p>
             <div id="upload-container">
                 <div id="preview-container"></div>
@@ -92,8 +93,8 @@
                 </div>
 
                 <div>
-                    <label for="typeOfEvent">Type of Event</label>
-                    <input type="text" name="typeOfEvent" id="typeOfEvent">
+                    <label for="eventType">Type of Event</label>
+                    <input type="text" name="eventType" id="eventType">
                 </div>
             </div>
 

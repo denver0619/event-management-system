@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Diagnostics;
+using System.Text.Json;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace event_management_system.Domain.Repositories
@@ -29,6 +30,7 @@ namespace event_management_system.Domain.Repositories
         public void AddEvent(IEvent eventEntity)
         {
             Event eventData = new Event(eventEntity);
+            Debug.WriteLine(JsonSerializer.Serialize(eventData));
             /*MySqlParameter parameter =  new MySqlParameter("@Image", MySqlDbType.Blob, ((eventData.Image != null && !(eventData.Image!.Length>0))?eventData.Image.Length:0));*/
             databaseHelper.InsertRecord(tableName, eventData);
         }
