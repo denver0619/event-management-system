@@ -87,13 +87,15 @@ function loadEventDetailScript() {
     function setupEditButton(){
         var editBtn = document.getElementById('edit-btn')
 
-        editBtn.addEventListener('click', function () {
+        editBtn.addEventListener('click', function (e) {
+            e.preventDefault();
             gatherEditData();
-        }
+        })
     }
 
     function gatherEditData() {
         var eventId = document.getElementById('subcontent-container').getAttribute('event-id');
+        var datePosted = document.getElementById('event-details-field').getAttribute('date-posted');
         var organizationId = document.getElementById('subcontent-container').getAttribute('organization-id');
         var eventTitle = document.getElementById('eventTitle').value;
         var startDateTime = document.getElementById('startDateTime').value;
@@ -154,11 +156,11 @@ function loadEventDetailScript() {
             resetErrorStyles('eventNature');
         }
 
-        if (typeOfEvent === '') {
-            applyErrorStyles('typeOfEvent');
+        if (eventType === '') {
+            applyErrorStyles('eventType');
             isError = true;
         } else {
-            resetErrorStyles('typeOfEvent');
+            resetErrorStyles('eventType');
         }
 
         if (contactPerson === '') {
@@ -182,6 +184,7 @@ function loadEventDetailScript() {
             resetErrorStyles('description');
         }
 
+        console.log(datePosted);
 
         var eventDetails = {
             EventID: eventId,
@@ -195,15 +198,45 @@ function loadEventDetailScript() {
             Title: eventTitle,
             ParticipantNumber: 600,
             EventType: eventType,
-            ContactPerson: "Jaeia Mikaella Apad",
-            ContactNumber: "09463571592",
-            FeedbackLink: "sample1.com",
-            PaymentLink: "sample2.com",
-            Description: "napakalapet",
+            ContactPerson: contactPerson,
+            ContactNumber: contactNumber,
+            FeedbackLink: feedbackLink,
+            PaymentLink: paymentLink,
+            Description: description,
             Image: "",
         };
+
+        console.log(eventDetails)
+
+        sendEditData(eventDetails)
     }
 
+    function sendEditData(eventDetails) {
+        fetch('/OrganizationEvents/EditEvent', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(eventDetails)
+        })
+    }
 
+    // Function to apply error styles to input fields
+    function applyErrorStyles(elementId) {
+        var element = document.getElementById(elementId);
+        element.style.boxShadow = '0 0 5px 2px rgba(255, 255, 255, 0.5)';
+        element.style.border = '1px solid red';
+        element.classList.add('shake'); // Adding a shake class for animation
+        setTimeout(function () {
+            element.classList.remove('shake'); // Remove the shake class after the animation ends
+        }, 500);
+    }
+
+    function resetErrorStyles(elementId) {
+        var element = document.getElementById(elementId);
+        element.style.border = '1px solid #ccc'; // Reset the border
+        element.style.boxShadow = "none";
+
+    }
 
 }

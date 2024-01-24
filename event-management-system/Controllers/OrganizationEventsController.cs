@@ -140,8 +140,14 @@ namespace event_management_system.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditEvent()
+        public IActionResult EditEvent([FromBody]Event eventEntity)
         {
+            eventEntity.DatePosted = DateTime.Now;
+            Debug.WriteLine(JsonSerializer.Serialize(eventEntity));
+            EventCreateEditService editService = new EventCreateEditService();
+            editService.UpdateEvent(eventEntity);
+            editService.Dispose();
+
             return Ok();
         }
 
