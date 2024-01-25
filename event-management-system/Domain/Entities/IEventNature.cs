@@ -2,8 +2,8 @@
 {
     public interface IEventNature
     {
-        public string EventNatureID { get; set; }
-        public string NatureName { get; set; }
-        public string NatureDescription { get; set; };
+        public string? EventNatureID { get; set; }
+        public string? NatureName { get; set; }
+        public string? NatureDescription { get; set; }
     }
 }

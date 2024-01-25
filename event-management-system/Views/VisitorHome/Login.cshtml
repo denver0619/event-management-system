@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;600;700&display=swap" rel="stylesheet">
+    <title>@ViewData["Title"] - TicketFlare</title>
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="login-bg">
+        <div class="login-container">
+            <h1 class="logo-name">TicketFlare</h1>
+            <div class="login-content-container">
+                <div class="login-header">
+                    <h1>WELCOME!</h1>
+                    <h4>Login to continue</h4>
+                </div>
+                <div class="login-field">
+                    <form>
+                        <div class="form-row">
+                            <label for="email">Email</label>
+                            <input type="text" id="email" />
+                        </div>
+                        <div class="form-row">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" />
+                        </div>                                            
+                    </form>
+
+                    <button class="login-btn" id="loginBtn">
+                        LOGIN
+                    </button>
+                </div>
+            </div>           
+        </div>
+    </div>
+    
+</body>
+</html>
+
+<script src="~/js/login.js"></script>

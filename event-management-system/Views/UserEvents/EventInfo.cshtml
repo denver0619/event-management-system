@@ -1,0 +1,116 @@
+﻿@{
+    ViewData["Title"] = "Events";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    @model event_management_system.Domain.Models.EventsModel;
+}
+
+<div class="nav-bg">
+</div>
+
+<div class="introduction-container visitor-event-introduction">
+    <div class="introduction-content standard-container">
+        <div class="introduction-text-container">
+            <h1 class="introduction-text-title large-text"><span>EVENT LISTING</span></h1>
+            <p class="introduction-text-p">
+                Welcome to our Event Listing Tab - your comprehensive portal to a dynamic realm of captivating experiences within our college community. This curated space is designed to unveil a plethora of enriching events spanning diverse interests and passions.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="subcontent-container" id="subcontent-container">
+    <div class="event-info-container">
+        <div class="event-info-content-container">
+            <div class="image-container">
+            </div>
+
+            <div class="info-row">
+                <div>
+                    <p class="small-text" id="EventName">@Model.EventInfo.Title</p>
+                    <p class="xs-text" id="OrganizationName">@Model.EventInfo.Organization.OrganizationName</p>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div>
+                    <p class="xs-text">Start Date</p>
+                    <p class="small-text" id="DateStart">@Model.EventInfo.DateStart</p>
+                </div>
+                <div>
+                    <p class="xs-medium-text">End Date</p>
+                    <p class="small-text" id="DateEnd">@Model.EventInfo.DateEnd</p>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div>
+                    <p class="xs-text">Venue</p>
+                    <p class="small-text" id="Venue">@Model.EventInfo.Venue</p>
+                </div>
+                <div>
+                    <p class="xs-medium-text">Number of Participants</p>
+                    <p class="small-text" id="NumberOfParticipants">@Model.EventInfo.ParticipantNumber</p>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div>
+                    <p class="xs-text">Nature of Event</p>
+                    <p class="small-text" id="EventNature">@Model.EventInfo.EventNatureID</p>
+                </div>
+                <div>
+                    <p class="xs-medium-text">Type of Event</p>
+                    <p class="small-text" id="EventType">@Model.EventInfo.EventType</p>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div>
+                    <p class="xs-text">Contact Person</p>
+                    <p class="small-text" id="ContactPerson">@Model.EventInfo.ContactPerson</p>
+                </div>
+                <div>
+                    <p class="xs-medium-text">Contact Number</p>
+                    <p class="small-text" id="ContactNumber">@Model.EventInfo.ContactNumber</p>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div>
+                    <p class="xs-text">Feedback Link</p>
+                    <p class="small-text" id="FeedbackLink">@Model.EventInfo.FeedbackLink</p>
+                </div>
+                <div>
+                    <p class="xs-medium-text">Payment Link</p>
+                    <p class="small-text" id="PaymentLink">@Model.EventInfo.PaymentLink</p>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div>
+                    <p class="xs-text">Description</p>
+                    <div id="description-container">
+                        <p class="xs-text" id="Description">
+                            @Model.EventInfo.Description
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="pill-box" id="register-btn">
+                Register
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/js/user-event-info.js"></script>
+}
+
+
+
