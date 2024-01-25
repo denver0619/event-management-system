@@ -29,7 +29,7 @@ internal class Program
 
         app.MapControllerRoute(
             name: "default",
-            pattern: "{controller=Home}/{action=Index}/{id?}");
+            pattern: "{controller=VisitorHome}/{action=Index}/{id?}");
         OpenBrowser("http://localhost:5000");
         app.Run();
     }
